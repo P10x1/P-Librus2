@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Wiadomości - P-Librus</title>
+  <style>
+  body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e6ebed, #f5f7f9);
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: linear-gradient(to right, #d4dce4, #f2f3f5);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo span {
+      font-size: 24px;
+      color: #8a2e6e;
+      font-weight: bold;
+    }
+    .user-info {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+    .menu {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #edf0f3;
+      flex-wrap: wrap;
+    }
+    .menu-item {
+      text-align: center;
+      margin: 10px;
+      position: relative;
+    }
+    .menu-item a {
+      font-size: 14px;
+      display: block;
+      padding: 10px 15px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.3s;
+    }
+    .menu-item a:hover {
+      background-color: #f0f0f0;
+    }
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 50%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #8a2e6e;
+    }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    select, textarea, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    textarea {
+      height: 150px;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .checkbox-group label {
+      font-weight: normal;
+    }
+    button {
+      background-color: #8a2e6e;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #a14b84;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
+    <span>P-Librus</span>
+  </div>
+  <div class="user-info">
+    Jesteś zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
+  </div>
+  <select>
+    <option selected>polski</option>
+    <option>english</option>
+  </select>
+</div>
+
+<div class="menu">
+  <div class="menu-item">
+    <a href="indywidualni.html">Indywidualni</a>
+  </div>
+  <div class="menu-item">
+    <a href="Lekcja.html">Lekcja</a>
+  </div>
+  <div class="menu-item">
+    <a href="oceny.html">Oceny</a>
+    <div class="badge">5</div>
+  </div>
+  <div class="menu-item">
+    <a href="organizacja.html">Organizacja</a>
+    <div class="badge">3</div>
+  </div>
+  <div class="menu-item">
+    <a href="wiadomosci.html">Wiadomości</a>
+  </div>
+  <div class="menu-item">
+    <a href="ogloszenia.html">Ogłoszenia</a>
+    <div class="badge">1</div>
+  </div>
+  <div class="menu-item">
+    <a href="terminarz.html">Terminarz</a>
+    <div class="badge">6</div>
+  </div>
+</div>
+<h1>Wyślij wiadomość</h1>
+<form id="messageForm">
+  <label for="classSelect">Wybierz klasę:</label>
+  <select id="classSelect" onchange="updateParents()">
+    <option value="">-- wybierz --</option>
+    <option value="6A">6A</option>
+    <option value="6B">6B</option>
+    <option value="6C">6C</option>
+    <option value="7D">7D</option>
+    <option value="7E">7E</option>
+    <option value="8F">8F</option>
+    <option value="8G">8G</option>
+    <option value="1H">1H</option>
+  </select>
+
+  <label>Rodzice z wybranej klasy:</label>
+  <div><button type="button" onclick="selectAll('parentList')">Zaznacz wszystkich rodziców</button></div>
+  <div id="parentList" class="checkbox-group"></div>
+
+  <label for="teachers">Wybierz nauczycieli:</label>
+  <div><button type="button" onclick="selectAll('teacherList')">Zaznacz wszystkich nauczycieli</button></div>
+  <div class="checkbox-group" id="teacherList"></div>
+
+  <label for="subject">Temat:</label>
+  <input type="text" id="subject" name="subject">
+
+  <label for="message">Treść wiadomości:</label>
+  <textarea id="message" name="message"></textarea>
+
+  <button type="submit">Wyślij</button>
+</form>
+
+<script>
+  const parentsByClass = {
+    '6A': ['Agata', 'Tadeusz', 'Piotr'],
+    '6B': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '6C': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '7D': ['Mirek', 'Ela', 'Ula'],
+    '7E': ['Ola', 'Maria', 'Marta'],
+    '8F': ['Ola', 'Julia', 'Natan', 'Filip'],
+    '8G': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
+    '1H': ['Andrzej', 'Maciej', 'Patryk']
+  };
+
+  const teachers = [
+    "Iwona Milnik", "Patryk Prosiak", "Julia Bośniak", "Martyna Willska", "Maja Oloj",
+    "Justyna born", "Lena Pikura", "Patrycja Mińska", "Agata Majeska", "Maciej bojnek",
+    "Anna Łezka", "Maria Oksejska", "Zuzia Filipińska", "Julia Komuniak", "Krzysztof Sowa",
+    "Maciej Liński", "Paweł Krak", "Milena Bośniak", "Martyna Polecsa", "Pomela Muk"
+  ];
+
+  function updateParents() {
+    const classSelect = document.getElementById('classSelect');
+    const parentList = document.getElementById('parentList');
+    parentList.innerHTML = '';
+    const selectedClass = classSelect.value;
+    if (selectedClass && parentsByClass[selectedClass]) {
+      parentsByClass[selectedClass].forEach(name => {
+        const label = document.createElement('label');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.name = 'recipients';
+        checkbox.value = name;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(name));
+        parentList.appendChild(label);
+      });
+    }
+  }
+
+  function loadTeachers() {
+    const teacherList = document.getElementById('teacherList');
+    teachers.forEach(name => {
+      const label = document.createElement('label');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.name = 'recipients';
+      checkbox.value = name;
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(name));
+      teacherList.appendChild(label);
+    });
+  }
+
+  function selectAll(containerId) {
+    const checkboxes = document.querySelectorAll(`#${containerId} input[type="checkbox"]`);
+    checkboxes.forEach(cb => cb.checked = true);
+  }
+
+  document.getElementById('messageForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const recipients = [...document.querySelectorAll('input[name="recipients"]:checked')].map(cb => cb.value);
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    alert("Wiadomość wysłana do: " + recipients.join(", ") + "\n\nTemat: " + subject + "\n\nTreść: " + message);
+    // Tu można dodać kod do wysyłki danych na serwer
+  });
+
+  loadTeachers();
+</script>
+
+</body>
+</html>

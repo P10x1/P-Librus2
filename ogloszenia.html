@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Ogłoszenia - P-Librus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #d4dce4, #f2f3f5);
+}
+body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #e6ebed, #f5f7f9);
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: linear-gradient(to right, #d4dce4, #f2f3f5);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-right: auto;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo span {
+      font-size: 24px;
+      color: #8a2e6e;
+      font-weight: bold;
+    }
+    .user-info {
+      margin-right: 20px;
+      font-size: 14px;
+    }
+    .menu {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #edf0f3;
+      flex-wrap: wrap;
+    }
+    .menu-item {
+      text-align: center;
+      margin: 10px;
+      position: relative;
+    }
+    .menu-item a {
+      font-size: 14px;
+      display: block;
+      padding: 10px 15px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+      text-decoration: none;
+      color: black;
+      transition: background-color 0.3s;
+    }
+    .menu-item a:hover {
+      background-color: #f0f0f0;
+    }
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 50%;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #8a2e6e;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    form button {
+      background-color: #8a2e6e;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #72255a;
+    }
+    .announcement {
+      border-left: 4px solid #8a2e6e;
+      padding: 10px;
+      margin: 15px 0;
+      background: #f9f9fb;
+    }
+    .announcement h3 {
+      margin: 0;
+    }
+    .announcement small {
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<script type="module">
+  // Importy z Firebase CDN
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    // twoja konfiguracja
+  };// Your web app's Firebase configuration (wklej tutaj swój config)
+  const firebaseConfig = {
+  apiKey: "AIzaSyDlSm_Cg8Pz0rPsExKro958vjRDUD_i95Y",
+  authDomain: "p-librus.firebaseapp.com",
+  projectId: "p-librus",
+  storageBucket: "p-librus.firebasestorage.app",
+  messagingSenderId: "1018564561209",
+  appId: "1:1018564561209:web:14fc2df790ca838837c0e8"
+};
+
+ 
+
+  // teraz możesz używać db, np. dodawanie i pobieranie dokumentów
+</script>
+<div class="header">
+  <div class="logo">
+    <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
+    <span>P-Librus</span>
+  </div>
+  <div class="user-info">
+    Jesteś zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
+  </div>
+  <select>
+    <option selected>polski</option>
+    <option>english</option>
+  </select>
+</div>
+
+<div class="menu">
+  <div class="menu-item">
+    <a href="indywidualni.html">Indywidualni</a>
+  </div>
+  <div class="menu-item">
+    <a href="Lekcja.html">Lekcja</a>
+  </div>
+  <div class="menu-item">
+    <a href="oceny.html">Oceny</a>
+    <div class="badge">5</div>
+  </div>
+  <div class="menu-item">
+    <a href="organizacja.html">Organizacja</a>
+    <div class="badge">3</div>
+  </div>
+  <div class="menu-item">
+    <a href="wiadomosci.html">Wiadomości</a>
+  </div>
+  <div class="menu-item">
+    <a href="ogloszenia.html">Ogłoszenia</a>
+    <div class="badge">1</div>
+  </div>
+  <div class="menu-item">
+    <a href="terminarz.html">Terminarz</a>
+    <div class="badge">6</div>
+  </div>
+</div>
+  
+  <div class="container">
+    <h1>Ogłoszenia</h1>
+    
+    <form id="announcementForm">
+      <input type="date" id="date" required>
+      <input type="text" id="title" placeholder="Tytuł" required>
+      <textarea id="description" rows="4" placeholder="Opis" required></textarea>
+      <input type="text" id="author" placeholder="Dodane przez" required>
+      <button type="submit">Dodaj ogłoszenie</button>
+    </form>
+
+    <hr>
+
+    <div id="announcements"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('announcementForm');
+    const announcementsDiv = document.getElementById('announcements');
+
+    function loadAnnouncements() {
+      const stored = JSON.parse(localStorage.getItem('announcements')) || [];
+      announcementsDiv.innerHTML = '';
+      stored.forEach(a => {
+        const el = document.createElement('div');
+        el.className = 'announcement';
+        el.innerHTML = `
+          <h3>${a.title}</h3>
+          <small>${a.date} – ${a.author}</small>
+          <p>${a.description}</p>
+        `;
+        announcementsDiv.appendChild(el);
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const newAnnouncement = {
+        date: document.getElementById('date').value,
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        author: document.getElementById('author').value
+      };
+      const current = JSON.parse(localStorage.getItem('announcements')) || [];
+      current.unshift(newAnnouncement);
+      localStorage.setItem('announcements', JSON.stringify(current));
+      form.reset();
+      loadAnnouncements();
+    });
+
+    loadAnnouncements();
+  </script>
+  <!-- Firebase App (core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+</body>
+</html>
