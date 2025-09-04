@@ -15,26 +15,6 @@
       align-items: center;
     }
 
-    h1 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      background: #0057b8;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      text-align: center;
-      min-width: 200px;
-    }
-
     .btn:hover {
       background: #004a9c;
       transform: scale(1.05);
@@ -187,7 +167,74 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
   background: #f8f9fa;
 }
+.login-box {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 0.8s ease;
+    }
 
+    .login-box h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+   .input-group input {
+  width: 200%;       /* pola będą węższe */
+  max-width: 300px; /* nie rozciągną się za bardzo */
+  display: block;
+  margin: 0 auto;   /* wyśrodkowanie */
+}
+
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: #0057b8;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background: #004a9c;
+      transform: scale(1.03);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -260,4 +307,5 @@
   </script>
 </body>
 </html>
+
 
