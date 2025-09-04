@@ -179,6 +179,10 @@
       font-size: 0.9rem;
       display: none;
     }
+	  .hidden {
+  display: none;
+}
+
   </style>
 </head>
 <body>
@@ -206,6 +210,7 @@
       }
     });
   </script>
+	<div id="mainContent" class="hidden">
 <div class="top-alert" id="topAlert">
   <span class="alert-message">Nowa wersja dziennika elektronicznego, Nowe możliwości. Sprawdź sam!</span>
   <button class="close-btn" onclick="document.getElementById('topAlert').style.display='none'">×</button>
@@ -421,6 +426,10 @@
 <!-- Firebase Firestore -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
 
+		 <button onclick="logout()">Wyloguj</button>
+</div>
+	
 </body>
 </html>
+
 
