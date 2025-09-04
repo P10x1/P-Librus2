@@ -6,168 +6,15 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f4f8;
+      background: linear-gradient(135deg, #0057b8, #0099cc);
       margin: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
-    .btn:hover {
-      background: #004a9c;
-      transform: scale(1.05);
-    }
-
-    .btn-logout {
-      background: #d9534f;
-      margin-bottom: 30px;
-    }
-
-    .btn-logout:hover {
-      background: #c9302c;
-    }
     .login-box {
-      background: #fff;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      width: 320px;
-      text-align: center;
-      margin: 100px auto;
-    }
-    .login-box input, .login-box button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .login-box button {
-      background: #0057b8;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    .login-box button:hover {
-      background: #004a9c;
-    }
-    .error {
-      margin-top: 10px;
-      color: red;
-      display: none;
-    }
-    /* Główny interfejs */
-    #mainContent {
-      padding: 20px;
-    }
-    #logoutBtn {
-      background: #d9534f;
-      margin-top: 20px;
-    }
-    #logoutBtn:hover {
-      background: #c9302c;
-    }
-	h1 {
-      color: #333;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      background: #0057b8;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s ease;
-      text-align: center;
-      min-width: 180px;
-    }
-
-    .btn:hover {
-      background: #004a9c;
-      transform: scale(1.05);
-    }
-
-    .btn-logout {
-      background: #d9534f;
-      margin-top: 20px;
-    }
-
-    .btn-logout:hover {
-      background: #c9302c;
-    }
-	/* Kafelki */
-    .tiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      width: 80%;
-      max-width: 800px;
-    }
-
-    .tile {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .tile:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-      background: #f8f9fa;
-    }
-	.hidden {
-  display: none;
-}
-/* Styl dla kafelków */
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  width: 80%;
-  max-width: 800px;
-  margin-top: 20px; /* odstęp pod przyciskiem Wyloguj */
-}
-
-.tile {
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.tile img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 15px;
-}
-
-.tile:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  background: #f8f9fa;
-}
-.login-box {
       background: white;
       padding: 40px 30px;
       border-radius: 12px;
@@ -235,6 +82,7 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
