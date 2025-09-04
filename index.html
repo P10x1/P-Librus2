@@ -239,14 +239,19 @@
 </head>
 <body>
   <!-- Panel logowania -->
-  <div id="loginPanel" class="login-box">
-    <h2>Logowanie</h2>
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Login" required>
-      <input type="password" id="password" placeholder="Hasło" required>
-      <button type="submit">Zaloguj się</button>
+   <div class="login-box">
+    <h2>Zaloguj się do P-Librus</h2>
+    <form onsubmit="return login(event)">
+      <div class="input-group">
+        <label for="username">Login</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Hasło</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit" class="btn-login">Zaloguj</button>
     </form>
-    <div id="errorMsg" class="error">Błędny login lub hasło!</div>
   </div>
 
   <!-- Główna strona (ukryta na początku) -->
@@ -307,5 +312,6 @@
   </script>
 </body>
 </html>
+
 
 
