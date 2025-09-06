@@ -492,7 +492,7 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
       label.textContent = uczen;
       wrapper.appendChild(label);
 
-      ["Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona", "Nieobecność usprawiedliwiona", "Zwolnienie", "Rekolekcje", "Egzamin"].forEach(opcja => {
+      ["Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona", "Nieobecność usprawiedliwiona", "Zwolnienie", "Rekolekcje", "Egzamin", "Sanatorium", "Wycieczka", "Konkurs", "Wolontariat"].forEach(opcja => {
         const radio = document.createElement("input");
         radio.type = "radio";
         radio.name = `frekwencja_${index}`;
@@ -765,6 +765,7 @@ function wybierzKlase(klasa) {
 
 </body>
 </html>
+
 
 
 
