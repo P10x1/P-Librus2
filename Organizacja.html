@@ -108,6 +108,35 @@
     .label {
       font-weight: bold;
     }
+	  table {
+      width: 80%;
+      border-collapse: collapse;
+      margin: 20px auto;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
   </style>
 </head>
 <body>
@@ -247,76 +276,94 @@
   <p><b>Inne :</b> Różne przedmioty dla szkoły podstawowej i średniej</p>
 </div>
   </div>
-  
-  <div class="school-info">
-  <h2>Lekcje i przedmioty nauczane przez naszych nauczycieli</h2>
-  <style> td { border: 1px solid black; } </style>
-    <table>
-  <tr>
-    <td>Nauczyciel</td><td>Przedmiot uczący</td>
+
+
+<div class="section">
+    <h2>Nasi nauczyciele i przedmioty przez nich nauczane</h2>
+	
+ <table>
+    <tr>
+      <th>Imię i nazwisko</th>
+      <th>Przedmiot uczący</th>
     </tr>
-      <tr>
-    <td>Patryk prosiak </td><td>Matematyka i fizyka</td>
-        </tr>
-      <tr>
-    <td>Julia Bośniak </td><td>Chemia</td>
-        </tr>
-      <tr>
-    <td>Martyna Willska</td><td>EDB i DZ</td>
-        </tr>
-      <tr>
-    <td>Maja Oloj</td><td>Informatyka i Język angielski</td>
-        </tr>
-      <tr>
-    <td>Justyna Born</td><td>Język angielski</td>
-        </tr>
-      <tr>
-    <td>Lena Pikura</td><td>Muzyka i Plastyka i Technika</td>
-        </tr>
-      <tr>
-    <td>Patrycja Mińska</td><td> Muzyka i Świetlica</td>
-  </tr>
-      <tr>
-      <td>Agata majewska</td><td>Religia</td>
+    <tr>
+      <td>Patryk Prosiak</td>
+      <td>Matematyka, Fizyka</td>
     </tr>
-      <tr>
-      <td>Maciej bojnek</td><td>Historia, WOS</td>
+    <tr>
+      <td>Julia Bośniak</td>
+      <td>Chemia</td>
     </tr>
-      <tr>
-      <td>Anna Łezka</td><td>Matematyka, Język Polski</td>
+    <tr>
+      <td>Martyna Wilska</td>
+      <td>Edukacja dla bezpieczeństwa, Doradztwo zawodowe</td>
     </tr>
-      <tr>
-      <td>Maria Oksejska</td><td>Język niemiecki</td>
+	<tr>
+      <td>Maja Oloj</td>
+      <td>Informatyka, Język angielski</td>
     </tr>
-      <tr>
-      <td>Zuzia Filipińska</td><td>Język Hiszpański</td>
+	<tr>
+      <td>Justyna Born</td>
+      <td>Język angielski</td>
     </tr>
-      <tr>
-      <td>Julia komuniak</td><td>Język francuski</td>
+	<tr>
+      <td>Patrycja Mińska</td>
+      <td>Muzyka, Świetlica</td>
     </tr>
-      <tr>
-      <td>Krzysztof Sowa</td><td>Wychowanie fizyczne</td>
+	<tr>
+      <td>Agata Majewska</td>
+      <td>Katachetka religii</td>
     </tr>
-      <tr>
-      <td>Maciej Liński</td><td>Kolarstwo</td>
+	<tr>
+      <td>Maciej Bojnek</td>
+      <td>Historia, Wiedza o społeczeństwie</td>
     </tr>
-      <tr>
-      <td>Paweł Krak</td><td>Wychowanie fizyczne</td>
+	<tr>
+      <td>Anna Łezka</td>
+      <td>Język polski, Matematyka</td>
     </tr>
-      <tr>
-      <td>Milena Bośniak</td><td>Plastyka, Technika</td>
+	<tr>
+      <td>Maria Oksejska</td>
+      <td>Język niemiecki</td>
     </tr>
-      <tr>
-      <td>Martyna Polecsa</td><td>Geografia, Przyroda</td>
+	<tr>
+      <td>Zuzanna Filipińska</td>
+      <td>Język Hiszpański</td>
     </tr>
-      <tr>
-      <td>Pomela Muk</td><td>Biologia</td>
+	<tr>
+      <td>Julia Komuniak</td>
+      <td>Język francuski</td>
     </tr>
-      <tr>
-      <td>Piotr Rejmentowski</td><td>Język piotrowski, Język angielski, Biologia, Przyroda</td>
+	<tr>
+      <td>Krzysztof Sowa</td>
+      <td>Wychowanie fizyczne</td>
     </tr>
-</table>
-<div>
+	<tr>
+      <td>Paweł Krak</td>
+      <td>Wychowanie fizyczne</td>
+    </tr>
+	<tr>
+      <td>Milena Bośniak</td>
+      <td>Plastyka, Technika</td>
+    </tr>
+	<tr>
+      <td>Martyna Polecsa</td>
+      <td>Geografia, Przyroda (niektóre działy)</td>
+    </tr>
+	<tr>
+      <td>Pomela Muk</td>
+      <td>Biologia (w zastępstwie Piotr Rejmentowski)</td>
+    </tr>
+	<tr>
+      <td>Piotr Rejmentowski</td>
+      <td>Język piotrowski, Biologia, Przyroda (Niektóre tematy), Edukacja ogólna, </td>
+    </tr>
+	<tr>
+      <td>Agata Majewska</td>
+      <td>Katachetka religii</td>
+    </tr>
+  </table>
+
 </div>
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
   <div style="margin-bottom: 10px;">
@@ -329,3 +376,4 @@
 
 </body>
 </html>
+
