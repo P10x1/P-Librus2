@@ -433,21 +433,22 @@ function pokazPostep(klasa) {
 	};
 
 	const kolory = {
-	'6FJ-Język_Piotrowski': "#4CAF50",
-    '7A-Język_Piotrowski': "#4CAF50",
-    '7B-Język_Piotrowski': "#4CAF50",
-    '7C-Język_Piotrowski': "#4CAF50",
-    '8D-Język_Piotrowski': "#4CAF50",
-    '8E-Język_Piotrowski': "#4CAF50",
-	'1G-Język_Piotrowski': "#2196F3", 
-	'2H-Język_Piotrowski': "#2196F3", 
-	'6FJ-Biologia': "#2196F3", 
-	'4K-Przyroda': "#2196F3", 
-	'7A-Biologia': "#2196F3", 
-    '5i-Biologia': "#2196F3", 
-	'8D-Biologia': "#FF9800"
-	'Edukacja_ogólna': "#9C27B0
-  };
+  '6FJ-Język_Piotrowski': "#4CAF50",
+  '7A-Język_Piotrowski': "#4CAF50",
+  '7B-Język_Piotrowski': "#4CAF50",
+  '7C-Język_Piotrowski': "#4CAF50",
+  '8D-Język_Piotrowski': "#4CAF50",
+  '8E-Język_Piotrowski': "#4CAF50",
+  '1G-Język_Piotrowski': "#2196F3", 
+  '2H-Język_Piotrowski': "#2196F3", 
+  '6FJ-Biologia': "#2196F3", 
+  '4K-Przyroda': "#2196F3", 
+  '7A-Biologia': "#2196F3", 
+  '5i-Biologia': "#2196F3", 
+  '8D-Biologia': "#FF9800",
+  'Edukacja_ogólna': "#9C27B0"
+};
+
   const klasaSelect = document.getElementById("klasa-select");
   const tematSelect = document.getElementById("temat-select");
 
@@ -695,6 +696,7 @@ function pokazTabeleWyboruKlasy() {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
+      <td style="background-color:${kolory[klasa] || 'transparent'}"></td>
       <td>${klasa}</td>
       <td>${ostatnia ? ostatnia.temat : '<em>–</em>'}</td>
       <td>${ostatnia ? ostatnia.data : '<em>–</em>'}</td>
@@ -704,6 +706,7 @@ function pokazTabeleWyboruKlasy() {
     tabela.appendChild(tr);
   });
 }
+
 
 function wybierzKlase(klasa) {
   document.getElementById("klasa-select").value = klasa;
@@ -795,6 +798,7 @@ function wybierzKlase(klasa) {
 
 </body>
 </html>
+
 
 
 
