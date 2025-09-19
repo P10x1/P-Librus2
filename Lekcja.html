@@ -169,6 +169,14 @@
   cursor: pointer;
   color: #ffffff;
 }
+td.pasek {
+  width: 10px;
+}
+
+.pasek.dzien1 { background-color: #4CAF50; }
+.pasek.dzien2 { background-color: #2196F3; }
+.pasek.bio8   { background-color: #FF9800; }
+.pasek.ogolna { background-color: #9C27B0; }
 
 
   </style>
@@ -237,6 +245,7 @@
         <th><i>Klasa</th>
         <th><i>Ostatni temat</th>
         <th><i>Data ostatniej lekcji</th>
+		<th><i>Dzień</th>
         <th></th>
       </tr>
     </thead>
@@ -423,6 +432,22 @@ function pokazPostep(klasa) {
  
 	};
 
+	const kolory = {
+	'6FJ-Język_Piotrowski': "#4CAF50",
+    '7A-Język_Piotrowski': "#4CAF50",
+    '7B-Język_Piotrowski': "#4CAF50",
+    '7C-Język_Piotrowski': "#4CAF50",
+    '8D-Język_Piotrowski': "#4CAF50",
+    '8E-Język_Piotrowski': "#4CAF50",
+	'1G-Język_Piotrowski': "#2196F3", 
+	'2H-Język_Piotrowski': "#2196F3", 
+	'6FJ-Biologia': "#2196F3", 
+	'4K-Przyroda': "#2196F3", 
+	'7A-Biologia': "#2196F3", 
+    '5i-Biologia': "#2196F3", 
+	'8D-Biologia': "#FF9800"
+	'Edukacja_ogólna': "#9C27B0
+  };
   const klasaSelect = document.getElementById("klasa-select");
   const tematSelect = document.getElementById("temat-select");
 
@@ -770,6 +795,7 @@ function wybierzKlase(klasa) {
 
 </body>
 </html>
+
 
 
 
