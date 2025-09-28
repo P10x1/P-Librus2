@@ -700,11 +700,16 @@ function pokazTabeleWyboruKlasy() {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
-      <td style="background-color:${kolory[klasa] || 'transparent'}"></td>
-      <td>${klasa}</td>
-      <td>${ostatnia ? ostatnia.temat : '<em>–</em>'}</td>
-      <td>${ostatnia ? ostatnia.data : '<em>–</em>'}</td>
-      <td><button onclick="wybierzKlase('${klasa}')">Wybierz i sprawdź obecność</button></td>
+      <td>${klasa === "2H-Język_Piotrowski" ? "<s>" + klasa + "</s>" : klasa}</td>
+<td>${ostatnia ? ostatnia.temat : '<em>–</em>'}</td>
+<td>${ostatnia ? ostatnia.data : '<em>–</em>'}</td>
+<td>
+  <button onclick="wybierzKlase('${klasa}')" 
+          ${klasa === "2H-Język_Piotrowski" ? "disabled" : ""}>
+    Wybierz i sprawdź obecność
+  </button>
+</td>
+
     `;
 
     tabela.appendChild(tr);
@@ -802,6 +807,7 @@ function wybierzKlase(klasa) {
 
 </body>
 </html>
+
 
 
 
