@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>P-Librus - Zachowanie</title>
+  <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #dfe9f3, #ffffff);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #d4dce4, #f2f3f5);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .logo { display: flex; align-items: center; }
+  .logo img { height: 40px; margin-right: 10px; }
+  .logo span { font-size: 24px; color: #8a2e6e; font-weight: bold; }
+
+  .user-info { font-size: 14px; }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #edf0f3;
+    flex-wrap: wrap;
+  }
+  .menu-item { margin: 10px; position: relative; }
+  .menu-item a {
+    font-size: 14px;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s;
+    display: block;
+  }
+  .menu-item a:hover { background-color: #f0f0f0; }
+
+  .container {
+    padding: 40px;
+    background: #ffffff;
+    margin: 30px auto;
+    border-radius: 15px;
+    max-width: 1000px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  h2 { color: #2a6f97; }
+
+  label { font-weight: 600; display: block; margin-top: 15px; color: #34495e; }
+
+  select, textarea, button, input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  button {
+    background: #2a6f97; color: white; border: none;
+    border-radius: 7px; cursor: pointer;
+    margin-top: 20px; font-weight: bold;
+    transition: background 0.3s;
+  }
+  button:hover { background: #1b4965; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin-top: 30px;
+    background: #fff; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  th, td { padding: 10px; text-align: center; border-bottom: 1px solid #ccc; }
+  th { background: #e0e0e0; color: #333; }
+
+  .grade {
+    position: relative; display: inline-block;
+    margin: 0 3px; padding: 4px 6px;
+    border-radius: 5px; font-weight: bold;
+    cursor: pointer;
+  }
+  .grade .tooltip {
+    visibility: hidden; width: 240px;
+    background-color: #333; color: #fff;
+    text-align: left; border-radius: 6px;
+    padding: 6px; position: absolute;
+    z-index: 1; bottom: 125%; left: 50%;
+    margin-left: -120px; opacity: 0;
+    transition: opacity 0.3s; white-space: pre-line;
+  }
+  .grade:hover .tooltip { visibility: visible; opacity: 1; }
+
+/* Kolory tła zależne od kategorii (A = dodatnie, B = ujemne) */
+.kat-dodatnia {
+  background-color: #e8f6ea; /* jasna zieleń */
+  border: 1px solid #c8e6c9;
+  padding: 3px 6px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.kat-ujemna {
+  background-color: #fde8e8; /* jasna czerwień */
+  border: 1px solid #f5c6c6;
+  padding: 3px 6px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+
+  .typ-Dodatnie { background-color: #c8e6c9; color: #2e7d32; }
+  .typ-Ujemne { background-color: #ffcdd2; color: #c62828; }
+  .typ-Neutralne { background-color: #eeeeee; color: #555; }
+
+  .modal {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: none; justify-content: center;
+    align-items: center; z-index: 1000;
+  }
+  .modal-content {
+    background: white; padding: 20px;
+    width: 90%; max-height: 90vh;
+    overflow-y: auto; border-radius: 10px; position: relative;
+  }
+  .modal-content button.close-modal {
+    position: absolute; top: 10px; right: 15px;
+    background: crimson; color: white;
+    border: none; padding: 5px 10px;
+    font-size: 14px; border-radius: 5px; cursor: pointer;
+  }
+  
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
+      <span>P-Librus</span>
+    </div>
+    <div class="user-info">
+      Zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
+    </div>
+    <select>
+      <option selected>polski</option>
+      <option>english</option>
+    </select>
+  </div>
+
+  <div class="menu">
+    <div class="menu-item"><a href="indywidualni.html">Indywidualni</a></div>
+    <div class="menu-item"><a href="Lekcja.html">Lekcja</a></div>
+    <div class="menu-item"><a href="Oceny.html">Oceny</a></div>
+    <div class="menu-item"><a href="Zachowanie.html">Zachowanie</a></div>
+    <div class="menu-item"><a href="organizacja.html">Organizacja</a></div>
+    <div class="menu-item"><a href="wiadomosci.html">Wiadomości</a></div>
+    <div class="menu-item"><a href="Ogloszenia.html">Ogłoszenia</a></div>
+    <div class="menu-item"><a href="Terminarz.html">Terminarz</a></div>
+  </div>
+
+  <!-- tabela wyboru klasy -->
+  <div class="container" id="wybor-klasy">
+    <h2>Wybierz klasę</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Klasa</th>
+          <th>Suma punktów</th>
+          <th>Akcja</th>
+        </tr>
+      </thead>
+      <tbody id="listaKlasTabela"></tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalZachowanie" class="modal">
+    <div class="modal-content">
+      <button class="close-modal" onclick="zamknijModal()">Zamknij</button>
+      <div id="panelZachowanie" class="container">
+        <h2>PANEL NAUCZYCIELA – ZACHOWANIE</h2>
+
+        <label for="klasa">Klasa:</label>
+        <select id="klasa"></select>
+
+        <label for="typ">Rodzaj punktu:</label>
+        <select id="typ">
+          <option>Dodatnie</option>
+          <option>Ujemne</option>
+          <option>Neutralne</option>
+        </select>
+
+        <label for="kategoria">Kategoria:</label>
+        <select id="kategoria"></select>
+
+        <label for="punkty">Liczba punktów (+/-):</label>
+        <input type="number" id="punkty" value="1">
+
+        <label for="komentarz">Komentarz:</label>
+        <textarea id="komentarz" rows="2"></textarea>
+		
+		<button type="button" onclick="toggleWszyscy()">Wybierz wszystkich</button>
+
+        <div id="students"></div>
+
+        <button onclick="zapiszPunkty()">Zapisz punkt</button>
+		
+
+
+        <h2>Tabela punktów dla klasy</h2>
+        <div id="tabeleKlas"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const klasy = {
+  '6I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
+	'6L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+    '7F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'7J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '8A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '8B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '1E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
+	'2G-Język_Piotrowski': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
+	'3H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
+    '4D-Przyroda': ['Mirek', 'Ela', 'Ula'],
+	'5K-Biologia': ['Tymek','Tosia','Dobromiła','Kasjan'],
+    '6I-Biologia': ['Jagoda', 'Krystian', 'Justyna'],
+	'7FJ-Biologia': ['Ola', 'Julia', 'Natan', 'Filip', 'Zuzia', 'Kasia', 'Maja'],
+	'8A-Biologia': ['Agata', 'Tadeusz', 'Piotr'],
+	'Dodatkowa_Biologia': ['Jagoda', 'Krystian', 'Justyna', 'Agata', 'Tadeusz', 'Piotr', 'Ola', 'Julia', 'Natan', 'Filip', 'Zuzia', 'Kasia', 'Maja', 'Mirek', 'Ela', 'Ula'],
+	'Edukacja_ogólna': ['Julia','Ola','Zuzia','Tadeusz','Grzesiek','Adam','Wiesia','Bożena','Jagoda','Antek','Maciej','Tosia']
+};
+
+const STARTOWE_PUNKTY = 40;
+
+
+const kategorie = [
+  // ✅ Dodatnie
+  "A-Wzorowa frekwencja",
+  "A-Aktywność na lekcji",
+  "A-Wolontariat / działalność społeczna",
+  "A-Reprezentowanie szkoły",
+  "A-Pomoc kolegom",
+  "A-Kultura osobista",
+  "A-Wysoka kultura języka",
+  "A-Dbałość o mienie szkoły",
+  "A-Przyniesienie dodatkowych materiałów",
+  "A-Inicjatywa własna",
+
+  // ❌ Ujemne
+  "B-Spóźnienie",
+  "B-Nieusprawiedliwiona nieobecność",
+  "B-Zakłócanie porządku zajęć",
+  "B-Przeszkadzanie innym",
+  "B-Brak pracy domowej",
+  "B-Nieprzygotowanie do lekcji",
+  "B-Używanie telefonu na lekcji",
+  "B-Niewłaściwe zachowanie na przerwie",
+  "B-Nieodpowiednie słownictwo",
+  "B-Niszczenie mienia",
+  "B-Aggresywne zachowanie",
+  "B-Brak szacunku do nauczyciela",
+  "B-Brak szacunku do rówieśników",
+  "B-Nieprzestrzeganie regulaminu szkoły"
+];
+
+
+// tabela wyboru klasy
+const listaKlasTabela = document.getElementById('listaKlasTabela');
+Object.keys(klasy).forEach(nazwaKlasy => {
+  const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
+  const punkty = zapisane[nazwaKlasy] || [];
+  const suma = punkty.reduce((a,b)=>a+b.punkty,0);
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${nazwaKlasy}</td>
+    <td>${suma}</td>
+    <td><button class="wybierz-klase-btn" data-klasa="${nazwaKlasy}">Wybierz</button></td>
+  `;
+  listaKlasTabela.appendChild(tr);
+});
+
+const selectKlasa = document.getElementById('klasa');
+const selectKategoria = document.getElementById('kategoria');
+const studentsDiv = document.getElementById('students');
+const tabeleKlasDiv = document.getElementById('tabeleKlas');
+
+for (let klasa in klasy) {
+  const opt = document.createElement('option');
+  opt.value = klasa;
+  opt.textContent = klasa;
+  selectKlasa.appendChild(opt);
+}
+kategorie.forEach(k => {
+  const opt = document.createElement('option');
+  opt.value = k;
+  opt.textContent = k;
+
+  if (k.startsWith("A-")) {
+    opt.style.backgroundColor = "#e6f7e6"; // zielone tło dla dodatnich
+    opt.style.color = "#2e7d32";           // ciemnozielony tekst
+  }
+  if (k.startsWith("B-")) {
+    opt.style.backgroundColor = "#fde0e0"; // czerwone tło dla ujemnych
+    opt.style.color = "#c62828";           // ciemnoczerwony tekst
+  }
+
+  selectKategoria.appendChild(opt);
+});
+
+
+function pokazUczniow() {
+  studentsDiv.innerHTML = '';
+  const wybranaKlasa = selectKlasa.value;
+  klasy[wybranaKlasa].forEach(uczen => {
+    const div = document.createElement('div');
+    div.className = 'student';
+    div.innerHTML = `
+      <span>${uczen}</span>
+      <input type="checkbox" id="uczen-${uczen}">
+    `;
+    studentsDiv.appendChild(div);
+  });
+}
+
+function zapiszPunkty() {
+  const typ = document.getElementById('typ').value;
+  const kategoria = document.getElementById('kategoria').value;
+  const komentarz = document.getElementById('komentarz').value;
+  const ilosc = parseInt(document.getElementById('punkty').value);
+  const klasa = selectKlasa.value;
+  if (!klasa) return alert("Wybierz klasę");
+
+  const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
+  if (!zapisane[klasa]) zapisane[klasa] = [];
+
+  klasy[klasa].forEach(uczen => {
+    const chk = document.getElementById(`uczen-${uczen}`);
+    if (chk && chk.checked) {
+      zapisane[klasa].push({
+        uczen,
+        typ,
+        kategoria,
+        punkty: ilosc,
+        komentarz,
+        data: new Date().toLocaleDateString()
+      });
+    }
+  });
+
+  localStorage.setItem('zachowanie', JSON.stringify(zapisane));
+  pokazTabele();
+  alert("Punkty zapisane!");
+}
+
+function pokazTabele() {
+  const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
+  const klasa = selectKlasa.value;
+  if (!zapisane[klasa]) { tabeleKlasDiv.innerHTML = ''; return; }
+
+  let html = `<table><thead><tr>
+    <th>Uczeń</th>
+    <th>Punkty</th>
+    <th>Suma</th>
+  </tr></thead><tbody>`;
+
+  klasy[klasa].forEach(uczen => {
+    const wpisy = zapisane[klasa].filter(w => w.uczen === uczen);
+   const zdobyte = wpisy.reduce((a,b)=>a+(Number(b.punkty)||0),0);
+const suma = STARTOWE_PUNKTY + zdobyte;
+
+
+    const lista = wpisy.map(w => {
+      const kl = `typ-${w.typ}`; // zachowujemy klasę typu (Dodatnie/Ujemne/Neutralne)
+      const kat = (w.kategoria || '').toString().trim();
+      const katClass = kat.startsWith('A-') ? 'kat-dodatnia' :
+                       kat.startsWith('B-') ? 'kat-ujemna' : '';
+      // tooltip - czytelnie opisane pola
+      const tooltip = `Typ: ${w.typ}\nKategoria: ${w.kategoria || '-'}\nKomentarz: ${w.komentarz || '-'}\nData: ${w.data || '-'}`;
+      return `
+        <span class="grade ${kl} ${katClass}">
+          ${w.punkty}
+          <div class="tooltip">${tooltip}</div>
+        </span>
+      `;
+    }).join(' ');
+
+    html += `<tr>
+      <td>${uczen}</td>
+      <td>${lista}</td>
+      <td>${suma}</td>
+    </tr>`;
+  });
+
+  html += "</tbody></table>";
+  tabeleKlasDiv.innerHTML = html;
+}
+
+
+// obsługa wyboru klasy
+document.addEventListener('click', e=>{
+  if (e.target.classList.contains('wybierz-klase-btn')) {
+    const klasa = e.target.getAttribute('data-klasa');
+    otworzModal(klasa);
+  }
+});
+
+function otworzModal(klasa) {
+  document.getElementById('klasa').value = klasa;
+  document.getElementById('modalZachowanie').style.display = 'flex';
+  pokazUczniow();
+  pokazTabele();
+}
+function zamknijModal() {
+  document.getElementById('modalZachowanie').style.display = 'none';
+}
+function toggleWszyscy() {
+  const checkboxes = studentsDiv.querySelectorAll("input[type=checkbox]");
+  const allChecked = [...checkboxes].every(chk => chk.checked);
+  checkboxes.forEach(chk => chk.checked = !allChecked);
+}
+
+</script>
+
+<footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
+  <div style="margin-bottom: 10px;">
+    <img src="teamppp.png" alt="Team P" style="width: 200px; margin: 0 20px;">
+    <img src="21 maj 2025, 16_13_32.png" alt="p-librus" style="width: 200px; margin: 0 20px;">
+    <img src="stpschool.png" alt="STP School" style="width: 200px; margin: 0 20px;">
+  </div>
+  <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
+</footer>
+</body>
+</html>
