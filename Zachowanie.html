@@ -121,6 +121,7 @@
 }
 
 
+
   .typ-Dodatnie { background-color: #c8e6c9; color: #2e7d32; }
   .typ-Ujemne { background-color: #ffcdd2; color: #c62828; }
   .typ-Neutralne { background-color: #eeeeee; color: #555; }
@@ -272,8 +273,21 @@ const kategorie = [
   "B-Aggresywne zachowanie",
   "B-Brak szacunku do nauczyciela",
   "B-Brak szacunku do rówieśników",
-  "B-Nieprzestrzeganie regulaminu szkoły"
+  "B-Nieprzestrzeganie regulaminu szkoły",
+
+  // 📌 Obowiązki ucznia (neutralne / techniczne)
+  "C-Wywiązywanie się z obowiązków ucznia",
+  "C-Zmiana obuwia",
+  "C-Przynoszenie potrzebnych przyborów",
+  "C-Przestrzeganie zasad BHP",
+  "C-Przestrzeganie zasad higieny",
+  "C-Uczestnictwo w zajęciach dodatkowych",
+  "C-Przestrzeganie zasad bezpieczeństwa",
+  "C-Noszenie stroju galowego",
+  "C-Przestrzeganie zasad korzystania z szafki",
+  "C-Zachowanie porządku w sali i na korytarzu"
 ];
+
 
 
 // tabela wyboru klasy
@@ -312,8 +326,13 @@ kategorie.forEach(k => {
     opt.style.color = "#2e7d32";           // ciemnozielony tekst
   }
   if (k.startsWith("B-")) {
-    opt.style.backgroundColor = "#fde0e0"; // czerwone tło dla ujemnych
-    opt.style.color = "#c62828";           // ciemnoczerwony tekst
+opt.style.backgroundColor = "#fff8e1"; // jasne żółte tło
+opt.style.color = "#f57f17";           // ciemnożółty / pomarańczowy tekst
+
+  }
+  if (k.startsWith("C-")) {
+    opt.style.backgroundColor = "#fde0e0"; // 
+    opt.style.color = "#c62828";           // 
   }
 
   selectKategoria.appendChild(opt);
@@ -443,4 +462,5 @@ function toggleWszyscy() {
 </footer>
 </body>
 </html>
+
 
