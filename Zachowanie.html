@@ -325,14 +325,15 @@ kategorie.forEach(k => {
     opt.style.backgroundColor = "#e6f7e6"; // zielone tło dla dodatnich
     opt.style.color = "#2e7d32";           // ciemnozielony tekst
   }
-  if (k.startsWith("B-")) {
-opt.style.backgroundColor = "#fff8e1"; // jasne żółte tło
-opt.style.color = "#f57f17";           // ciemnożółty / pomarańczowy tekst
+if (k.startsWith("B-")) {
+  opt.style.backgroundColor = "#fde0e0"; // czerwone tło dla ujemnych
+  opt.style.color = "#c62828";           // ciemnoczerwony tekst
+}
+if (k.startsWith("C-")) {
+  opt.style.backgroundColor = "#fff8e1"; // żółte tło dla neutralnych
+  opt.style.color = "#f57f17";           // ciemnożółty / pomarańczowy tekst
+}
 
-  }
-  if (k.startsWith("C-")) {
-    opt.style.backgroundColor = "#fde0e0"; // 
-    opt.style.color = "#c62828";           // 
   }
 
   selectKategoria.appendChild(opt);
@@ -462,5 +463,6 @@ function toggleWszyscy() {
 </footer>
 </body>
 </html>
+
 
 
