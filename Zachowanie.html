@@ -325,19 +325,18 @@ kategorie.forEach(k => {
     opt.style.backgroundColor = "#e6f7e6"; // zielone tło dla dodatnich
     opt.style.color = "#2e7d32";           // ciemnozielony tekst
   }
-if (k.startsWith("B-")) {
-  opt.style.backgroundColor = "#fde0e0"; // czerwone tło dla ujemnych
-  opt.style.color = "#c62828";           // ciemnoczerwony tekst
-}
-if (k.startsWith("C-")) {
-  opt.style.backgroundColor = "#fff8e1"; // żółte tło dla neutralnych
-  opt.style.color = "#f57f17";           // ciemnożółty / pomarańczowy tekst
-}
-
+  if (k.startsWith("B-")) {
+    opt.style.backgroundColor = "#fde0e0"; // czerwone tło dla ujemnych
+    opt.style.color = "#c62828";           // ciemnoczerwony tekst
+  }
+  if (k.startsWith("C-")) {
+    opt.style.backgroundColor = "#fff8e1"; // żółte tło dla neutralnych
+    opt.style.color = "#f57f17";           // ciemnożółty / pomarańczowy tekst
   }
 
   selectKategoria.appendChild(opt);
 });
+
 
 
 function pokazUczniow() {
@@ -463,6 +462,7 @@ function toggleWszyscy() {
 </footer>
 </body>
 </html>
+
 
 
 
