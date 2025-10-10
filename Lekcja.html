@@ -182,31 +182,7 @@ td.pasek {
   </style>
 </head>
 <body>
-
-<div class="top-alert" id="topAlert">
-  <span class="alert-message">Nowa wersja dziennika elektronicznego, Nowe możliwości. Sprawdź sam!</span>
-  <button class="close-btn" onclick="document.getElementById('topAlert').style.display='none'">×</button>
-</div>
-
-<script type="module">
-  // Importy z Firebase CDN
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-  const firebaseConfig = {
-    // twoja konfiguracja
-  };// Your web app's Firebase configuration (wklej tutaj swój config)
-  const firebaseConfig = {
-  apiKey: "AIzaSyDlSm_Cg8Pz0rPsExKro958vjRDUD_i95Y",
-  authDomain: "p-librus.firebaseapp.com",
-  projectId: "p-librus",
-  storageBucket: "p-librus.firebasestorage.app",
-  messagingSenderId: "1018564561209",
-  appId: "1:1018564561209:web:14fc2df790ca838837c0e8"
-};
-
- 
-
+	
   // teraz możesz używać db, np. dodawanie i pobieranie dokumentów
 </script>
 
@@ -816,9 +792,45 @@ function wybierzKlase(klasa) {
   <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
 </footer>
 
+<script type="module">
+  import { db } from "./firebase.js";
+  import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+  // 🟢 Funkcja: zapisz lekcję w chmurze
+  async function zapiszLekcje() {
+    const klasa = document.getElementById("klasa").value;
+    const temat = document.getElementById("temat").value;
+    const data = document.getElementById("data").value;
+
+    await addDoc(collection(db, "lekcje"), {
+      klasa,
+      temat,
+      data,
+      createdAt: new Date()
+    });
+
+    alert("✅ Lekcja zapisana w chmurze!");
+  }
+
+  // 🟣 Funkcja: pobierz lekcje i wypisz w konsoli
+  async function pobierzLekcje() {
+    const querySnapshot = await getDocs(collection(db, "lekcje"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  }
+
+  // 🧠 Po załadowaniu strony — pobierz lekcje
+  window.addEventListener("DOMContentLoaded", pobierzLekcje);
+
+  // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
+  document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
+</script>
+
+	
 </body>
 </html>
+
 
 
 
