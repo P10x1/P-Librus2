@@ -354,8 +354,8 @@ function pokazPostep(klasa) {
   <label for="temat-select">Temat lekcji:</label>
   <select id="temat-select"></select>
   
-  <label for="nowy-temat">Dodaj własny temat lekcji:</label>
-<textarea id="opis" rows="3"></textarea>
+<label for="nowy-temat">Dodaj własny temat lekcji:</label>
+<input type="text" id="nowy-temat" placeholder="Wpisz nowy temat..." />
 <button type="button" onclick="dodajWlasnyTemat()">Dodaj temat</button>
 
 <label for="opis">Dodatkowe notatki:</label>
@@ -368,6 +368,33 @@ function pokazPostep(klasa) {
   <button onclick="zapiszLekcje()">Zapisz lekcję</button>
 </div>
 
+<script>
+  function dodajWlasnyTemat() {
+    const nowyTematInput = document.getElementById("nowy-temat");
+    const nowyTemat = nowyTematInput.value.trim();
+
+    if (nowyTemat === "") {
+      alert("Proszę wpisać temat lekcji.");
+      return;
+    }
+
+    const klasa = document.getElementById("klasa-select").value;
+    if (!tematy[klasa]) tematy[klasa] = [];
+
+    tematy[klasa].push(nowyTemat);
+
+    const tematSelect = document.getElementById("temat-select");
+    const option = document.createElement("option");
+    option.value = nowyTemat;
+    option.textContent = nowyTemat;
+    tematSelect.appendChild(option);
+
+    tematSelect.value = nowyTemat;
+    nowyTematInput.value = "";
+  }
+
+</script>
+	
 <div class="history-box" id="historia-box" style="display: none;">
   <h2>Historia lekcji</h2>
   <ul id="historia-lekcji"></ul>
@@ -830,6 +857,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
