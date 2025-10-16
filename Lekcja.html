@@ -255,6 +255,11 @@ td.pasek {
   <div id="lekcja-form" style="display: none;">
 <h3 id="wybrana-klasa" style="color: #2a6f97;"></h3>
 
+<div id="wydarzenie-klasy" style="background:#e8f4fa; padding:10px; border-radius:10px; margin-top:10px; display:none;">
+  <strong>📅 Nadchodzące wydarzenie:</strong> <span id="wydarzenie-tekst"></span>
+</div>
+
+	  
   <label for="przedmiot-select">Przedmiot:</label>
   <select id="przedmiot-select">
     <option value="biologia">Biologia</option>
@@ -525,36 +530,53 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
   }
 }
 
-  function pokazFrekwencje(klasa) {
-    const kontener = document.getElementById("frekwencja-box");
-    kontener.innerHTML = "";
+function pokazFrekwencje(klasa) {
+  const kontener = document.getElementById("frekwencja-box");
+  kontener.innerHTML = "";
 
-    if (!uczniowie[klasa]) return;
+  if (!uczniowie[klasa]) return;
 
-    uczniowie[klasa].forEach((uczen, index) => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "frekwencja-wrapper";
+  uczniowie[klasa].forEach((uczen, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "frekwencja-wrapper";
 
-      const label = document.createElement("label");
-      label.textContent = uczen;
-      wrapper.appendChild(label);
+    const label = document.createElement("label");
+    label.textContent = uczen;
+    wrapper.appendChild(label);
 
-      ["Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona", "Nieobecność usprawiedliwiona", "Zwolnienie", "Rekolekcje", "Egzamin", "Sanatorium", "Wycieczka", "Konkurs", "Wolontariat"].forEach(opcja => {
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = `frekwencja_${index}`;
-        radio.value = opcja;
+    // Frekwencja
+    ["Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona", "Nieobecność usprawiedliwiona", "Zwolnienie"].forEach(opcja => {
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = `frekwencja_${index}`;
+      radio.value = opcja;
 
-        const span = document.createElement("span");
-        span.textContent = opcja;
+      const span = document.createElement("span");
+      span.textContent = opcja;
 
-        wrapper.appendChild(radio);
-        wrapper.appendChild(span);
-      });
-
-      kontener.appendChild(wrapper);
+      wrapper.appendChild(radio);
+      wrapper.appendChild(span);
     });
-  }
+
+    // 🟢 Nowe pole: ocena
+    const ocenaLabel = document.createElement("span");
+    ocenaLabel.textContent = " Ocena: ";
+    const ocenaInput = document.createElement("input");
+    ocenaInput.type = "number";
+    ocenaInput.min = 1;
+    ocenaInput.max = 6;
+    ocenaInput.step = 0.5;
+    ocenaInput.name = `ocena_${index}`;
+    ocenaInput.style.width = "60px";
+    ocenaInput.placeholder = "-";
+
+    wrapper.appendChild(ocenaLabel);
+    wrapper.appendChild(ocenaInput);
+
+    kontener.appendChild(wrapper);
+  });
+}
+
 
   function zapiszLekcje() {
     const data = document.getElementById("data").value;
@@ -567,13 +589,16 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
       return;
     }
 
-    const frekwencja = [];
-    if (uczniowie[klasa]) {
-      uczniowie[klasa].forEach((uczen, index) => {
-        const zaznaczona = document.querySelector(`input[name="frekwencja_${index}"]:checked`);
-        frekwencja.push({ uczen, status: zaznaczona ? zaznaczona.value : "Brak danych" });
-      });
-    }
+  const frekwencja = [];
+if (uczniowie[klasa]) {
+  uczniowie[klasa].forEach((uczen, index) => {
+    const zaznaczona = document.querySelector(`input[name="frekwencja_${index}"]:checked`);
+    const ocenaInput = document.querySelector(`input[name="ocena_${index}"]`);
+    const ocena = ocenaInput ? ocenaInput.value : "";
+    frekwencja.push({ uczen, status: zaznaczona ? zaznaczona.value : "Brak danych", ocena });
+  });
+}
+
 
     const nowaLekcja = { data, klasa, temat, opis, frekwencja };
     const klucz = `lekcje_${klasa}`;
@@ -641,7 +666,8 @@ function edytujLekcje(index, klasa) {
 
   if (lekcja.frekwencja && lekcja.frekwencja.length) {
     li.innerHTML += `<br><strong>Frekwencja:</strong><ul>${
-      lekcja.frekwencja.map(f => `<li>${f.uczen}: ${f.status}</li>`).join("")
+      lekcja.frekwencja.map(f => `<li>${f.uczen}: ${f.status}${f.ocena ? ` – Ocena: ${f.ocena}` : ""}</li>`).join("")
+
     }</ul>`;
   }
 
@@ -745,6 +771,8 @@ function wybierzKlase(klasa) {
   pokazFrekwencje(klasa);
   pokazHistorieLekcji(klasa);
   pokazPostep(klasa);
+pokazWydarzenie(klasa);
+
 }
 
 
@@ -852,11 +880,49 @@ function wybierzKlase(klasa) {
 
   // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
   document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
+// 🗓️ Terminarz klas
+const terminarz = {
+  "6I-Język_Piotrowski":  
+	  "6L-Język_Piotrowski":       
+	"7F-Język_Piotrowski": 
+	"7J-Język_Piotrowski":
+		"8A-Język_Piotrowski":       
+	"8B-Język_Piotrowski": 
+	"8C-Język_Piotrowski": 
+	"1E-Język_Piotrowski": 
+		"2G-Język_Piotrowski": 
+			"3H-Język_Piotrowski": 
+				"4D-Przyroda": 
+					"5K-Biologia": 
+						"6I-Biologia": 	  
+	"7FJ-Biologia": 
+							"8A-Biologia": 
+								"Dodatkowa_Biologia": 
+	"Edukacja_ogólna": 
+ 
+};
+
+// 🔔 Funkcja pokazująca wydarzenie klasy
+function pokazWydarzenie(klasa) {
+  const div = document.getElementById("wydarzenie-klasy");
+  const tekst = document.getElementById("wydarzenie-tekst");
+
+  if (terminarz[klasa]) {
+    tekst.textContent = terminarz[klasa];
+    div.style.display = "block";
+  } else {
+    div.style.display = "none";
+  }
+}
+
+
 </script>
+	
 
 	
 </body>
 </html>
+
 
 
 
