@@ -547,11 +547,7 @@ function togglePominTemat() {
   pokazPostep(klasa);
 }
 
-// 🔹 Przycisk do pomijania tematów
-const pominBtn = document.createElement("button");
-pominBtn.textContent = "Pomiń / Cofnij temat";
-pominBtn.onclick = togglePominTemat;
-document.getElementById("temat-select").insertAdjacentElement("afterend", pominBtn);
+
 
 
       const tLower = t.toLowerCase();  
@@ -729,6 +725,13 @@ function edytujLekcje(index, klasa) {
 
   }
 
+// 🔹 Przycisk do pomijania tematów
+const pominBtn = document.createElement("button");
+pominBtn.textContent = "Pomiń / Cofnij temat";
+pominBtn.onclick = togglePominTemat;
+document.getElementById("temat-select").insertAdjacentElement("afterend", pominBtn);
+
+	
   klasaSelect.addEventListener("change", () => {
     updateTematy();
     pokazFrekwencje(klasaSelect.value);
@@ -925,6 +928,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
