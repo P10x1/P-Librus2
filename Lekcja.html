@@ -829,44 +829,11 @@ function wybierzKlase(klasa) {
   <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
 </footer>
 
-<script type="module">
-  import { db } from "./firebase.js";
-  import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-
-  // 🟢 Funkcja: zapisz lekcję w chmurze
-  async function zapiszLekcje() {
-    const klasa = document.getElementById("klasa").value;
-    const temat = document.getElementById("temat").value;
-    const data = document.getElementById("data").value;
-
-    await addDoc(collection(db, "lekcje"), {
-      klasa,
-      temat,
-      data,
-      createdAt: new Date()
-    });
-
-    alert("✅ Lekcja zapisana w chmurze!");
-  }
-
-  // 🟣 Funkcja: pobierz lekcje i wypisz w konsoli
-  async function pobierzLekcje() {
-    const querySnapshot = await getDocs(collection(db, "lekcje"));
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-    });
-  }
-
-  // 🧠 Po załadowaniu strony — pobierz lekcje
-  window.addEventListener("DOMContentLoaded", pobierzLekcje);
-
-  // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
-  document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
-</script>
 
 	
 </body>
 </html>
+
 
 
 
