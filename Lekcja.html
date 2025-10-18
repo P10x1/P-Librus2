@@ -793,7 +793,10 @@ function wybierzKlase(klasa) {
   pokazPostep(klasa);
 }
 
-pokazTabeleWyboruKlasy();  <!-- 🔹 dodaj to przed zamknięciem -->
+document.addEventListener("DOMContentLoaded", () => {
+  pokazTabeleWyboruKlasy();
+});
+
 
 </script>  <!-- 🔹 Tego brakowało! -->
 
@@ -811,6 +814,7 @@ pokazTabeleWyboruKlasy();  <!-- 🔹 dodaj to przed zamknięciem -->
 	
 </body>
 </html>
+
 
 
 
