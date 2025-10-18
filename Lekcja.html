@@ -820,67 +820,6 @@ function wybierzKlase(klasa) {
 
 
 
-</script>
-<!-- Firebase App (core SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-<!-- Firebase Firestore -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-<script>
-  // Tu wklejasz swój JavaScript
-
-  // Przykład: selektory elementów
-  const klasaSelect = document.getElementById("klasa-select");  // Twój select z klasami
-  const tematSelect = document.getElementById("temat-select");  // Select z tematami
-
-  // Obiekt z tematami — przykładowa struktura
-  const tematy = {
-    "1a": ["Matematyka", "Polski"],
-    "2b": ["Biologia", "Historia"]
-  };
-
-  function aktualizujTematy() {
-    const klasa = klasaSelect.value;
-    const listaTematow = tematy[klasa] || [];
-
-    tematSelect.innerHTML = ""; // wyczyść
-
-    listaTematow.forEach((temat) => {
-      const option = document.createElement("option");
-      option.value = temat;
-      option.textContent = temat;
-      tematSelect.appendChild(option);
-    });
-  }
-
-  function dodajWlasnyTemat() {
-    const nowyTematInput = document.getElementById("nowy-temat");
-    const nowyTemat = nowyTematInput.value.trim();
-
-    if (nowyTemat === "") {
-      alert("Proszę wpisać temat.");
-      return;
-    }
-
-    const klasa = klasaSelect.value;
-
-    if (!tematy[klasa]) {
-      tematy[klasa] = [];
-    }
-    tematy[klasa].push(nowyTemat);
-
-    aktualizujTematy();
-
-    nowyTematInput.value = "";
-    tematSelect.value = nowyTemat;
-  }
-
-  // Aktualizuj tematy po zmianie klasy
-  klasaSelect.addEventListener("change", aktualizujTematy);
-
-  // Inicjalizacja tematu przy starcie
-  aktualizujTematy();
-
-</script>
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
   <div style="margin-bottom: 10px;">
     <img src="teamppp.png" alt="Team P" style="width: 200px; margin: 0 20px;">
@@ -928,6 +867,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
