@@ -274,10 +274,6 @@ td.pasek {
 </div>
 
 <script>
-	function getPominieteTematy(klasa) {
-  return JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
-}
-
 function pokazPostep(klasa) {
   const box = document.getElementById("postep-box");
   box.innerHTML = "";
@@ -305,22 +301,16 @@ function pokazPostep(klasa) {
   const box = document.getElementById("postep-box");
   box.innerHTML = "";
 
-  const pominiete = getPominieteTematy(klasa);
-const wszystkieTematy = (tematy[klasa] || []).filter(t => {
+  const wszystkieTematy = (tematy[klasa] || []).filter(t => {
   const tLower = t.toLowerCase();
-  // wyklucz pominięte tematy
-  if (pominiete.includes(t)) return false;
-
-  // zachowaj istniejące warunki filtrowania
   return !t.startsWith("DZIAŁ") &&
     (tLower.includes("powtórzenie") ||
      tLower.includes("sprawdzian") ||
      tLower.includes("omówienie sprawdzianu") ||
      tLower.includes("egzamin") ||
-     tLower.includes("jak na egzaminie") ||
-     (!t.startsWith("DZIAŁ") && !tLower.includes("dział")));
+	 tLower.includes("Jak na egzaminie") ||
+     (!t.startsWith("DZIAŁ") && !tLower.includes("dział"))); // zwykłe białe tematy
 });
-
 
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
@@ -474,57 +464,23 @@ const wszystkieTematy = (tematy[klasa] || []).filter(t => {
   const klasaSelect = document.getElementById("klasa-select");
   const tematSelect = document.getElementById("temat-select");
 
-  
-
-// 🔹 Oznaczanie tematów na liście
-function updateTematy() {
+  function updateTematy() {
   tematSelect.innerHTML = "";
   const klasa = klasaSelect.value;
+
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
-  const pominiete = getPominieteTematy(klasa);
 
   if (tematy[klasa]) {
     tematy[klasa].forEach(t => {
       const option = document.createElement("option");
       option.value = t;
-      option.textContent = t + (pominiete.includes(t) ? " (pominięty)" : "");
-      if (t.startsWith("DZIAŁ")) option.classList.add("dzial-option");
+      option.textContent = t;
 
-      // kolory
-      if (zrealizowaneTematy.has(t)) option.style.backgroundColor = "yellow";
-      if (pominiete.includes(t)) option.style.color = "#888"; // wyszarz
-      tematSelect.appendChild(option);
-    });
-  }
-
-  wybierzNastepnyTemat(klasa, zrealizowaneTematy);
-}
-
-// 🔹 Funkcja do pomijania/odznaczania tematów
-function togglePominTemat() {
-  const klasa = klasaSelect.value;
-  const temat = tematSelect.value;
-  if (!temat) return;
-
-  let pominiete = getPominieteTematy(klasa);
-
-  if (pominiete.includes(temat)) {
-    // Cofnij pominięcie
-    pominiete = pominiete.filter(t => t !== temat);
-  } else {
-    // Dodaj do pominiętych
-    pominiete.push(temat);
-  }
-
-  zapiszPominieteTematy(klasa, pominiete);
-  updateTematy();
-  pokazPostep(klasa);
-}
-
-
-
+      if (t.startsWith("DZIAŁ")) {
+        option.classList.add("dzial-option");
+      }
 
       const tLower = t.toLowerCase();  
       if (
@@ -701,13 +657,6 @@ function edytujLekcje(index, klasa) {
 
   }
 
-// 🔹 Przycisk do pomijania tematów
-const pominBtn = document.createElement("button");
-pominBtn.textContent = "Pomiń / Cofnij temat";
-pominBtn.onclick = togglePominTemat;
-document.getElementById("temat-select").insertAdjacentElement("afterend", pominBtn);
-
-	
   klasaSelect.addEventListener("change", () => {
     updateTematy();
     pokazFrekwencje(klasaSelect.value);
@@ -721,7 +670,7 @@ document.getElementById("temat-select").insertAdjacentElement("afterend", pominB
   pokazHistorieLekcji(klasaSelect.value);
   pokazPostep(klasaSelect.value); // ← TO DODAJ
 });
-
+pokazTabeleWyboruKlasy();
 
   function zaznaczWszystkichObecnosc() {
   const kontener = document.getElementById("frekwencja-box");
@@ -785,6 +734,7 @@ function wybierzKlase(klasa) {
   document.getElementById("wybor-klasy").style.display = "none";
   document.getElementById("historia-box").style.display = "block";
 
+  // ✨ Dodaj ten wiersz:
   document.getElementById("wybrana-klasa").textContent = "Wybrana klasa: " + klasa;
 
   updateTematy();
@@ -793,14 +743,69 @@ function wybierzKlase(klasa) {
   pokazPostep(klasa);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  pokazTabeleWyboruKlasy();
-});
 
 
-</script>  <!-- 🔹 Tego brakowało! -->
+</script>
+<!-- Firebase App (core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+<script>
+  // Tu wklejasz swój JavaScript
 
+  // Przykład: selektory elementów
+  const klasaSelect = document.getElementById("klasa-select");  // Twój select z klasami
+  const tematSelect = document.getElementById("temat-select");  // Select z tematami
 
+  // Obiekt z tematami — przykładowa struktura
+  const tematy = {
+    "1a": ["Matematyka", "Polski"],
+    "2b": ["Biologia", "Historia"]
+  };
+
+  function aktualizujTematy() {
+    const klasa = klasaSelect.value;
+    const listaTematow = tematy[klasa] || [];
+
+    tematSelect.innerHTML = ""; // wyczyść
+
+    listaTematow.forEach((temat) => {
+      const option = document.createElement("option");
+      option.value = temat;
+      option.textContent = temat;
+      tematSelect.appendChild(option);
+    });
+  }
+
+  function dodajWlasnyTemat() {
+    const nowyTematInput = document.getElementById("nowy-temat");
+    const nowyTemat = nowyTematInput.value.trim();
+
+    if (nowyTemat === "") {
+      alert("Proszę wpisać temat.");
+      return;
+    }
+
+    const klasa = klasaSelect.value;
+
+    if (!tematy[klasa]) {
+      tematy[klasa] = [];
+    }
+    tematy[klasa].push(nowyTemat);
+
+    aktualizujTematy();
+
+    nowyTematInput.value = "";
+    tematSelect.value = nowyTemat;
+  }
+
+  // Aktualizuj tematy po zmianie klasy
+  klasaSelect.addEventListener("change", aktualizujTematy);
+
+  // Inicjalizacja tematu przy starcie
+  aktualizujTematy();
+
+</script>
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
   <div style="margin-bottom: 10px;">
     <img src="teamppp.png" alt="Team P" style="width: 200px; margin: 0 20px;">
@@ -810,18 +815,44 @@ document.addEventListener("DOMContentLoaded", () => {
   <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
 </footer>
 
+<script type="module">
+  import { db } from "./firebase.js";
+  import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+  // 🟢 Funkcja: zapisz lekcję w chmurze
+  async function zapiszLekcje() {
+    const klasa = document.getElementById("klasa").value;
+    const temat = document.getElementById("temat").value;
+    const data = document.getElementById("data").value;
+
+    await addDoc(collection(db, "lekcje"), {
+      klasa,
+      temat,
+      data,
+      createdAt: new Date()
+    });
+
+    alert("✅ Lekcja zapisana w chmurze!");
+  }
+
+  // 🟣 Funkcja: pobierz lekcje i wypisz w konsoli
+  async function pobierzLekcje() {
+    const querySnapshot = await getDocs(collection(db, "lekcje"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  }
+
+  // 🧠 Po załadowaniu strony — pobierz lekcje
+  window.addEventListener("DOMContentLoaded", pobierzLekcje);
+
+  // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
+  document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
+</script>
 
 	
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
