@@ -274,6 +274,10 @@ td.pasek {
 </div>
 
 <script>
+	function getPominieteTematy(klasa) {
+  return JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
+}
+
 function pokazPostep(klasa) {
   const box = document.getElementById("postep-box");
   box.innerHTML = "";
@@ -301,16 +305,22 @@ function pokazPostep(klasa) {
   const box = document.getElementById("postep-box");
   box.innerHTML = "";
 
-  const wszystkieTematy = (tematy[klasa] || []).filter(t => {
+  const pominiete = getPominieteTematy(klasa);
+const wszystkieTematy = (tematy[klasa] || []).filter(t => {
   const tLower = t.toLowerCase();
+  // wyklucz pominięte tematy
+  if (pominiete.includes(t)) return false;
+
+  // zachowaj istniejące warunki filtrowania
   return !t.startsWith("DZIAŁ") &&
     (tLower.includes("powtórzenie") ||
      tLower.includes("sprawdzian") ||
      tLower.includes("omówienie sprawdzianu") ||
      tLower.includes("egzamin") ||
-	 tLower.includes("Jak na egzaminie") ||
-     (!t.startsWith("DZIAŁ") && !tLower.includes("dział"))); // zwykłe białe tematy
+     tLower.includes("jak na egzaminie") ||
+     (!t.startsWith("DZIAŁ") && !tLower.includes("dział")));
 });
+
 
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
@@ -481,6 +491,68 @@ function pokazPostep(klasa) {
       if (t.startsWith("DZIAŁ")) {
         option.classList.add("dzial-option");
       }
+		// 🔹 Lista pominiętych tematów w localStorage
+function getPominieteTematy(klasa) {
+  return JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
+}
+
+function zapiszPominieteTematy(klasa, lista) {
+  localStorage.setItem(`pominiete_${klasa}`, JSON.stringify(lista));
+}
+
+// 🔹 Oznaczanie tematów na liście
+function updateTematy() {
+  tematSelect.innerHTML = "";
+  const klasa = klasaSelect.value;
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
+  const pominiete = getPominieteTematy(klasa);
+
+  if (tematy[klasa]) {
+    tematy[klasa].forEach(t => {
+      const option = document.createElement("option");
+      option.value = t;
+      option.textContent = t + (pominiete.includes(t) ? " (pominięty)" : "");
+      if (t.startsWith("DZIAŁ")) option.classList.add("dzial-option");
+
+      // kolory
+      if (zrealizowaneTematy.has(t)) option.style.backgroundColor = "yellow";
+      if (pominiete.includes(t)) option.style.color = "#888"; // wyszarz
+      tematSelect.appendChild(option);
+    });
+  }
+
+  wybierzNastepnyTemat(klasa, zrealizowaneTematy);
+}
+
+// 🔹 Funkcja do pomijania/odznaczania tematów
+function togglePominTemat() {
+  const klasa = klasaSelect.value;
+  const temat = tematSelect.value;
+  if (!temat) return;
+
+  let pominiete = getPominieteTematy(klasa);
+
+  if (pominiete.includes(temat)) {
+    // Cofnij pominięcie
+    pominiete = pominiete.filter(t => t !== temat);
+  } else {
+    // Dodaj do pominiętych
+    pominiete.push(temat);
+  }
+
+  zapiszPominieteTematy(klasa, pominiete);
+  updateTematy();
+  pokazPostep(klasa);
+}
+
+// 🔹 Przycisk do pomijania tematów
+const pominBtn = document.createElement("button");
+pominBtn.textContent = "Pomiń / Cofnij temat";
+pominBtn.onclick = togglePominTemat;
+document.getElementById("temat-select").insertAdjacentElement("afterend", pominBtn);
+
 
       const tLower = t.toLowerCase();  
       if (
@@ -853,6 +925,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
