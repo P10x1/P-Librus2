@@ -373,7 +373,7 @@ body {
           cell.innerHTML = `<div class="date-number">${currentDate.getDate()}</div>`;
 
           // Znajdź wydarzenia na ten dzień i wstaw je
-          const dayStr = currentDate.toISOString().slice(0,10);
+          const dayStr = currentDate.toLocaleDateString('sv-SE'); // format YYYY-MM-DD bez przesunięcia
           const todaysEvents = events.filter(ev => ev.date === dayStr);
 
           todaysEvents.forEach((ev, idx) => {
@@ -479,6 +479,7 @@ function editEvent(index) {
 </body>
 
 </html>
+
 
 
 
