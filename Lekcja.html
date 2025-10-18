@@ -721,7 +721,7 @@ document.getElementById("temat-select").insertAdjacentElement("afterend", pominB
   pokazHistorieLekcji(klasaSelect.value);
   pokazPostep(klasaSelect.value); // ← TO DODAJ
 });
-pokazTabeleWyboruKlasy();
+
 
   function zaznaczWszystkichObecnosc() {
   const kontener = document.getElementById("frekwencja-box");
@@ -785,7 +785,6 @@ function wybierzKlase(klasa) {
   document.getElementById("wybor-klasy").style.display = "none";
   document.getElementById("historia-box").style.display = "block";
 
-  // ✨ Dodaj ten wiersz:
   document.getElementById("wybrana-klasa").textContent = "Wybrana klasa: " + klasa;
 
   updateTematy();
@@ -794,6 +793,9 @@ function wybierzKlase(klasa) {
   pokazPostep(klasa);
 }
 
+pokazTabeleWyboruKlasy();  <!-- 🔹 dodaj to przed zamknięciem -->
+
+</script>  <!-- 🔹 Tego brakowało! -->
 
 
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
@@ -809,6 +811,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
