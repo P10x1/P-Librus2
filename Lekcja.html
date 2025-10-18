@@ -474,31 +474,7 @@ const wszystkieTematy = (tematy[klasa] || []).filter(t => {
   const klasaSelect = document.getElementById("klasa-select");
   const tematSelect = document.getElementById("temat-select");
 
-  function updateTematy() {
-  tematSelect.innerHTML = "";
-  const klasa = klasaSelect.value;
-
-  const klucz = `lekcje_${klasa}`;
-  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
-  const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
-
-  if (tematy[klasa]) {
-    tematy[klasa].forEach(t => {
-      const option = document.createElement("option");
-      option.value = t;
-      option.textContent = t;
-
-      if (t.startsWith("DZIAŁ")) {
-        option.classList.add("dzial-option");
-      }
-		// 🔹 Lista pominiętych tematów w localStorage
-function getPominieteTematy(klasa) {
-  return JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
-}
-
-function zapiszPominieteTematy(klasa, lista) {
-  localStorage.setItem(`pominiete_${klasa}`, JSON.stringify(lista));
-}
+  
 
 // 🔹 Oznaczanie tematów na liście
 function updateTematy() {
@@ -833,6 +809,7 @@ function wybierzKlase(klasa) {
 	
 </body>
 </html>
+
 
 
 
