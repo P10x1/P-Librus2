@@ -302,54 +302,73 @@
   renderTodos();
 </script>
 <script>
+  // Ładowanie nadchodzących wydarzeń (7 dni)
   function loadUpcomingEvents() {
-  const events = JSON.parse(localStorage.getItem('events') || '[]');
-  const now = new Date();
-  const sevenDaysLater = new Date();
-  sevenDaysLater.setDate(now.getDate() + 7);
+    const events = JSON.parse(localStorage.getItem('events') || '[]');
+    const now = new Date();
+    const sevenDaysLater = new Date();
+    sevenDaysLater.setDate(now.getDate() + 7);
 
-  const upcoming = events
-    .map(ev => ({
-      ...ev,
-      dateObj: new Date(ev.date)
-    }))
-    .filter(ev => ev.dateObj >= now && ev.dateObj <= sevenDaysLater)
-    .sort((a, b) => a.dateObj - b.dateObj);
+    const upcoming = events
+      .map(ev => ({ ...ev, dateObj: new Date(ev.date) }))
+      .filter(ev => ev.dateObj >= now && ev.dateObj <= sevenDaysLater)
+      .sort((a, b) => a.dateObj - b.dateObj);
 
-  const ul = document.getElementById("upcoming-events");
-  ul.innerHTML = ""; // czyści listę przed dodaniem nowych
+    const ul = document.getElementById("upcoming-events");
+    ul.innerHTML = "";
 
-  if (upcoming.length === 0) {
-    ul.innerHTML = "<li>Brak wydarzeń w nadchodzącym tygodniu.</li>";
-    return;
-  }
-
-  upcoming.forEach(ev => {
-    const li = document.createElement("li");
-    li.style.marginBottom = "8px";
-    li.innerHTML = `<strong>${ev.date}</strong>: ${ev.subject} – ${ev.type} (${ev.className}) ${ev.comment ? `– <em>${ev.comment}</em>` : ""}`;
-    ul.appendChild(li);
-  });
-}
-
-
+    if (upcoming.length === 0) {
+      ul.innerHTML = "<li>Brak wydarzeń w nadchodzącym tygodniu.</li>";
+      return;
     }
 
-   
+    upcoming.forEach(ev => {
+      const li = document.createElement("li");
+      li.style.marginBottom = "8px";
+      li.innerHTML = `<strong>${ev.date}</strong>: ${ev.subject} – ${ev.type} (${ev.className}) ${ev.comment ? `– <em>${ev.comment}</em>` : ""}`;
+      ul.appendChild(li);
+    });
   }
 
-  // Załaduj po załadowaniu strony
-  window.addEventListener("DOMContentLoaded", loadUpcomingEvents);
-</script>
+  // Mini kalendarz – wyświetlanie wydarzeń dla wybranego dnia
+  const miniCalendar = document.getElementById("mini-calendar");
+  const calendarEventsList = document.getElementById("calendar-events");
 
-<!-- Firebase App (core SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-<!-- Firebase Firestore -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
+  function loadCalendarEvents(selectedDate) {
+    const events = JSON.parse(localStorage.getItem('events') || '[]');
+    const filtered = events.filter(ev => ev.date === selectedDate);
+
+    calendarEventsList.innerHTML = "";
+    if (filtered.length === 0) {
+      calendarEventsList.innerHTML = "<li>Brak wydarzeń na ten dzień.</li>";
+      return;
+    }
+
+    filtered.forEach(ev => {
+      const li = document.createElement("li");
+      li.textContent = `${ev.subject} – ${ev.type} (${ev.className})`;
+      calendarEventsList.appendChild(li);
+    });
+  }
+
+  // Automatyczne ustawienie dzisiejszej daty
+  window.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split("T")[0];
+    miniCalendar.value = today;
+    loadCalendarEvents(today);
+    loadUpcomingEvents();
+  });
+
+  // Reakcja na zmianę daty w mini kalendarzu
+  miniCalendar.addEventListener("change", (e) => {
+    loadCalendarEvents(e.target.value);
+  });
+</script>
 
 	
 </body>
 </html>
+
 
 
 
