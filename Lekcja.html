@@ -177,6 +177,123 @@ td.pasek {
 .pasek.bio8   { background-color: #FF9800; }
 .pasek.ogolna { background-color: #9C27B0; }
 
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.modern-table th {
+  background-color: #2a6f97;
+  color: white;
+  padding: 10px;
+}
+
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modern-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.btn-nav {
+  background: #2a6f97;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-nav:hover {
+  background: #1b4965;
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.modern-table th {
+  background-color: #2a6f97;
+  color: white;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.modern-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.btn-nav {
+  background: #2a6f97;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-nav:hover {
+  background: #1b4965;
+}
+
+.btn-action {
+  background: #e0e0e0;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: all 0.2s;
+}
+
+.btn-action:hover {
+  background: #d4d4d4;
+}
+
+.status-label {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.status-normalna { color: #2a6f97; }
+.status-odwolana { color: red; }
+.status-zastepstwo { color: orange; }
+
+.akcja-select {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.akcja-select:hover {
+  background-color: #f5faff;
+}
+.zakonczona {
+  text-decoration: line-through;
+  color: #888;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
   </style>
 </head>
@@ -211,7 +328,7 @@ td.pasek {
 <div class="lesson-box">
   <h2>PANEL NAUCZYCIELA LEKCJI</h2>
 
-  <div id="wybor-klasy">
+  <div id="wybor-klasy" style="display:none;">
   <h2>Wybierz klasę do wpisania nowej lekcji lub edycji.</h2>
   <table style="width: 100%; border-collapse: collapse;" id="tabela-klas">
     <thead>
@@ -248,21 +365,60 @@ td.pasek {
   <option value="Edukacja_ogólna">Edukacja ogólna</option>
 </select>
 
+<!-- NOWY WIDOK PLANU LEKCJI -->
+<div id="plan-lekcji" class="lesson-box">
+  <h2>📅 Plan lekcji – Piotr Rejmentowski</h2>
+
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+    <button id="prev-day" class="btn-nav">◀</button>
+    <input type="date" id="data-plan" />
+    <span id="dzien-tygodnia" style="font-weight:bold; font-size:16px; color:#2a6f97;"></span>
+    <button id="next-day" class="btn-nav">▶</button>
+  </div>
+
+  <table id="tabela-planu" class="modern-table">
+    <thead>
+      <tr>
+        <th>Nr lekcji</th>
+        <th>Klasa</th>
+        <th>Temat</th>
+        <th>Status</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div id="plan-nieregularne" class="lesson-box" style="margin-top:25px;">
+  <h3>📘 Klasy nieregularne</h3>
+  <table id="tabela-nieregularne" class="modern-table">
+    <thead>
+      <tr>
+        <th>Klasa</th>
+        <th>Temat</th>
+        <th>Status</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+
+
 
   <div id="lekcja-form" style="display: none;">
+  <button type="button" onclick="powrotDoPlanu()">← Wróć do planu lekcji</button>
+<script>
+function powrotDoPlanu() {
+  document.getElementById("lekcja-form").style.display = "none";
+  document.getElementById("plan-lekcji").style.display = "block";
+}
+</script>
+
 <h3 id="wybrana-klasa" style="color: #2a6f97;"></h3>
 
-  <label for="przedmiot-select">Przedmiot:</label>
-  <select id="przedmiot-select">
-    <option value="biologia">Biologia</option>
-    <option value="jezyk piotrowski">Język Piotrowski</option>
-    <option value="geografia">Geografia</option>
-    <option value="fizyka">Fizyka</option>
-    <option value="jezyk angielski">Język angielski</option>
-	<option value="przyroda">Przyroda</option>
-    <option value="inny">Inny</option>
-	<option value="Edukacja_ogólna">Edukacja ogólna</option>
-  </select>
+
 
   <label for="data">Data:</label>
   <input type="date" id="data" />
@@ -341,12 +497,8 @@ function pokazPostep(klasa) {
   `;
 }
 
-
-
 </script>
   
-  
-
   <label for="temat-select">Temat lekcji:</label>
   <select id="temat-select"></select>
   
@@ -360,6 +512,18 @@ function pokazPostep(klasa) {
   <label>Frekwencja uczniów:</label>
 <button type="button" onclick="zaznaczWszystkichObecnosc()" style="margin-bottom: 10px;">Zaznacz wszystkich jako Obecność</button>
 <div id="frekwencja-box"></div>
+
+<label>Status lekcji:</label>
+<select id="status-lekcji">
+  <option value="normalna">Zajęcia zgodnie z planem</option>
+  <option value="odwołana">Lekcja odwołana</option>
+  <option value="zastepstwo">Zastępstwo</option>
+</select>
+
+<div id="zastepstwo-box" style="display:none; margin-top:10px;">
+  <label for="zastepca">Prowadzący zastępstwo:</label>
+  <input type="text" id="zastepca" placeholder="Wpisz nazwisko zastępcy..." />
+</div>
 
   <button onclick="zapiszLekcje()">Zapisz lekcję</button>
 </div>
@@ -552,36 +716,43 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
     });
   }
 
-  function zapiszLekcje() {
-    const data = document.getElementById("data").value;
-    const klasa = klasaSelect.value;
-    const temat = tematSelect.value;
-    const opis = document.getElementById("opis").value;
+function zapiszLekcje() {
+  const data = document.getElementById("data").value;
+  const klasa = klasaSelect.value;
+  const temat = tematSelect.value;
+  const opis = document.getElementById("opis").value;
+  const status = document.getElementById("status-lekcji").value;
+  const zastepca = document.getElementById("zastepca")?.value || "";
 
-    if (!data || !temat) {
-      alert("Uzupełnij wszystkie dane.");
-      return;
-    }
-
-    const frekwencja = [];
-    if (uczniowie[klasa]) {
-      uczniowie[klasa].forEach((uczen, index) => {
-        const zaznaczona = document.querySelector(`input[name="frekwencja_${index}"]:checked`);
-        frekwencja.push({ uczen, status: zaznaczona ? zaznaczona.value : "Brak danych" });
-      });
-    }
-
-    const nowaLekcja = { data, klasa, temat, opis, frekwencja };
-    const klucz = `lekcje_${klasa}`;
-    const istniejace = JSON.parse(localStorage.getItem(klucz)) || [];
-    istniejace.push(nowaLekcja);
-    localStorage.setItem(klucz, JSON.stringify(istniejace));
-    pokazHistorieLekcji(klasa);
-    document.getElementById("data").value = "";
-    document.getElementById("opis").value = "";
-    updateTematy();
-    pokazFrekwencje(klasa);
+  if (!data || !temat) {
+    alert("Uzupełnij wszystkie dane.");
+    return;
   }
+
+  const frekwencja = [];
+  if (uczniowie[klasa]) {
+    uczniowie[klasa].forEach((uczen, index) => {
+      const zaznaczona = document.querySelector(`input[name="frekwencja_${index}"]:checked`);
+      frekwencja.push({ uczen, status: zaznaczona ? zaznaczona.value : "Brak danych" });
+    });
+  }
+
+  const nowaLekcja = { data, klasa, temat, opis, status, zastepca, frekwencja };
+  const klucz = `lekcje_${klasa}`;
+  const istniejace = JSON.parse(localStorage.getItem(klucz)) || [];
+  istniejace.push(nowaLekcja);
+  localStorage.setItem(klucz, JSON.stringify(istniejace));
+
+  pokazHistorieLekcji(klasa);
+  updateTematy();
+  pokazFrekwencje(klasa);
+  pokazPostep(klasa);
+}
+document.getElementById("status-lekcji").addEventListener("change", e => {
+  document.getElementById("zastepstwo-box").style.display =
+    e.target.value === "zastepstwo" ? "block" : "none";
+});
+
   
  function usunLekcje(index, klasa) {
   const klucz = `lekcje_${klasa}`;
@@ -633,7 +804,13 @@ function edytujLekcje(index, klasa) {
 
     lekcje.forEach((lekcja, index) => {
   const li = document.createElement("li");
-  li.innerHTML = `<strong>${lekcja.data}:</strong> ${lekcja.temat}<br>${lekcja.opis || ""}`;
+  li.innerHTML = `
+  <strong>${lekcja.data}:</strong> ${lekcja.temat} 
+  <span style="color:${lekcja.status === 'odwołana' ? 'red' : lekcja.status === 'zastepstwo' ? 'orange' : 'black'};">
+    [${lekcja.status}${lekcja.zastepca ? " – " + lekcja.zastepca : ""}]
+  </span><br>${lekcja.opis || ""}
+`;
+
 
   if (lekcja.frekwencja && lekcja.frekwencja.length) {
     li.innerHTML += `<br><strong>Frekwencja:</strong><ul>${
@@ -746,66 +923,7 @@ function wybierzKlase(klasa) {
 
 
 </script>
-<!-- Firebase App (core SDK) -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-<!-- Firebase Firestore -->
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"></script>
-<script>
-  // Tu wklejasz swój JavaScript
 
-  // Przykład: selektory elementów
-  const klasaSelect = document.getElementById("klasa-select");  // Twój select z klasami
-  const tematSelect = document.getElementById("temat-select");  // Select z tematami
-
-  // Obiekt z tematami — przykładowa struktura
-  const tematy = {
-    "1a": ["Matematyka", "Polski"],
-    "2b": ["Biologia", "Historia"]
-  };
-
-  function aktualizujTematy() {
-    const klasa = klasaSelect.value;
-    const listaTematow = tematy[klasa] || [];
-
-    tematSelect.innerHTML = ""; // wyczyść
-
-    listaTematow.forEach((temat) => {
-      const option = document.createElement("option");
-      option.value = temat;
-      option.textContent = temat;
-      tematSelect.appendChild(option);
-    });
-  }
-
-  function dodajWlasnyTemat() {
-    const nowyTematInput = document.getElementById("nowy-temat");
-    const nowyTemat = nowyTematInput.value.trim();
-
-    if (nowyTemat === "") {
-      alert("Proszę wpisać temat.");
-      return;
-    }
-
-    const klasa = klasaSelect.value;
-
-    if (!tematy[klasa]) {
-      tematy[klasa] = [];
-    }
-    tematy[klasa].push(nowyTemat);
-
-    aktualizujTematy();
-
-    nowyTematInput.value = "";
-    tematSelect.value = nowyTemat;
-  }
-
-  // Aktualizuj tematy po zmianie klasy
-  klasaSelect.addEventListener("change", aktualizujTematy);
-
-  // Inicjalizacja tematu przy starcie
-  aktualizujTematy();
-
-</script>
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
   <div style="margin-bottom: 10px;">
     <img src="teamppp.png" alt="Team P" style="width: 200px; margin: 0 20px;">
@@ -848,6 +966,241 @@ function wybierzKlase(klasa) {
 
   // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
   document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
+</script>
+
+<script>
+const planLekcji = {
+  "poniedziałek": [
+    { nr: 1, klasa: "7FJ-Biologia" },
+    { nr: 2, klasa: "6I-Biologia" },
+    { nr: 3, klasa: "5K-Biologia" },
+    { nr: 4, klasa: "4D-Przyroda" },
+    { nr: 5, klasa: "1E-Język_Piotrowski" },
+    { nr: 6, klasa: "2G-Język_Piotrowski" },
+    { nr: 7, klasa: "3H-Język_Piotrowski" },
+	{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ],
+  "wtorek": [
+    { nr: 1, klasa: "6I-Język_Piotrowski" },
+    { nr: 2, klasa: "6L-Język_Piotrowski" },
+    { nr: 3, klasa: "7F-Język_Piotrowski" },
+    { nr: 4, klasa: "7J-Język_Piotrowski" },
+    { nr: 5, klasa: "8A-Język_Piotrowski" },
+    { nr: 6, klasa: "8B-Język_Piotrowski" },
+    { nr: 7, klasa: "8C-Język_Piotrowski" },
+		{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ],
+  "środa": [
+    { nr: 1, klasa: "7FJ-Biologia" },
+    { nr: 2, klasa: "6I-Biologia" },
+    { nr: 3, klasa: "5K-Biologia" },
+    { nr: 4, klasa: "4D-Przyroda" },
+    { nr: 5, klasa: "1E-Język_Piotrowski" },
+    { nr: 6, klasa: "2G-Język_Piotrowski" },
+    { nr: 7, klasa: "3H-Język_Piotrowski" },
+		{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ],
+  "czwartek": [
+    { nr: 1, klasa: "6I-Język_Piotrowski" },
+    { nr: 2, klasa: "6L-Język_Piotrowski" },
+    { nr: 3, klasa: "7F-Język_Piotrowski" },
+    { nr: 4, klasa: "7J-Język_Piotrowski" },
+    { nr: 5, klasa: "8A-Język_Piotrowski" },
+    { nr: 6, klasa: "8B-Język_Piotrowski" },
+    { nr: 7, klasa: "8C-Język_Piotrowski" },
+		{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ],
+  "piątek": [
+    { nr: 1, klasa: "7FJ-Biologia" },
+    { nr: 2, klasa: "6I-Biologia" },
+    { nr: 3, klasa: "5K-Biologia" },
+    { nr: 4, klasa: "4D-Przyroda" },
+    { nr: 5, klasa: "1E-Język_Piotrowski" },
+    { nr: 6, klasa: "2G-Język_Piotrowski" },
+    { nr: 7, klasa: "3H-Język_Piotrowski" },
+		{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ],
+    "sobota": [
+    { nr: 1, klasa: "6I-Język_Piotrowski" },
+    { nr: 2, klasa: "6L-Język_Piotrowski" },
+    { nr: 3, klasa: "7F-Język_Piotrowski" },
+    { nr: 4, klasa: "7J-Język_Piotrowski" },
+    { nr: 5, klasa: "8A-Język_Piotrowski" },
+    { nr: 6, klasa: "8B-Język_Piotrowski" },
+    { nr: 7, klasa: "8C-Język_Piotrowski" },
+		{ nr: 8, klasa: "8A-Biologia" },
+	{ nr: 9, klasa: "Dodatkowa_Biologia" },
+	{ nr: 10, klasa: "Edukacja_ogólna" },
+  ]
+};
+// 🔸 Klasy, które zakończyły materiał
+const zakonczoneKlasy = [
+  "3H-Język_Piotrowski",
+  "1E-Język_Piotrowski",
+  "2G-Język_Piotrowski",
+  "6I-Język_Piotrowski",
+  "6L-Język_Piotrowski"
+];
+
+// 🔸 Klasy nieregularne (pojawiają się tylko w określone dni)
+const nieregularneKlasy = {
+  "8A-Biologia": ["2025-11-14", "2025-11-28", "2025-12-12"],
+  "Edukacja_ogólna": ["2025-11-07", "2025-11-21"],
+  "Dodatkowa_Biologia": ["2025-11-06", "2025-11-07", "2025-11-08", "2025-11-09", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-15", "2025-11-16", "2025-11-17", "2025-11-18"]
+};
+
+function pokazPlan(date) {
+  const tabela = document.getElementById("tabela-planu").querySelector("tbody");
+  tabela.innerHTML = "";
+
+  const dni = ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
+  const dzien = dni[date.getDay()];
+  document.getElementById("dzien-tygodnia").textContent = dzien.charAt(0).toUpperCase() + dzien.slice(1);
+  document.getElementById("data-plan").value = date.toISOString().split("T")[0];
+
+  const planDnia = planLekcji[dzien] || [];
+
+  planDnia.forEach(poz => {
+  const data = document.getElementById("data-plan").value;
+
+  // 🔹 Pomiń klasy nieregularne, jeśli nie mają dziś zajęć
+  if (nieregularneKlasy[poz.klasa] && !nieregularneKlasy[poz.klasa].includes(data)) {
+    return; // nie wyświetlaj tej klasy dziś
+  }
+
+  const klucz = `lekcje_${poz.klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  const wpisana = lekcje.find(l => l.data === data);
+  const tematInfo = wpisana ? "✅ " + wpisana.temat : "—";
+  const status = wpisana ? (wpisana.status || "normalna") : "normalna";
+
+  // 🔹 Sprawdź, czy klasa zakończyła materiał
+  const zakonczona = zakonczoneKlasy.includes(poz.klasa);
+
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${poz.nr}</td>
+    <td class="${zakonczona ? 'zakonczona' : ''}" title="${zakonczona ? 'Zakończyli materiał' : ''}">${poz.klasa}</td>
+    <td>${tematInfo}</td>
+    <td><span class="status-label status-${status}">${status}</span></td>
+    <td>
+      <select class="akcja-select" ${zakonczona ? 'disabled' : ''} onchange="wykonajAkcje(this.value, '${poz.klasa}', '${data}')">
+        <option value="">— wybierz —</option>
+        <option value="otworz">Wybierz i sprawdź obecność</option>
+        <option value="odwolaj">Odwołaj lekcję</option>
+        <option value="zastepstwo">Zastępstwo</option>
+      </select>
+    </td>
+  `;
+  tabela.appendChild(tr);
+});
+
+}
+
+function wykonajAkcje(akcja, klasa, data) {
+  if (akcja === "otworz") {
+    otworzLekcje(klasa, data);
+  } else if (akcja === "odwolaj") {
+    odwolajLekcje(klasa, data);
+  } else if (akcja === "zastepstwo") {
+    zastepstwoLekcji(klasa, data);
+  }
+}
+
+function otworzLekcje(klasa, data) {
+  document.getElementById("plan-lekcji").style.display = "none";
+  document.getElementById("lekcja-form").style.display = "block";
+  document.getElementById("historia-box").style.display = "block";
+  document.getElementById("klasa-select").value = klasa;
+  document.getElementById("data").value = data;
+  document.getElementById("wybrana-klasa").textContent = "Wybrana klasa: " + klasa;
+  updateTematy();
+  pokazFrekwencje(klasa);
+  pokazHistorieLekcji(klasa);
+  pokazPostep(klasa);
+}
+
+function odwolajLekcje(klasa, data) {
+  if (!confirm(`Czy na pewno chcesz odwołać lekcję z klasy ${klasa} (${data})?`)) return;
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  lekcje.push({ data, klasa, temat: "—", status: "odwolana" });
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazPlan(new Date(data));
+}
+
+function zastepstwoLekcji(klasa, data) {
+  const zastepca = prompt("Podaj nazwisko nauczyciela prowadzącego zastępstwo:");
+  if (!zastepca) return;
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazPlan(new Date(data));
+}
+function pokazKlasyNieregularne() {
+  const tabela = document.getElementById("tabela-nieregularne").querySelector("tbody");
+  tabela.innerHTML = "";
+
+  // 🔹 znajdź wszystkie klasy, które nie występują w planLekcji
+  const klasyWPlanie = Object.values(planLekcji).flat().map(p => p.klasa);
+  const wszystkieKlasy = Object.keys(uczniowie || {});
+  const nieregularne = wszystkieKlasy.filter(k => !klasyWPlanie.includes(k));
+
+  nieregularne.forEach(klasa => {
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+    const ostatnia = lekcje[lekcje.length - 1];
+    const tematInfo = ostatnia ? `✅ ${ostatnia.temat} (${ostatnia.data})` : "—";
+    const status = ostatnia ? (ostatnia.status || "normalna") : "normalna";
+    const zakonczona = zakonczoneKlasy.includes(klasa);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="${zakonczona ? 'zakonczona' : ''}" title="${zakonczona ? 'Zakończyli materiał' : ''}">${klasa}</td>
+      <td>${tematInfo}</td>
+      <td><span class="status-label status-${status}">${status}</span></td>
+      <td>
+        <select class="akcja-select" ${zakonczona ? 'disabled' : ''} onchange="wykonajAkcje(this.value, '${klasa}', new Date().toISOString().split('T')[0])">
+          <option value="">— wybierz —</option>
+          <option value="otworz">Wybierz i sprawdź obecność</option>
+          <option value="odwolaj">Odwołaj lekcję</option>
+          <option value="zastepstwo">Zastępstwo</option>
+        </select>
+      </td>
+    `;
+    tabela.appendChild(tr);
+  });
+}
+
+let currentDate = new Date();
+
+pokazPlan(currentDate);
+pokazKlasyNieregularne();
+
+
+document.getElementById("prev-day").addEventListener("click", () => {
+  currentDate.setDate(currentDate.getDate() - 1);
+  pokazPlan(currentDate);
+});
+document.getElementById("next-day").addEventListener("click", () => {
+  currentDate.setDate(currentDate.getDate() + 1);
+  pokazPlan(currentDate);
+});
+document.getElementById("data-plan").addEventListener("change", e => {
+  currentDate = new Date(e.target.value);
+  pokazPlan(currentDate);
+});
 </script>
 
 	
