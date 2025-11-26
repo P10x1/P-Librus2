@@ -347,22 +347,16 @@ td.pasek {
 
 <!-- Ukryty select, który nadal używany w kodzie -->
 <select id="klasa-select" style="display: none;">
-  <option value="6I-Język_Piotrowski">6I - Język Piotrowski</option>
-  <option value="6L-Język_Piotrowski">6L - Język Piotrowski</option>
-  <option value="7F-Język_Piotrowski">7F - Język Piotrowski</option>
-  <option value="7J-Język_Piotrowski">7J - Język Piotrowski</option>
-  <option value="8A-Język_Piotrowski">8A - Język Piotrowski</option>
-  <option value="8B-Język_Piotrowski">8B - Język Piotrowski</option>
-  <option value="8C-Język_Piotrowski">8C - Język Piotrowski</option>
-  <option value="4D-Przyroda">4D - Przyroda</option>
-  <option value="1E-Język_Piotrowski">1E - Język Piotrowski</option>
-  <option value="2G-Język_Piotrowski">2G - Język Piotrowski</option>
-  <option value="3H-Język_Piotrowski">3H - Język Piotrowski</option>
-  <option value="7FJ-Biologia">7FJ - Biologia</option>
-  <option value="5K-Biologia">5K - Biologia</option>
-  <option value="6I-Biologia">6i - Biologia</option>
-  <option value="8A-Biologia">8A - Biologia</option>
-  <option value="Dodatkowa_Biologia">Dodatkowa biologia</option>
+  <option value="6A-Język_Piotrowski">6A - Język Piotrowski</option>
+  <option value="6C-Język_Piotrowski">6C - Język Piotrowski</option>
+  <option value="6H-Język_Piotrowski">6H - Język Piotrowski</option>
+  <option value="7I-Język_Piotrowski">7I - Język Piotrowski</option>
+  <option value="7L-Język_Piotrowski">7L - Język Piotrowski</option>
+  <option value="8F-Język_Piotrowski">8F - Język Piotrowski</option>
+  <option value="8J-Język_Piotrowski">8J - Język Piotrowski</option>
+  <option value="1B-Język_Piotrowski">1B - Język Piotrowski</option>
+  <option value="2E-Język_Piotrowski">2E - Język Piotrowski</option>
+  <option value="3G-Język_Piotrowski">3G - Język Piotrowski</option>
   <option value="Edukacja_ogólna">Edukacja ogólna</option>
 </select>
 
@@ -565,66 +559,53 @@ function pokazPostep(klasa) {
 
 <script>
   const uczniowie = {
-	'6I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
-	'6L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
-    '7F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
-	'7J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
-    '8A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
-    '8B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
-    '8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
-    '1E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
-	'2G-Język_Piotrowski': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
-	'3H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
-    '4D-Przyroda': ['Mirek', 'Ela', 'Ula'],
-	'5K-Biologia': ['Tymek','Tosia','Dobromiła','Kasjan'],
-    '6I-Biologia': ['Jagoda', 'Krystian', 'Justyna'],
-	'7FJ-Biologia': ['Ola', 'Julia', 'Natan', 'Filip', 'Zuzia', 'Kasia', 'Maja'],
-	'8A-Biologia': ['Agata', 'Tadeusz', 'Piotr'],
-	'Dodatkowa_Biologia': ['Jagoda', 'Krystian', 'Justyna', 'Agata', 'Tadeusz', 'Piotr', 'Ola', 'Julia', 'Natan', 'Filip', 'Zuzia', 'Kasia', 'Maja', 'Mirek', 'Ela', 'Ula'],
+	'7I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
+	'7L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+    '8F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'8J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '6A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '1B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '6C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '2E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
+	'3G-Język_Piotrowski': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
+	'6H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
 	'Edukacja_ogólna': ['Julia','Ola','Zuzia','Tadeusz','Grzesiek','Adam','Wiesia','Bożena','Jagoda','Antek','Maciej','Tosia']
   };
+  
+  // Alias skróconych nazw na pełne klasy
+const aliasyKlas = {
+  "6A": "6A-Język_Piotrowski",
+  "6C": "6C-Język_Piotrowski",
+  "6H": "6H-Język_Piotrowski",
+  "7I": "7I-Język_Piotrowski",
+  "7L": "7L-Język_Piotrowski",
+  "8F": "8F-Język_Piotrowski",
+  "8J": "8J-Język_Piotrowski",
+  "1B": "1B-Język_Piotrowski",
+  "2E": "2E-Język_Piotrowski",
+  "3G": "3G-Język_Piotrowski"
+};
+
+function normalizujKlase(klasa) {
+  return aliasyKlas[klasa] || klasa;
+}
+
 
   const tematy = {
   
-      "6I-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Kolory i pomieszczenia", "Alfabet i znaki piotrowskie", "DZIAŁ 2 - Liczby i daty", "Liczby","Daty", "DZIAŁ 3 - PIERWSZA GRAMATYKA", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "DZIAŁ 4 - GRAMATYKA DODATKOWA", "Zaimki osobowe","Present Simple - Wprowadzenie","Powtórzenie do egzaminu 1", "Powtórzenie do egzaminu 2", "Egzamin szóstoklasisty"],
-	  "6L-Język_Piotrowski": ["DZIAŁ 0 - CAŁY PODRĘCZNIK", "Alfabet i znaki piotrowskie", "Pomieszczenia", "Liczby", "Miesiące, Daty", "Kolory", "Past simple - Wprowadzenie","Past simple - Ogólność, Upodobania","Past simple - Regularność","Past simple - Opis osobowy",  "Zaimki osobowe" ,"Powtórzenie wiadomości", "Sprawdzian", "Omówienie sprawdzianu"],
-      "7F-Język_Piotrowski": ["Inne", "DZIAŁ 1 - ZDROWIE","Choroby i bóle","Części ciała i zdrowy styl życia","Past simple","Jak na egzaminie","DZIAŁ 2 - ŚWIAT ORAZ PRZYRODA","Kontynenty oraz kraje","Zwierzęta, Krajobrazy, Rośliny","Czas poprawny, Zapis czasu słownie","Present Simple","Jak na egzaminie (2)","DZIAŁ 3 - ŻYCIE PRYWATNE", "Rodzina i znajomi", "Czas wolny, Wydarzenia", "Present Cintus", "Jak na egzaminie (3)","DZIAŁ 4 - CZŁOWIEK", "Cechy charakteru, Wygląd zewnętrzny","Ubrania, Przedmioty osobiste", "Etapy życia","Zaimki osobowe", "Porównanie czasów teraźniejszych","Jak na egzaminie (4)"],
-      "7J-Język_Piotrowski": ["Inne", "DZIAŁ 1 - CZŁOWIEK","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)", "DZIAŁ 4 - ŚWIAT I PRZYRODA","Vocabulary (4)", "Gramar (4)", "Buking i writing (4)", "Powtórzenie wiadomości (4)","Sprawdzian (4)","Omówienie sprawdzianu (4)"],
-      "8A-Język_Piotrowski": ["DZIAŁ 1 - PRACA", "Zawody", "Odmiana zawodów przez osoby", "Miejsca prac", "Present Simple", "Jak na egzaminie (1)", "DZIAŁ 2 - EDUKACJA", "Przedmioty fizyczne i lekcyjne", "Pracownicy i pomieszczenia", "Czasowniki szkolne", "Present Hadsing", "Jak na egzaminie (2)", "DZIAŁ 3 - DOM", "Rodzaje miejsc zamieszkania", "Meble wewnętrzne", "Na zewnątrz", "Określenia i pomieszczenia", "Present Past", "Jak na egzaminie (3)", "DZIAŁ 4 - LEKCJE DODATKOWE", "Zaimki osobowe", "Gramatyka piotrowska", "Jak na egzaminie (4)"],
-      "8B-Język_Piotrowski": ["Inne", "DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - EDUKACJA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)"],
-	  "8C-Język_Piotrowski": ["Inne", "DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Rodzaje miejsc zamieszkania","Meble","Na zewnątrz","Określenia domów i pomieszczenia","Present simple","Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)","DZIAŁ 2 - EDUKACJA","Przedmioty fizyczne","Przedmioty lekcyjne","Pracownicy i pomieszczenia w szkole","Czasowniki szkolne","Present hadsing","Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)","DZIAŁ 3 - PRACA", "Zawody", "Odmiana zawodów przez osoby","Miejsca prac","Present past","Zaimki osobowe", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)"],
-	  "1E-Język_Piotrowski": ["Inne", "DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)"],
-	  "2G-Język_Piotrowski": ["Inne", "DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)"],
-	  "3H-Język_Piotrowski": ["Inne", "DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)"],
-  	  "4D-Przyroda": ["DZIAŁ 1 - Poznajemy warsztat przyrodnika","Przyroda i jej składniki", "Jak poznawać przyrodę?", "Przyrządy i pomoce przyrodnika","Określamy kierunki geograficzne", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - Poznajemy pogodę i inne zjawiska przyrodnicze", "Substancje wokół nas", "Woda występuje w trzech stanach skupienia", "Składniki pogody","Obserwujemy pogodę",",,Wędrówka'' Słońca po niebie", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)", "DZIAŁ 3 - Poznajemy świat organizmów", "Organizmy mają wspólne cechy", "Organizmy różnią się sposobem odżywiania","Rośliny i zwierzęta wokół nas", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)", "DZIAŁ 4 - Odkrywamy tajemnice ciała człowieka","Trawienie i wchłanianie pokarmu", "Układ krwionośny transportuje krew", "Układ oddechowy zapewnia wymianę gazową","Szkielet i mięsnie umożliwiają ruch","Układ nerwowy kontroluje pracę organizmu","Układ rozrodczy umożliwia wydawanie na świat potomstwa", "Dojrzewanie to czas wielkich zmian", "Powtórzenie wiadomości (4)","Sprawdzian (4)","Omówienie sprawdzianu (4)","DZIAŁ 5 - Odkrywamy tajemnice zdrowia","Zdrowy styl życia", "Choroby zakaźne i pasożytnicze", "Jak postępować w niebezpiecznych sytuacjach?","Czym jest uzależnienie?", "Powtórzenie wiadomości (5)","Sprawdzian (5)","Omówienie sprawdzianu (5)", "DZIAŁ 6 - ORIENTUJEMY SIĘ W TERENIE", "Co pokazujemy na planach?", "Jak czytamy mapy i plany?", "Jak się orientować w terenie?", "Powtórzenie wiadomości (6)", "Sprawdzian (6)", "Omówienie sprawdzianu (6)", "DZIAŁ 7 - Poznajemy krajobraz najbliższej okolicy","Rodzaje krajobrazów", "Ukształtowanie terenu", "Czy wszystkie skały są twarde?","Wody słodkie i słone","Krajobraz wczoraj i dziś", "Obszary i obiekty chronione", "Powtórzenie wiadomości (7)","Sprawdzian (7)","Omówienie sprawdzianu (7)", "DZIAŁ 8 - Odkrywamy tajemnice życia w wodzie i na lądzie","Warunki życia w wodzie", "Z biegiem rzeki", "Życie w jeziorze","Warunki życia na lądzie","Las ma budowę warstwową", "Jakie drzewa rosną w lesie?", "Na łące", "Na polu uprawnym", "Powtórzenie wiadomości (8)","Sprawdzian (8)","Omówienie sprawdzianu (8)"],
-	  "5K-Biologia": ["Inne", "DZIAŁ 1 - Biologia - nauka o życiu", "Biologia jako nauka", "Jak poznawać biologię", "Obserwacje mikroskopowe", "Powtórzenie wiadomości (1)", "Praca klasowa (1)", "Omówienie pracy klasowej (1)", "DZIAŁ 2 - Budowa i czynności życiowe organizmów", "Składniki chemiczne organizmów", "Budowa komórki zwierzęcej", "Komórka roślinna. 1nne rodzaje komórek", "Samożywność", "Cudzożywność", "Sposoby oddychania organizmów", "Powtórzenie wiadomości (2)", "Praca klasowa (2)", "Omówienie pracy klasowej (2)", "DZIAŁ 3 - Wirusy, bakterie, protisty i grzyby", "Klasyfikacja organizmów", "Wirusy i bakterie", "Różnorodność protistów", "Budowa i rożnorodność grzybów. Protosty", "Powtórzenie wiadomości (3)", "Praca klasowa (3)", "Omówienie pracy klasowej (3)", "DZIAŁ 4 - Tkanki i organy rośl1nne", "Tkanki rośl1nne", "Korzeń  organ podziemny rośliny", "Pęd. Budowa i funkcje łodygi", "Liść - wytwórnia pokarmu", "Powtórzenie wiadomości (4)", "Praca klasowa (4)", "Omówienie pracy klasowej (4)", "DZIAŁ 5 - Różnorodność roślin", "Mchy", "Paprotniki", "Nagonasienne", "Okrytonasienne", "Rozprzestrzenianie się roślin okrytonasiennych", "Znaczenie i przegląd roślin okrytonasiennych", "Powtórzenie wiadomości (5)", "Praca klasowa (5)", "Omówienie pracy klasowej (5)"],
-	  "6I-Biologia": ["Inne", "DZIAŁ 1 - Świat zwierząt","W królestwie zwierząt", "Tkanki : Nabłonkowa, mięśniowa i nerwowa", "Tkanka Łączna", "Powtórzenie wiadomości (1)","Sprawdzian (1)","Omówienie sprawdzianu (1)", "DZIAŁ 2 - Od parzydełkowców do pierścienic","Parzydełkowce - najprostrze zwierzęta tkankowe", "Płazińce - zwierzęta, które mają płaskie ciało", "Nicienie - zwierzęta, które mają nitkowate ciało","Pierścienice - zwierzęta które mają segemntowane ciało", "Powtórzenie wiadomości (2)","Sprawdzian (2)","Omówienie sprawdzianu (2)", "DZIAŁ 3 - Stawonogi i mięczaki","Cechy stawonogów", "Skorupiaki - stawonogi, które mają twardy pancerz", "Owady - stawonogi zdolne do lotu","Pajęczaki - stawonogi, które mają czety pary odnóży","Mięczaki - zwierzęta które mają muszlę", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)","DZIAŁ 4 - Kręgowce zmiennocieplne","Ryby - Kręgowce środowisk wodnych", "Przegląd i znaczenie ryb", "Płazy - Kręgowce wodno-lądowe","Przegląd i znaczenie płazów","Gady - Kręgowce, które opanowały ląd","Przegląd i znaczenie gadów", "Powtórzenie wiadomości (4)","Sprawdzian (4)","Omówienie sprawdzianu (4)", "DZIAŁ 5 - Kręgowce stałocieplne","Ptaki - Kręgowce zdolne do lotu", "Przegląd i znaczenie ptaków", "Ssaki - kręgowce, które karmią młode mlekiem","Przegląd i znaczenie ssaków", "Powtórzenie wiadomości (3)","Sprawdzian (3)","Omówienie sprawdzianu (3)"],
-	  "7FJ-Biologia": ["Inne", "DZIAŁ 1 - Organizm człowieka. Skóra - powłoka organizmu", "Organizm człowieka jako funkcjonalna całość", "Budowa i funkcje skóry", "Higiena i choroby skóry", "Powtórzenie wiadomości (1)", "Praca klasowa (1)", "Omówienie pracy klasowej (1)", "DZIAŁ 2 - Aparat ruchu", "Aparat ruchu. Budowa szkieletu", "Budowa kości", "Budowa i rola szkieletu osiowego", "Szkielet kończyn", "Budowa i rola mięśni", "Higienia i choroby aparatu ruchu", "Powtórzenie wiadomości (2)", "Praca klasowa (2)", "Omówienie pracy klasowej (2)", "DZIAŁ 3 - Układ pokarmowy", "Pokarm - budulec i źródło energii", "Witaminy, sole mineralne, woda", "Budowa i rola układu pokarmowego", "Higienia i choroby układu pokarmowego", "Powtórzenie wiadomości (3)", "Praca klasowa (3)", "Omówienie pracy klasowej (3)", "DZIAŁ 4 - Układ krążenia", "Budowa i funckje krwi", "Krążenie krwi", "Budowa i działanie serca", "Higienia i choroby układu krwionośnego", "Układ limfatyczny", "Budowa i działanie układu odpornościowego", "Zaburzenia funkcjonowania układu odpornościowego", "Powtórzenie wiadomości (4)", "Praca klasowa (4)", "Omówienie pracy klasowej (4)", "DZIAŁ 5 - Układ oddechowy", "Budowa i rola układu oddechowego", "Mechanizm oddychania", "Higienia i choroby układu oddechowego", "Powtórzenie wiadomości (5)", "Praca klasowa (5)", "Omówienie pracy klasowej (5)", "DZIAŁ 6 - Układ Wydalniczy", "Budowa i działanie układu wydalniczego", "Higienia i choroby układu wydalniczego", "Powtórzenie wiadomości (6)", "Praca klasowa (6)", "Omówienie pracy klasowej (6)", "DZIAŁ 7 - Regulacja nerwowo-hormonalna", "Budowa i funkcjonowanie układu hormonalnego", "Zaburzenia funkcjonowania układu hormonalnego", "Budowa i rola układu hormonalnego", "Ośrodkowy układ nerwowy", "Obwodowy układ nerwowy. Odruchy", "Higiena układu nerwowego", "Powtórzenie wiadomości (7)", "Praca klasowa (7)", "Omówienie pracy klasowej (7)", "DZIAŁ 8 - Narządy zmysłów", "Budowa i działanie narządu wzroku", "Ucho - narząd słuchu i równowagi", "Higienia oka i ucha", "Zmysły powonienia, smaku i dotyku", "Powtórzenie wiadomości (8)", "Praca klasowa (8)", "Omówienie pracy klasowej (8)", "DZIAŁ 9 - Rozmnażanie i rozwój człowieka", "Męski układ rozrodczy", "Żeński układ rozrodczy", "Funkcjonowanie żeńskiego układu rozrodczego", "Rozwój człowieka - od poczęcia do narodzin", "Rozwój człowieka - od narodzin do starości", "Higienia i choroby układu rozrodczego", "Powtórzenie wiadomości (9)", "Praca klasowa (9)", "Omówienie pracy klasowej (9)", "DZIAŁ 10 - Równowaga wewnętrzn organizmu", "Mechanizmy regulacyjne organizmu", "Choroba - zaburzenie homeostazy", "Powtórzenie wiadomości (10)", "Praca klasowa (10)", "Omówienie pracy klasowej (10)"],
-	  "8A-Biologia": ["Inne", "DZIAŁ 1 - Genetyka", "Czym jest genetyka?", "Nośnik informacji genetycznej - DNA", "Podziały komórkowe", "Podstawowe prawa dziedziczenia", "Dziedziczenie cech u człowieka", "Dziedziczenie ", "Dziedziczenie płci u człowieka", "Dziedziczenie grup krwi", "Mutacje", "Powtórzenie wiadomości (1)", "Praca klasowa (1)", "Omówienie pracy klasowej (1)", "DZIAŁ 2 - Ewolucja życia", "Źródła wiedzy o ewolucji", "Mechanizmy ewolucji", "Pochodznie człowieka", "Powtórzenie wiadomości (2)", "Praca klasowa (2)", "Omówienie pracy klasowej (2)", "DZIAŁ 3 - Ekologia", "Organizm a środowisko", "Cechy populacji", "Konkurencja", "Drapieżnictwo. Roślinożerność", "Pasyżytnictwo", "Nieantagonistyczne zależności między gatunkami", "Czym jest ekosystem?", "Zależności pokarmowe", "Materia i energia w ekosystemie", "Powtórzenie wiadomości (3)", "Praca klasowa (3)", "Omówienie pracy klasowej (3)", "DZIAŁ 4 - Człowiek i środowisko", "Rożnorodność biologiczna", "Wpływ człowieka na różnorodność biologiczną", "Racjonalne gospodarowanie zasobami przyrody", "Sposoby ochrony przyrody", "Powtórzenie wiadomości (4)", "Praca klasowa (4)", "Omówienie pracy klasowej (4)"],
-	  "Dodatkowa_Biologia": ["Inne", "DZIAŁ 1 - Biologia jako nauka o życiu","Biologia jako nauka o życiu", "Dziedziny biologii", "Metody badawcze w biologii", "DZIAŁ 2 - Organizacja i chemizm życia","Pierwiastki budujące ciało organizmów", "Znaczenie wody dla funkcjonowania organizmów", "Skład chemiczny komórek", "Fotosynteza, oddychanie tlenowe i fermnentacja jako procesy dostarczające energii", "Czynniki niezbędne do życia dla organizmów samożywnych i cudzożywnych", "DZIAŁ 3 - Budowa i funkcjonowanie komórki","Rodzaje komórek", "Struktury komórkowe i ich funkcje", "Porównanie budowy komórki zwierzęcej, roślinnej i bakteryjnej.","DZIAŁ 4 - Budowa i funkcjonowanie organizmu roślinnego","Organy roślinne - wegetatywne i generatywne", "Mszaki", "Paprociowe","Rośliny nagonasienne","Rośliny okrytonasienne", "DZIAŁ 5 - Różnorodność życia", "System klasyfikacji biologicznej", "Wirusy - najmniejsi zabójcy świat; podstawy mikrobiologii", "Bakterie","Grzyby", "Porosty","Zwierzęta","Cechy wybranych grup zwierząt - bezkręgowce", "Cechy wybranych grup zwierząt - kręgowce", "Porównanie cech morfologicznych, środowiska i trybu życia wybranych grup zwierząt", "DZIAŁ 6 - Organizm człowieka", "Tkanki", "Układy narządów i ich rola w organizmie", "Układ ruchu", "Układ pokarmowy i odżywianie", "Układ oddechowy", "Układ krążenia", "Układ limfatyczny", "Układ odpornościowy", "Układ wydalniczy", "Układ nerwowy", "Narządy zmysłów", "Układ hormonalny", "Skóra człowieka", "Rozmnażanie i rozwój", "Równowaga wewnęrzna organizmu - homeostaza", "DZIAŁ 7 - Genetyka", "Proces mitozy i mejozy", "Budowa i funkcja DNA", "Dziedziczenie cech jednogenowych", "Mutacje i ich rodzaje", "DZIAŁ 8 - Ewolucja życia", "Dowody ewolucji", "Mechanizmy ewolucji", "Jak powstają nowe gatunki?", "Historia i pochodzenie człowieka", "Przebieg ewolucji człowieka", "DZIAŁ 9 - Ekologia", "Organizm i środowisko", "Populacja i jej cechy", "Interakcje w populacji", "Ekosystem", "DZIAŁ 10 - Zagrożenia różnorodności biologicznej", "Konieczność ochrony różnorodności biologicznej", "Zanieczyszczenia powietrza", "Zanieszczynia wody i gleby", "Ochrona środowiska"],
-	  "Edukacja_ogólna": ["Inne","Temat edukacji ogólnej", "Powtórzenie przed sprawdzianem","Sprawdzian/Praca pisemna", "Omówienie sprawdzianu"]
+      "6A-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Kolory i pomieszczenia", "Alfabet i znaki piotrowskie", "DZIAŁ 2 - Liczby i daty", "Liczby","Daty", "DZIAŁ 3 - PIERWSZA GRAMATYKA", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "DZIAŁ 4 - GRAMATYKA DODATKOWA", "Zaimki osobowe","Present Simple - Wprowadzenie"],
+	  "6H-Język_Piotrowski": ["DZIAŁ 0 - CAŁY PODRĘCZNIK", "Alfabet i znaki piotrowskie", "Pomieszczenia", "Liczby", "Miesiące, Daty", "Kolory", "Past simple - Wprowadzenie","Past simple - Ogólność, Upodobania","Past simple - Regularność","Past simple - Opis osobowy",  "Zaimki osobowe"],
+	  "6C-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Alfabet i znaki piotrowskie", "Słownictwo : Kolory i pomieszczenia", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby", "Daty", "DZIAŁ 3 - GRAMATYKA", "Podstawy gramatyki piotrowskiej", "Past Simple - Jako najprostszy czas.", "Past Simple - Ogólność i Upodobania", "Past Simple - Regularność", "Past Simple - Opis osobowy stały", "Zaimki osobowe - Wprowadzenie", "DZIAŁ 4 - NAUKA I TECHNIKA", "Nauka i technika jako pierwszy dział praktyczny", "Urządzenia nowoczesnej technologii", "Nauka w szkole", "Czasowniki i osoby technologii", "Past Simple - Podsumowanie"],
+      "7I-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE","Choroby i bóle","Części ciała i zdrowy styl życia","Past simple","Jak na egzaminie","DZIAŁ 2 - ŚWIAT ORAZ PRZYRODA","Kontynenty oraz kraje","Zwierzęta, Krajobrazy, Rośliny","Czas poprawny, Zapis czasu słownie","Present Simple","Jak na egzaminie (2)","DZIAŁ 3 - ŻYCIE PRYWATNE", "Rodzina i znajomi", "Czas wolny, Wydarzenia", "Present Cintus", "Jak na egzaminie (3)","DZIAŁ 4 - CZŁOWIEK", "Cechy charakteru, Wygląd zewnętrzny","Ubrania, Przedmioty osobiste", "Etapy życia","Zaimki osobowe", "Porównanie czasów teraźniejszych","Jak na egzaminie (4)"],
+      "7L-Język_Piotrowski": ["DZIAŁ 1 - CZŁOWIEK","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)", "DZIAŁ 4 - ŚWIAT I PRZYRODA","Vocabulary (4)", "Gramar (4)", "Buking i writing (4)"],
+      "8F-Język_Piotrowski": ["DZIAŁ 1 - PRACA", "Zawody", "Odmiana zawodów przez osoby", "Miejsca prac", "Present Simple", "Jak na egzaminie (1)", "DZIAŁ 2 - EDUKACJA", "Przedmioty fizyczne i lekcyjne", "Pracownicy i pomieszczenia", "Czasowniki szkolne", "Present Hadsing", "Jak na egzaminie (2)", "DZIAŁ 3 - DOM", "Rodzaje miejsc zamieszkania", "Meble wewnętrzne", "Na zewnątrz", "Określenia i pomieszczenia", "Present Past", "Jak na egzaminie (3)", "DZIAŁ 4 - LEKCJE DODATKOWE", "Zaimki osobowe", "Gramatyka piotrowska", "Jak na egzaminie (4)"],
+      "8J-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+      "1B-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+	  "2E-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
+	  "3G-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
+  	  "Edukacja_ogólna": ["DZIAŁ 0 - Brak tematów"]
  
 	};
-
-	const kolory = {
-  '6I-Język_Piotrowski': "#808080",
-  '6L-Język_Piotrowski': "#808080",
-  '7F-Język_Piotrowski': "#4CAF50",
-  '7J-Język_Piotrowski': "#4CAF50",
-  '8A-Język_Piotrowski': "#4CAF50",
-  '8B-Język_Piotrowski': "#4CAF50",
-  '8C-Język_Piotrowski': "#4CAF50", 
-  '1E-Język_Piotrowski': "#2196F3", 
-  '2G-Język_Piotrowski': "#808080", 
-  '3H-Język_Piotrowski': "#808080",  
-  '4D-Przyroda': "#2196F3", 
-  '5K-Biologia': "#2196F3", 
-  '6I-Biologia': "#2196F3", 
-  '7FJ-Biologia': "#2196F3", 
-  '8A-Biologia': "#FF9800",
-  'Edukacja_ogólna': "#9C27B0",
-  'Dodatkowa_Biologia': "#FF9800" 
-};
 
   const klasaSelect = document.getElementById("klasa-select");
   const tematSelect = document.getElementById("temat-select");
@@ -717,6 +698,62 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
     });
   }
 
+function pokazFrekwencjeZastepstwo(klasa) {
+  const kontener = document.getElementById("zastep-frekwencja");
+  kontener.innerHTML = "";
+
+  if (!uczniowie[klasa]) {
+    kontener.innerHTML = "<p>Brak danych o uczniach.</p>";
+    return;
+  }
+
+  uczniowie[klasa].forEach((uczen, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "frekwencja-wrapper";
+
+    const label = document.createElement("label");
+    label.textContent = uczen;
+    wrapper.appendChild(label);
+
+    [
+      "Obecność",
+      "Spóźnienie",
+      "Nieobecność nieusprawiedliwiona",
+      "Nieobecność usprawiedliwiona",
+      "Zwolnienie",
+      "Rekolekcje",
+      "Egzamin",
+      "Sanatorium",
+      "Wycieczka",
+      "Konkurs",
+      "Wolontariat"
+    ].forEach(opcja => {
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = `zastep_frekwencja_${index}`;
+      radio.value = opcja;
+
+      const span = document.createElement("span");
+      span.textContent = opcja;
+
+      wrapper.appendChild(radio);
+      wrapper.appendChild(span);
+    });
+
+    kontener.appendChild(wrapper);
+  });
+}
+function zastepstwoZaznaczWszystkich() {
+  const kontener = document.getElementById("zastep-frekwencja");
+  const radios = kontener.querySelectorAll('input[type="radio"]');
+
+  radios.forEach(radio => {
+    if (radio.value === "Obecność") {
+      radio.checked = true;
+    }
+  });
+}
+
 function zapiszLekcje() {
   const data = document.getElementById("data").value;
   const klasa = klasaSelect.value;
@@ -741,7 +778,17 @@ function zapiszLekcje() {
   const nowaLekcja = { data, klasa, temat, opis, status, zastepca, frekwencja };
   const klucz = `lekcje_${klasa}`;
   const istniejace = JSON.parse(localStorage.getItem(klucz)) || [];
-  istniejace.push(nowaLekcja);
+  // 🔥 Szukamy, czy istnieje lekcja tego dnia
+const indexIstniejacej = istniejace.findIndex(l => l.data === data);
+
+// 🔥 Jeśli istnieje → nadpisz
+if (indexIstniejacej !== -1) {
+    istniejace[indexIstniejacej] = nowaLekcja;
+} else {
+    // 🔥 Jeśli nie istnieje → dodaj jako nową
+    istniejace.push(nowaLekcja);
+}
+
   localStorage.setItem(klucz, JSON.stringify(istniejace));
 
   pokazHistorieLekcji(klasa);
@@ -921,9 +968,159 @@ function wybierzKlase(klasa) {
   pokazPostep(klasa);
 }
 
+// 🟦 Wypełnij listę klas
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("zast-klasa");
+  Object.keys(tematy).forEach(kl => {
+    const op = document.createElement("option");
+    op.value = kl;
+    op.textContent = kl;
+    select.appendChild(op);
+  });
+});
 
+
+// 🟧 Zapisanie zastępstwa do localStorage
+function addZastepstwo() {
+  const data = document.getElementById("zast-data").value;
+  const klasa = document.getElementById("zast-klasa").value;
+  const przedmiot = document.getElementById("zast-przedmiot").value.trim();
+  const nieobecny = document.getElementById("zast-nieobecny").value.trim();
+  const prowadzacy = document.getElementById("zast-prowadzacy").value.trim();
+  const frekwencja = [];
+
+if (uczniowie[klasa]) {
+  uczniowie[klasa].forEach((uczen, index) => {
+    const zaznaczone = document.querySelector(`input[name="zastep_frekwencja_${index}"]:checked`);
+    frekwencja.push({
+      uczen,
+      status: zaznaczone ? zaznaczone.value : "Brak danych"
+    });
+  });
+}
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  let klasaOryginal = document.getElementById("zast-klasa").value;
+
+  // używamy aliasu tylko do wczytania uczniów
+  let klasaDoFrekwencji = normalizujKlase(klasaOryginal);
+
+  pokazFrekwencjeZastepstwo(klasaDoFrekwencji);
+});
+
+
+  if (!data || !klasa || !przedmiot || !prowadzacy) {
+    alert("Uzupełnij wszystkie pola!");
+    return;
+  }
+
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  lekcje.push({
+    data,
+    klasa,
+    temat: `Zastępstwo z przedmiotu: ${przedmiot}`,
+    status: "zastepstwo",
+    zastepca: prowadzacy,
+    nieobecny
+  });
+
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+
+  alert("✓ Zastępstwo dodane!");
+  
+  // odśwież plan dnia
+  pokazPlan(new Date(data));
+}
+
+// AUTOMATYCZNIE dodaj klasę do planu na ten dzień
+const dni = ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
+const dzienTyg = dni[new Date(data).getDay()];
+
+if (!planLekcji[dzienTyg]) planLekcji[dzienTyg] = [];
+
+if (!planLekcji[dzienTyg].some(p => p.klasa === klasa)) {
+  planLekcji[dzienTyg].push({
+    nr: planLekcji[dzienTyg].length + 1, // numer lekcji kolejny
+    klasa: klasa
+  });
+}
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  const klasa = document.getElementById("zast-klasa").value;
+});
+
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  let klasa = document.getElementById("zast-klasa").value;
+
+  if (typeof normalizujKlase === "function") {
+    klasa = normalizujKlase(klasa); 
+  }
+
+  pokazFrekwencjeZastepstwo(klasa);
+});
 
 </script>
+
+<div class="lesson-box">
+  <h2>➕ Dodaj własne zastępstwo</h2>
+
+  <label>Data zastępstwa:</label>
+  <input type="date" id="zast-data" />
+
+  <label>Klasa:</label>
+  <select id="zast-klasa">
+    <option value="">— wybierz —</option>
+	<option value="6A">6A</option>
+	<option value="6C">6C</option>
+	<option value="6H">6H</option>
+	<option value="7I">7I</option>
+	<option value="7L">7L</option>
+	<option value="8F">8F</option>
+	<option value="8J">8J</option>
+	<option value="1B">1B</option>
+	<option value="2E">2E</option>
+	<option value="3G">3G</option>
+  </select>
+
+
+  <label>Przedmiot:</label>
+<select id="zast-przedmiot">
+  <option value="">— wybierz przedmiot —</option>
+  <option>Biologia</option>
+  <option>Chemia</option>
+  <option>Matematyka</option>
+  <option>Język polski</option>
+  <option>Język angielski</option>
+  <option>Geografia</option>
+  <option>Historia</option>
+  <option>Wychowanie fizyczne</option>
+  <option>Muzyka</option>
+  <option>Plastyka</option>
+  <option>Informatyka</option>
+  <option>Fizyka</option>
+  <option>Religia</option>
+  <option>Edukacja zdrowotna</option>
+  <option>Zastępstwo ogólne</option>
+</select>
+
+<label>Inny przedmiot (opcjonalnie):</label>
+<input type="text" id="zast-przedmiot-inny" placeholder="Wpisz, jeśli nie ma na liście" />
+
+
+  <label>Nauczyciel nieobecny:</label>
+  <input type="text" id="zast-nieobecny" placeholder="Np. Kowalski" />
+
+  <label>Prowadzący zastępstwo:</label>
+  <input type="text" id="zast-prowadzacy" value="Piotr Rejmentowski" />
+
+
+
+<div id="zastep-frekwencja"></div>
+
+  <button onclick="addZastepstwo()">Dodaj zastępstwo</button>
+</div>
+
+
 
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
   <div style="margin-bottom: 10px;">
@@ -972,95 +1169,63 @@ function wybierzKlase(klasa) {
 <script>
 const planLekcji = {
   "poniedziałek": [
-    { nr: 1, klasa: "7FJ-Biologia" },
-    { nr: 2, klasa: "6I-Biologia" },
-    { nr: 3, klasa: "5K-Biologia" },
-    { nr: 4, klasa: "4D-Przyroda" },
-    { nr: 5, klasa: "1E-Język_Piotrowski" },
-    { nr: 6, klasa: "2G-Język_Piotrowski" },
-    { nr: 7, klasa: "3H-Język_Piotrowski" },
-	{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6A-Język_Piotrowski" },
+    { nr: 2, klasa: "6H-Język_Piotrowski" },
+    { nr: 3, klasa: "6C-Język_Piotrowski" },
+    { nr: 4, klasa: "7L-Język_Piotrowski" },
+    { nr: 5, klasa: "8J-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
   "wtorek": [
-    { nr: 1, klasa: "6I-Język_Piotrowski" },
-    { nr: 2, klasa: "6L-Język_Piotrowski" },
-    { nr: 3, klasa: "7F-Język_Piotrowski" },
-    { nr: 4, klasa: "7J-Język_Piotrowski" },
-    { nr: 5, klasa: "8A-Język_Piotrowski" },
-    { nr: 6, klasa: "8B-Język_Piotrowski" },
-    { nr: 7, klasa: "8C-Język_Piotrowski" },
-		{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7I-Język_Piotrowski" },
+    { nr: 2, klasa: "8F-Język_Piotrowski" },
+    { nr: 3, klasa: "1B-Język_Piotrowski" },
+    { nr: 4, klasa: "2E-Język_Piotrowski" },
+    { nr: 5, klasa: "3G-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
   "środa": [
-    { nr: 1, klasa: "7FJ-Biologia" },
-    { nr: 2, klasa: "6I-Biologia" },
-    { nr: 3, klasa: "5K-Biologia" },
-    { nr: 4, klasa: "4D-Przyroda" },
-    { nr: 5, klasa: "1E-Język_Piotrowski" },
-    { nr: 6, klasa: "2G-Język_Piotrowski" },
-    { nr: 7, klasa: "3H-Język_Piotrowski" },
-		{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6A-Język_Piotrowski" },
+    { nr: 2, klasa: "6H-Język_Piotrowski" },
+    { nr: 3, klasa: "6C-Język_Piotrowski" },
+    { nr: 4, klasa: "7L-Język_Piotrowski" },
+    { nr: 5, klasa: "8J-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
   "czwartek": [
-    { nr: 1, klasa: "6I-Język_Piotrowski" },
-    { nr: 2, klasa: "6L-Język_Piotrowski" },
-    { nr: 3, klasa: "7F-Język_Piotrowski" },
-    { nr: 4, klasa: "7J-Język_Piotrowski" },
-    { nr: 5, klasa: "8A-Język_Piotrowski" },
-    { nr: 6, klasa: "8B-Język_Piotrowski" },
-    { nr: 7, klasa: "8C-Język_Piotrowski" },
-		{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7I-Język_Piotrowski" },
+    { nr: 2, klasa: "8F-Język_Piotrowski" },
+    { nr: 3, klasa: "1B-Język_Piotrowski" },
+    { nr: 4, klasa: "2E-Język_Piotrowski" },
+    { nr: 5, klasa: "3G-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
   "piątek": [
-    { nr: 1, klasa: "7FJ-Biologia" },
-    { nr: 2, klasa: "6I-Biologia" },
-    { nr: 3, klasa: "5K-Biologia" },
-    { nr: 4, klasa: "4D-Przyroda" },
-    { nr: 5, klasa: "1E-Język_Piotrowski" },
-    { nr: 6, klasa: "2G-Język_Piotrowski" },
-    { nr: 7, klasa: "3H-Język_Piotrowski" },
-		{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6A-Język_Piotrowski" },
+    { nr: 2, klasa: "6H-Język_Piotrowski" },
+    { nr: 3, klasa: "6C-Język_Piotrowski" },
+    { nr: 4, klasa: "7L-Język_Piotrowski" },
+    { nr: 5, klasa: "8J-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
     "sobota": [
-    { nr: 1, klasa: "6I-Język_Piotrowski" },
-    { nr: 2, klasa: "6L-Język_Piotrowski" },
-    { nr: 3, klasa: "7F-Język_Piotrowski" },
-    { nr: 4, klasa: "7J-Język_Piotrowski" },
-    { nr: 5, klasa: "8A-Język_Piotrowski" },
-    { nr: 6, klasa: "8B-Język_Piotrowski" },
-    { nr: 7, klasa: "8C-Język_Piotrowski" },
-		{ nr: 8, klasa: "8A-Biologia" },
-	{ nr: 9, klasa: "Dodatkowa_Biologia" },
-	{ nr: 10, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7I-Język_Piotrowski" },
+    { nr: 2, klasa: "8F-Język_Piotrowski" },
+    { nr: 3, klasa: "1B-Język_Piotrowski" },
+    { nr: 4, klasa: "2E-Język_Piotrowski" },
+    { nr: 5, klasa: "3G-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ]
 };
 // 🔸 Klasy, które zakończyły materiał
 const zakonczoneKlasy = [
-  "3H-Język_Piotrowski",
-  "1E-Język_Piotrowski",
-  "2G-Język_Piotrowski",
-  "6I-Język_Piotrowski",
-  "6L-Język_Piotrowski",
-  "8A-Język_Piotrowski",
-  "7J-Język_Piotrowski"
+
 ];
 
 // 🔸 Klasy nieregularne (pojawiają się tylko w określone dni)
 const nieregularneKlasy = {
-  "8A-Biologia": ["2025-11-14", "2025-11-28", "2025-12-12"],
-  "Edukacja_ogólna": ["2025-11-07", "2025-11-21"],
-  "Dodatkowa_Biologia": ["2025-11-06", "2025-11-07", "2025-11-08", "2025-11-09", "2025-11-10", "2025-11-11", "2025-11-12", "2025-11-13", "2025-11-14", "2025-11-15", "2025-11-16", "2025-11-17", "2025-11-18"]
-};
+  
+  };
 
 function pokazPlan(date) {
   const tabela = document.getElementById("tabela-planu").querySelector("tbody");
@@ -1068,46 +1233,80 @@ function pokazPlan(date) {
 
   const dni = ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
   const dzien = dni[date.getDay()];
-  document.getElementById("dzien-tygodnia").textContent = dzien.charAt(0).toUpperCase() + dzien.slice(1);
-  document.getElementById("data-plan").value = date.toISOString().split("T")[0];
+  const dzienData = date.toISOString().split("T")[0];
 
+  document.getElementById("dzien-tygodnia").textContent = dzien.charAt(0).toUpperCase() + dzien.slice(1);
+  document.getElementById("data-plan").value = dzienData;
+
+  // 🟦 STAŁY PLAN DNIA
   const planDnia = planLekcji[dzien] || [];
 
+  // 🟨 ZASTĘPSTWA i dodatkowe lekcje z localStorage
+  const dynamiczneWpisy = [];
+
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith("lekcje_")) {
+      const lekcje = JSON.parse(localStorage.getItem(key)) || [];
+      lekcje
+        .filter(l => l.data === dzienData)
+        .forEach(l => dynamiczneWpisy.push(l));
+    }
+  });
+
+  // 🟩 WYŚWIETLENIE:  najpierw stały plan, potem dynamiczne wpisy
+  let numer = 1;
+
+  // --- STAŁE LEKCJE ---
   planDnia.forEach(poz => {
-  const data = document.getElementById("data-plan").value;
+    const klasa = poz.klasa;
 
-  // 🔹 Pomiń klasy nieregularne, jeśli nie mają dziś zajęć
-  if (nieregularneKlasy[poz.klasa] && !nieregularneKlasy[poz.klasa].includes(data)) {
-    return; // nie wyświetlaj tej klasy dziś
-  }
+    const wpisana = dynamiczneWpisy.filter(l => l.klasa === klasa).pop();
 
-  const klucz = `lekcje_${poz.klasa}`;
-  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
-  const wpisana = lekcje.find(l => l.data === data);
-  const tematInfo = wpisana ? "✅ " + wpisana.temat : "—";
-  const status = wpisana ? (wpisana.status || "normalna") : "normalna";
+    const temat = wpisana
+      ? (wpisana.status === "zastepstwo" ? "Zastępstwo: " + (wpisana.temat || "") : wpisana.temat)
+      : "—";
 
-  // 🔹 Sprawdź, czy klasa zakończyła materiał
-  const zakonczona = zakonczoneKlasy.includes(poz.klasa);
+    const status = wpisana ? wpisana.status : "normalna";
 
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td>${poz.nr}</td>
-    <td class="${zakonczona ? 'zakonczona' : ''}" title="${zakonczona ? 'Zakończyli materiał' : ''}">${poz.klasa}</td>
-    <td>${tematInfo}</td>
-    <td><span class="status-label status-${status}">${status}</span></td>
-    <td>
-      <select class="akcja-select" ${zakonczona ? 'disabled' : ''} onchange="wykonajAkcje(this.value, '${poz.klasa}', '${data}')">
-        <option value="">— wybierz —</option>
-        <option value="otworz">Wybierz i sprawdź obecność</option>
-        <option value="odwolaj">Odwołaj lekcję</option>
-        <option value="zastepstwo">Zastępstwo</option>
-      </select>
-    </td>
-  `;
-  tabela.appendChild(tr);
-});
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${poz.nr}</td>
+      <td>${klasa}</td>
+      <td>${temat}</td>
+      <td><span class="status-label status-${status}">${status}</span></td>
+      <td>
+        <select class="akcja-select" onchange="wykonajAkcje(this.value, '${klasa}', '${dzienData}')">
+          <option value="">— wybierz —</option>
+          <option value="otworz">Wpisz lekcję / obecność</option>
+          <option value="odwolaj">Odwołaj lekcję</option>
+          <option value="zastepstwo">Zastępstwo</option>
+        </select>
+      </td>
+    `;
+    tabela.appendChild(tr);
+  });
 
+  // --- DYNAMICZNIE DODANE LEKCJE (NOWE, ZASTĘPSTWA, NIE W PLANIE) ---
+  dynamiczneWpisy
+    .filter(l => !planDnia.some(p => p.klasa === l.klasa))
+    .forEach(l => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${numer++}</td>
+        <td>${l.klasa}</td>
+        <td>${l.temat}</td>
+        <td><span class="status-label status-${l.status}">${l.status}</span></td>
+        <td>
+          <select class="akcja-select" onchange="wykonajAkcje(this.value, '${l.klasa}', '${dzienData}')">
+            <option value="">— wybierz —</option>
+            <option value="otworz">Edytuj lekcję</option>
+            <option value="odwolaj">Odwołaj</option>
+            <option value="zastepstwo">Zastępstwo</option>
+          </select>
+        </td>
+      `;
+      tabela.appendChild(tr);
+    });
 }
 
 function wykonajAkcje(akcja, klasa, data) {
@@ -1147,6 +1346,19 @@ function zastepstwoLekcji(klasa, data) {
   if (!zastepca) return;
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  function zastepstwoLekcji(klasa, data) {
+    const zastepca = prompt("Podaj nazwisko nauczyciela prowadzącego zastępstwo:");
+    if (!zastepca) return;
+
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+    lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
+
+    localStorage.setItem(klucz, JSON.stringify(lekcje));
+    alert("Zastępstwo zapisane.");
+}
+
   lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
   localStorage.setItem(klucz, JSON.stringify(lekcje));
   pokazPlan(new Date(data));
