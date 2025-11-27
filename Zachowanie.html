@@ -408,13 +408,14 @@ function zapiszPunkty() {
     const chk = document.getElementById(`uczen-${uczen}`);
     if (chk && chk.checked) {
       zapisane[klasa].push({
-        uczen,
-        typ,
-        kategoria,
-        punkty: ilosc,
-        komentarz,
-        data: new Date().toLocaleDateString()
-      });
+  id: Date.now(),
+  uczen,
+  typ,
+  kategoria,
+  punkty: ilosc,
+  komentarz,
+  data: new Date().toLocaleDateString()
+});
     }
   });
 
@@ -448,11 +449,14 @@ const suma = STARTOWE_PUNKTY + zdobyte;
       // tooltip - czytelnie opisane pola
       const tooltip = `Typ: ${w.typ}\nKategoria: ${w.kategoria || '-'}\nKomentarz: ${w.komentarz || '-'}\nData: ${w.data || '-'}`;
       return `
-        <span class="grade ${kl} ${katClass}">
-          ${w.punkty}
-          <div class="tooltip">${tooltip}</div>
-        </span>
-      `;
+  <span class="grade ${kl} ${katClass}" 
+        onclick="edytujPunkt('${klasa}', ${w.id})"
+        style="cursor: pointer;">
+    ${w.punkty}
+    <div class="tooltip">${tooltip}</div>
+  </span>
+`;
+
     }).join(' ');
 
     html += `<tr>
@@ -489,6 +493,28 @@ function toggleWszyscy() {
   const allChecked = [...checkboxes].every(chk => chk.checked);
   checkboxes.forEach(chk => chk.checked = !allChecked);
 }
+function edytujPunkt(klasa, id) {
+  const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
+  if (!zapisane[klasa]) return;
+
+  const wpis = zapisane[klasa].find(w => w.id === id);
+  if (!wpis) return;
+
+  // pobieramy dane
+  const nowaKategoria = prompt("Nowa kategoria:", wpis.kategoria);
+  if (nowaKategoria === null) return;
+
+  const nowePunkty = prompt("Nowa liczba punktów (+/-):", wpis.punkty);
+  if (nowePunkty === null || isNaN(nowePunkty)) return;
+
+  // zapisujemy zmiany
+  wpis.kategoria = nowaKategoria;
+  wpis.punkty = Number(nowePunkty);
+
+  localStorage.setItem('zachowanie', JSON.stringify(zapisane));
+
+  pokazTabele();
+}
 
 </script>
 
@@ -502,6 +528,7 @@ function toggleWszyscy() {
 </footer>
 </body>
 </html>
+
 
 
 
