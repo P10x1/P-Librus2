@@ -498,21 +498,49 @@ function edytujPunkt(klasa, id) {
   const wpis = zapisane[klasa].find(w => w.id === id);
   if (!wpis) return;
 
-  // pobieramy dane
-  const nowaKategoria = prompt("Nowa kategoria:", wpis.kategoria);
-  if (nowaKategoria === null) return;
+  // pytamy, co chcemy zrobić
+  const akcja = prompt(
+    "Co chcesz zrobić?\n" +
+    "1 – Edytuj kategorię\n" +
+    "2 – Edytuj liczbę punktów\n" +
+    "3 – Edytuj komentarz\n" +
+    "4 – Usuń wpis"
+  );
 
-  const nowePunkty = prompt("Nowa liczba punktów (+/-):", wpis.punkty);
-  if (nowePunkty === null || isNaN(nowePunkty)) return;
+  if (!akcja) return;
 
-  // zapisujemy zmiany
-  wpis.kategoria = nowaKategoria;
-  wpis.punkty = Number(nowePunkty);
+  // --- 1: Zmiana kategorii ---
+  if (akcja === "1") {
+    const nowaKategoria = prompt("Nowa kategoria:", wpis.kategoria);
+    if (nowaKategoria !== null) wpis.kategoria = nowaKategoria;
+  }
+
+  // --- 2: Zmiana punktów ---
+  else if (akcja === "2") {
+    const nowePunkty = prompt("Nowa liczba punktów (+/-):", wpis.punkty);
+    if (nowePunkty !== null && !isNaN(nowePunkty)) {
+      wpis.punkty = Number(nowePunkty);
+    }
+  }
+
+  // --- 3: Zmiana komentarza ---
+  else if (akcja === "3") {
+    const nowyKomentarz = prompt("Nowy komentarz:", wpis.komentarz || "");
+    if (nowyKomentarz !== null) wpis.komentarz = nowyKomentarz;
+  }
+
+  // --- 4: Usuwanie wpisu ---
+  else if (akcja === "4") {
+    const potwierdzenie = confirm("Czy na pewno usunąć ten wpis?");
+    if (potwierdzenie) {
+      zapisane[klasa] = zapisane[klasa].filter(w => w.id !== id);
+    }
+  }
 
   localStorage.setItem('zachowanie', JSON.stringify(zapisane));
-
   pokazTabele();
 }
+
 
 </script>
 
@@ -526,6 +554,7 @@ function edytujPunkt(klasa, id) {
 </footer>
 </body>
 </html>
+
 
 
 
