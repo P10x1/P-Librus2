@@ -449,7 +449,7 @@ const suma = STARTOWE_PUNKTY + zdobyte;
       const tooltip = `Typ: ${w.typ}\nKategoria: ${w.kategoria || '-'}\nKomentarz: ${w.komentarz || '-'}\nData: ${w.data || '-'}`;
       return `
   <span class="grade ${kl} ${katClass}" 
-        onclick="edytujPunkt('${klasa}', ${w.id})"
+        onclick="edytujPunkt('${klasa}', '${w.id}')"
         style="cursor: pointer;">
     ${w.punkty}
     <div class="tooltip">${tooltip}</div>
@@ -555,6 +555,7 @@ function edytujPunkt(klasa, id) {
 </footer>
 </body>
 </html>
+
 
 
 
