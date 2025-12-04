@@ -406,7 +406,7 @@ function zapiszPunkty() {
     const chk = document.getElementById(`uczen-${uczen}`);
     if (chk && chk.checked) {
       zapisane[klasa].push({
-  id: Date.now(),
+  id: crypto.randomUUID(),
   uczen,
   typ,
   kategoria,
@@ -414,6 +414,7 @@ function zapiszPunkty() {
   komentarz,
   data: new Date().toLocaleDateString()
 });
+
     }
   });
 
@@ -554,6 +555,7 @@ function edytujPunkt(klasa, id) {
 </footer>
 </body>
 </html>
+
 
 
 
