@@ -162,28 +162,6 @@
     margin: 0 3px;
   }
 
-  .grade .tooltip {
-    visibility: hidden;
-    width: 200px;
-    background-color: #333;
-    color: #fff;
-    text-align: left;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -100px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .grade:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-  }
-
   /* Typy ocen */
   .typ-Sprawdzian       { background-color: #ffccbc; color: black; }
   .typ-Pracaklasowa     { background-color: #ffe0b2; color: black; }
@@ -584,10 +562,14 @@ if (srednia) {
     const ocenyHTML = ocenyUcznia.map((o, idx) => {
       const klasaTypu = `typ-${o.typ.replace(/\s/g, '')}`;
       return `
-        <span class="grade ${klasaTypu}" style="cursor:pointer;" onclick="edytujOcene('${wybranaKlasa}', '${uczen}', ${idx})">
-          ${o.ocena}${o.typ.toLowerCase() === 'poprawa' ? '*' : ''}
-          <div class="tooltip">${o.typ}\n${o.komentarz}\n${o.data}</div>
-        </span>`;
+<span class="grade ${klasaTypu}"
+      data-typ="${o.typ}"
+      data-komentarz="${o.komentarz || 'Brak komentarza'}"
+      data-data="${o.data}"
+      style="cursor:pointer;"
+      onclick="edytujOcene('${wybranaKlasa}', '${uczen}', ${idx})">
+      ${o.ocena}${o.typ.toLowerCase() === 'poprawa' ? '*' : ''}
+</span>`;
     }).join(' ');
 
    html += `<tr>
@@ -665,6 +647,35 @@ function zapiszOceneJednego() {
   zamknijModalJednego();
   alert('Ocena zapisana!');
 }
+const globalTooltip = document.getElementById("global-tooltip");
+
+document.addEventListener("mouseover", e => {
+  if (e.target.classList.contains("grade")) {
+    const typ = e.target.dataset.typ;
+    const kom = e.target.dataset.komentarz;
+    const data = e.target.dataset.data;
+
+    globalTooltip.innerHTML = `
+      <strong>Ocena:</strong> ${e.target.textContent.trim()}<br>
+      <strong>Typ:</strong> ${typ}<br>
+      <strong>Data:</strong> ${data}<br>
+      <strong>Komentarz:</strong> ${kom}
+    `;
+
+    globalTooltip.style.opacity = 1;
+  }
+});
+
+document.addEventListener("mousemove", e => {
+  globalTooltip.style.left = e.pageX + 15 + "px";
+  globalTooltip.style.top = e.pageY + 15 + "px";
+});
+
+document.addEventListener("mouseout", e => {
+  if (e.target.classList.contains("grade")) {
+    globalTooltip.style.opacity = 0;
+  }
+});
 
 </script>
 
@@ -754,8 +765,29 @@ function zapiszOceneJednego() {
   </div>
   <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
 </footer>
+	<div id="global-tooltip"></div>
+
+<style>
+#global-tooltip {
+  position: fixed;
+  background: #2a6f97;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 320px;
+  z-index: 999999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.35);
+  white-space: normal;
+}
+</style>
+
 </body>
 </html>
+
 
 
 
