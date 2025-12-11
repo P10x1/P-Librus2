@@ -673,30 +673,58 @@ function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
 
     if (!uczniowie[klasa]) return;
 
+    // 🔥 POBIERANIE ocen z localStorage
+    const wszystkieOceny = JSON.parse(localStorage.getItem("oceny") || "{}");
+    const ocenyKlasy = wszystkieOceny[klasa] || [];
+
     uczniowie[klasa].forEach((uczen, index) => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "frekwencja-wrapper";
+        const wrapper = document.createElement("div");
+        wrapper.className = "frekwencja-wrapper";
 
-      const label = document.createElement("label");
-      label.textContent = uczen;
-      wrapper.appendChild(label);
+        // 🔥 wybieramy oceny TYLKO tego ucznia
+        const ocenyUcznia = ocenyKlasy
+            .filter(o => o.uczen === uczen)
+            .map(o => o.ocena)
+            .join(", ");
 
-      ["Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona", "Nieobecność usprawiedliwiona", "Zwolnienie", "Rekolekcje", "Egzamin", "Sanatorium", "Wycieczka", "Konkurs", "Wolontariat"].forEach(opcja => {
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = `frekwencja_${index}`;
-        radio.value = opcja;
+        const wyswietloneOceny = ocenyUcznia || "brak";
 
-        const span = document.createElement("span");
-        span.textContent = opcja;
+        const label = document.createElement("label");
+        label.innerHTML =
+            `<strong>${uczen}</strong> 
+             <span style="color:blue; font-size:14px;"> — Oceny: ${wyswietloneOceny}</span>`;
+        
+        wrapper.appendChild(label);
 
-        wrapper.appendChild(radio);
-        wrapper.appendChild(span);
-      });
+        // 🔥 FREKWENCJA
+        [
+            "Obecność",
+            "Spóźnienie",
+            "Nieobecność nieusprawiedliwiona",
+            "Nieobecność usprawiedliwiona",
+            "Zwolnienie",
+            "Rekolekcje",
+            "Egzamin",
+            "Sanatorium",
+            "Wycieczka",
+            "Konkurs",
+            "Wolontariat"
+        ].forEach(opcja => {
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = `frekwencja_${index}`;
+            radio.value = opcja;
 
-      kontener.appendChild(wrapper);
+            const span = document.createElement("span");
+            span.textContent = opcja;
+
+            wrapper.appendChild(radio);
+            wrapper.appendChild(span);
+        });
+
+        kontener.appendChild(wrapper);
     });
-  }
+}
 
 function pokazFrekwencjeZastepstwo(klasa) {
   const kontener = document.getElementById("zastep-frekwencja");
@@ -1421,6 +1449,7 @@ document.getElementById("data-plan").addEventListener("change", e => {
 	
 </body>
 </html>
+
 
 
 
