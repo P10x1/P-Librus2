@@ -422,6 +422,23 @@ function zapiszPunkty() {
   pokazTabele();
   alert("Punkty zapisane!");
 }
+function zachowanieOpis(suma) {
+  if (suma < 10) return "Naganne";
+  if (suma < 20) return "Nieodpowiednie";
+  if (suma < 30) return "Poprawne";
+  if (suma < 40) return "Dobre";
+  if (suma < 50) return "Bardzo dobre";
+  return "Wzorowe";
+}
+
+function ocenaZachowania(suma) {
+  if (suma < 10) return 1;
+  if (suma < 20) return 2;
+  if (suma < 30) return 3;
+  if (suma < 40) return 4;
+  if (suma < 50) return 5;
+  return 6;
+}
 
 function pokazTabele() {
   const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
@@ -430,14 +447,21 @@ function pokazTabele() {
 
   let html = `<table><thead><tr>
     <th>Uczeń</th>
-    <th>Punkty</th>
-    <th>Suma</th>
+<th>Punkty</th>
+<th>Suma</th>
+<th>Proponowane zachowanie</th>
+<th>Półroczna ocena</th>
+<th>Ocena końcowa</th>
+
   </tr></thead><tbody>`;
 
   klasy[klasa].forEach(uczen => {
     const wpisy = zapisane[klasa].filter(w => w.uczen === uczen);
    const zdobyte = wpisy.reduce((a,b)=>a+(Number(b.punkty)||0),0);
 const suma = STARTOWE_PUNKTY + zdobyte;
+const opis = zachowanieOpis(suma);
+const polrocze = ocenaZachowania(suma);
+const koniec = ocenaZachowania(suma); // na razie taka sama
 
 
     const lista = wpisy.map(w => {
@@ -462,6 +486,10 @@ const suma = STARTOWE_PUNKTY + zdobyte;
       <td>${uczen}</td>
       <td>${lista}</td>
       <td>${suma}</td>
+<td>${opis}</td>
+<td>${polrocze}</td>
+<td>${koniec}</td>
+
     </tr>`;
   });
 
@@ -555,6 +583,7 @@ function edytujPunkt(klasa, id) {
 </footer>
 </body>
 </html>
+
 
 
 
