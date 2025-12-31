@@ -242,6 +242,7 @@ const klasy = {
 };
 
 const STARTOWE_PUNKTY = 40;
+const OCENY_KEY = "ocenyZachowania";
 
 
 const kategorie = [
@@ -422,7 +423,8 @@ function zapiszPunkty() {
   pokazTabele();
   alert("Punkty zapisane!");
 }
-function zachowanieOpis(suma) {
+
+function proponowaneZachowanie(suma) {
   if (suma < 10) return "Naganne";
   if (suma < 20) return "Nieodpowiednie";
   if (suma < 30) return "Poprawne";
@@ -431,37 +433,48 @@ function zachowanieOpis(suma) {
   return "Wzorowe";
 }
 
-function ocenaZachowania(suma) {
-  if (suma < 10) return 1;
-  if (suma < 20) return 2;
-  if (suma < 30) return 3;
-  if (suma < 40) return 4;
-  if (suma < 50) return 5;
-  return 6;
-}
-
 function pokazTabele() {
   const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
   const klasa = selectKlasa.value;
   if (!zapisane[klasa]) { tabeleKlasDiv.innerHTML = ''; return; }
 
-  let html = `<table><thead><tr>
-    <th>Uczeń</th>
-<th>Punkty</th>
-<th>Suma</th>
-<th>Proponowane zachowanie</th>
-<th>Półroczna ocena</th>
-<th>Ocena końcowa</th>
-
-  </tr></thead><tbody>`;
+  let html = `<table><thead>
+<tr>
+  <th>Uczeń</th>
+  <th>Punkty</th>
+  <th>Suma</th>
+  <th>Proponowane zachowanie</th>
+  <th>Półroczna ocena</th>
+  <th>Ocena końcowa</th>
+</tr>
+</thead>
+<tbody>`;
 
   klasy[klasa].forEach(uczen => {
     const wpisy = zapisane[klasa].filter(w => w.uczen === uczen);
    const zdobyte = wpisy.reduce((a,b)=>a+(Number(b.punkty)||0),0);
 const suma = STARTOWE_PUNKTY + zdobyte;
-const opis = zachowanieOpis(suma);
-const polrocze = ocenaZachowania(suma);
-const koniec = ocenaZachowania(suma); // na razie taka sama
+	  // --- NOWE RZECZY ---
+const propozycja = proponowaneZachowanie(suma);
+
+const oceny = JSON.parse(localStorage.getItem(OCENY_KEY) || "{}");
+const uczenOceny = oceny[klasa]?.[uczen] || {};
+
+const polroczeSelect = selectOceny(
+  klasa,
+  uczen,
+  "polrocze",
+  uczenOceny.polrocze
+);
+
+const koniecSelect = selectOceny(
+  klasa,
+  uczen,
+  "koniec",
+  uczenOceny.koniec
+);
+
+
 
 
     const lista = wpisy.map(w => {
@@ -483,14 +496,14 @@ const koniec = ocenaZachowania(suma); // na razie taka sama
     }).join(' ');
 
     html += `<tr>
-      <td>${uczen}</td>
-      <td>${lista}</td>
-      <td>${suma}</td>
-<td>${opis}</td>
-<td>${polrocze}</td>
-<td>${koniec}</td>
+  <td>${uczen}</td>
+  <td>${lista}</td>
+  <td>${suma}</td>
+  <td>${propozycja}</td>
+  <td>${polroczeSelect}</td>
+  <td>${koniecSelect}</td>
+</tr>`;
 
-    </tr>`;
   });
 
   html += "</tbody></table>";
@@ -569,6 +582,27 @@ function edytujPunkt(klasa, id) {
   localStorage.setItem('zachowanie', JSON.stringify(zapisane));
   pokazTabele();
 }
+function selectOceny(klasa, uczen, typ, aktualna = "") {
+  const opcje = ["", "Wzorowe", "Bardzo dobre", "Dobre", "Poprawne", "Nieodpowiednie", "Naganne"];
+
+  return `
+    <select onchange="zapiszOcene('${klasa}','${uczen}','${typ}', this.value)">
+      ${opcje.map(o =>
+        `<option value="${o}" ${o === aktualna ? "selected" : ""}>${o || "-- wybierz --"}</option>`
+      ).join("")}
+    </select>
+  `;
+}
+function zapiszOcene(klasa, uczen, typ, wartosc) {
+  const dane = JSON.parse(localStorage.getItem(OCENY_KEY) || "{}");
+
+  if (!dane[klasa]) dane[klasa] = {};
+  if (!dane[klasa][uczen]) dane[klasa][uczen] = {};
+
+  dane[klasa][uczen][typ] = wartosc;
+
+  localStorage.setItem(OCENY_KEY, JSON.stringify(dane));
+}
 
 
 </script>
@@ -583,6 +617,7 @@ function edytujPunkt(klasa, id) {
 </footer>
 </body>
 </html>
+
 
 
 
