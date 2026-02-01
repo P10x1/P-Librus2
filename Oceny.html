@@ -178,8 +178,8 @@
   .typ-Aktywność        { background-color: #f0f4c3; color: black; }
   .typ-Pracadomowa      { background-color: #e6ee9c; color: black; }
   .typ-Półroczna        { background-color: #e0f7fa; color: black; }
-  .typ-Egzamin          { background-color: #E6DAF0; color: black; }
-
+  .typ-Egzamin-próbny   { background-color: #E6DAF0; color: black; }
+  .typ-Egzamin-oficjalny         { background-color: #E6DAF0; color: black; }
   /* Modal */
   .modal {
     position: fixed;
@@ -339,7 +339,8 @@
     <option>Poprawa</option>
     <option>Aktywność</option>
     <option>Praca domowa</option>
-    <option>Egzamin</option>
+    <option>Egzamin-próbny</option>
+	<option>Egzamin-oficjalny</option>
     <option>Półroczna</option>
   </select>
 
@@ -371,15 +372,14 @@
 
 <script>
     const klasy = {
-	'7I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
-	'7L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
-    '8F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
-	'8J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
-    '6A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
-    '1B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
-    '6C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
-    '2E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
-	'3G-Język_Piotrowski': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
+	'8I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
+	'8L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+    '6F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'1J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '7A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '2B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '7C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '3E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
 	'6H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
 	'Edukacja_ogólna': ['Julia','Ola','Zuzia','Tadeusz','Grzesiek','Adam','Wiesia','Bożena','Jagoda','Antek','Maciej','Tosia']
     };
@@ -408,7 +408,7 @@ Object.keys(klasy).forEach(nazwaKlasy => {
   listaKlasTabela.appendChild(tr);
 });
 
-    const ocenyMozliwe = ['BZ', 'NP', '-', '+', '1', '1+','2-','2','2+','3-', '3','3+', '4-', '4','4+', '5-','5', '5+', '6-','6'];
+    const ocenyMozliwe = ['BZ', 'NP', '-', '+', '1', '1+','2-','2','2+','3-', '3','3+', '4-', '4','4+', '5-','5', '5+', '6-','6','BRAK','%', '?'];
     const selectKlasa = document.getElementById('klasa');
     const studentsDiv = document.getElementById('students');
     const tabeleKlasDiv = document.getElementById('tabeleKlas');
@@ -723,7 +723,8 @@ window.addEventListener('DOMContentLoaded', () => {
       <option>Poprawa</option>
       <option>Aktywność</option>
       <option>Praca domowa</option>
-      <option>Egzamin</option>
+      <option>Egzamin-próbny</option>
+	  <option>Egzamin-oficjalny</option>
       <option>Półroczna</option>
     </select>
 
@@ -753,6 +754,9 @@ window.addEventListener('DOMContentLoaded', () => {
   <option value="5+">5+</option>
   <option value="6-">6-</option>
   <option value="6">6</option>
+  <option value="BRAK">BRAK</option>
+  <option value="%">%</option>
+  <option value="?">?</option>
 </select>
 
 
