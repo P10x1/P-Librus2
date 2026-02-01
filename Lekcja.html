@@ -375,16 +375,15 @@ td.pasek {
 
 <!-- Ukryty select, który nadal używany w kodzie -->
 <select id="klasa-select" style="display: none;">
-  <option value="6A-Język_Piotrowski">6A - Język Piotrowski</option>
-  <option value="6C-Język_Piotrowski">6C - Język Piotrowski</option>
+  <option value="6F-Język_Piotrowski">6F - Język Piotrowski</option>
   <option value="6H-Język_Piotrowski">6H - Język Piotrowski</option>
-  <option value="7I-Język_Piotrowski">7I - Język Piotrowski</option>
-  <option value="7L-Język_Piotrowski">7L - Język Piotrowski</option>
-  <option value="8F-Język_Piotrowski">8F - Język Piotrowski</option>
-  <option value="8J-Język_Piotrowski">8J - Język Piotrowski</option>
-  <option value="1B-Język_Piotrowski">1B - Język Piotrowski</option>
-  <option value="2E-Język_Piotrowski">2E - Język Piotrowski</option>
-  <option value="3G-Język_Piotrowski">3G - Język Piotrowski</option>
+  <option value="7A-Język_Piotrowski">7A - Język Piotrowski</option>
+  <option value="7C-Język_Piotrowski">7C - Język Piotrowski</option>
+  <option value="8I-Język_Piotrowski">8I - Język Piotrowski</option>
+  <option value="8L-Język_Piotrowski">8L - Język Piotrowski</option>
+  <option value="1J-Język_Piotrowski">1J - Język Piotrowski</option>
+  <option value="2B-Język_Piotrowski">2B - Język Piotrowski</option>
+  <option value="3E-Język_Piotrowski">3E - Język Piotrowski</option>
   <option value="Edukacja_ogólna">Edukacja ogólna</option>
 </select>
 
@@ -587,31 +586,29 @@ function pokazPostep(klasa) {
 
 <script>
   const uczniowie = {
-	'7I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
-	'7L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
-    '8F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
-	'8J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
-    '6A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
-    '1B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
-    '6C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
-    '2E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
-	'3G-Język_Piotrowski': ['Jagoda', 'Szymon', 'Antek', 'Lena'],
+	'8I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
+	'8L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+    '6F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'1J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '7A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '2B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '7C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '3E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
 	'6H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
 	'Edukacja_ogólna': ['Julia','Ola','Zuzia','Tadeusz','Grzesiek','Adam','Wiesia','Bożena','Jagoda','Antek','Maciej','Tosia']
   };
   
   // Alias skróconych nazw na pełne klasy
 const aliasyKlas = {
-  "6A": "6A-Język_Piotrowski",
-  "6C": "6C-Język_Piotrowski",
+  "6F": "6F-Język_Piotrowski",
   "6H": "6H-Język_Piotrowski",
-  "7I": "7I-Język_Piotrowski",
-  "7L": "7L-Język_Piotrowski",
-  "8F": "8F-Język_Piotrowski",
-  "8J": "8J-Język_Piotrowski",
-  "1B": "1B-Język_Piotrowski",
-  "2E": "2E-Język_Piotrowski",
-  "3G": "3G-Język_Piotrowski"
+  "7A": "7A-Język_Piotrowski",
+  "7C": "7C-Język_Piotrowski",
+  "8I": "8I-Język_Piotrowski",
+  "8L": "8L-Język_Piotrowski",
+  "1J": "1J-Język_Piotrowski",
+  "2B": "2B-Język_Piotrowski",
+  "3E": "3E-Język_Piotrowski"
 };
 
 function normalizujKlase(klasa) {
@@ -621,17 +618,16 @@ function normalizujKlase(klasa) {
 
   const tematy = {
   
-      "6A-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Kolory i pomieszczenia", "Alfabet i znaki piotrowskie", "DZIAŁ 2 - Liczby i daty", "Liczby","Daty", "DZIAŁ 3 - PIERWSZA GRAMATYKA", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "DZIAŁ 4 - GRAMATYKA DODATKOWA", "Zaimki osobowe","Present Simple - Wprowadzenie"],
-	  "6H-Język_Piotrowski": ["DZIAŁ 0 - CAŁY PODRĘCZNIK", "Alfabet i znaki piotrowskie", "Pomieszczenia", "Liczby", "Miesiące, Daty", "Kolory", "Past simple - Wprowadzenie","Past simple - Ogólność, Upodobania","Past simple - Regularność","Past simple - Opis osobowy",  "Zaimki osobowe"],
-	  "6C-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Alfabet i znaki piotrowskie", "Słownictwo : Kolory i pomieszczenia", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby", "Daty", "DZIAŁ 3 - GRAMATYKA", "Podstawy gramatyki piotrowskiej", "Past Simple - Jako najprostszy czas.", "Past Simple - Ogólność i Upodobania", "Past Simple - Regularność", "Past Simple - Opis osobowy stały", "Zaimki osobowe - Wprowadzenie", "DZIAŁ 4 - NAUKA I TECHNIKA", "Nauka i technika jako pierwszy dział praktyczny", "Urządzenia nowoczesnej technologii", "Nauka w szkole", "Czasowniki i osoby technologii", "Past Simple - Podsumowanie"],
-      "7I-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE","Choroby i bóle","Części ciała i zdrowy styl życia","Past simple","Jak na egzaminie","DZIAŁ 2 - ŚWIAT ORAZ PRZYRODA","Kontynenty oraz kraje","Zwierzęta, Krajobrazy, Rośliny","Czas poprawny, Zapis czasu słownie","Present Simple","Jak na egzaminie (2)","DZIAŁ 3 - ŻYCIE PRYWATNE", "Rodzina i znajomi", "Czas wolny, Wydarzenia", "Present Cintus", "Jak na egzaminie (3)","DZIAŁ 4 - CZŁOWIEK", "Cechy charakteru, Wygląd zewnętrzny","Ubrania, Przedmioty osobiste", "Etapy życia","Zaimki osobowe", "Porównanie czasów teraźniejszych","Jak na egzaminie (4)"],
-      "7L-Język_Piotrowski": ["DZIAŁ 1 - CZŁOWIEK","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)", "DZIAŁ 4 - ŚWIAT I PRZYRODA","Vocabulary (4)", "Gramar (4)", "Buking i writing (4)"],
-      "8F-Język_Piotrowski": ["DZIAŁ 1 - PRACA", "Zawody", "Odmiana zawodów przez osoby", "Miejsca prac", "Present Simple", "Jak na egzaminie (1)", "DZIAŁ 2 - EDUKACJA", "Przedmioty fizyczne i lekcyjne", "Pracownicy i pomieszczenia", "Czasowniki szkolne", "Present Hadsing", "Jak na egzaminie (2)", "DZIAŁ 3 - DOM", "Rodzaje miejsc zamieszkania", "Meble wewnętrzne", "Na zewnątrz", "Określenia i pomieszczenia", "Present Past", "Jak na egzaminie (3)", "DZIAŁ 4 - LEKCJE DODATKOWE", "Zaimki osobowe", "Gramatyka piotrowska", "Jak na egzaminie (4)"],
-      "8J-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
-      "1B-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
-	  "2E-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
-	  "3G-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
-  	  "Edukacja_ogólna": ["DZIAŁ 0 - Brak tematów"]
+      "6F-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Kolory i pomieszczenia", "Alfabet i znaki piotrowskie", "DZIAŁ 2 - Liczby i daty", "Liczby","Daty", "DZIAŁ 3 - PIERWSZA GRAMATYKA", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "DZIAŁ 4 - GRAMATYKA DODATKOWA", "Zaimki osobowe","Present Simple - Wprowadzenie"],
+	  "6H-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby", "Daty, Miesiące", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - GRAMATYKA", "Podstawy gramatyki piotrowskiej", "Past Simple - Jako najprostrzy czas", "Past Simple - Ogólność i upodobania", "Past Simple - Regularność", "Past Simple - Opis osobowy stały", "Zaimki osobowe - Wprowadzenie", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - NAUKA I TECHNIKA", "Nauka i technika jako pierwszy dział praktyczny", "Urządzenia nowoczesnej technologii", "Nauka w szkole", "Czasowniki i osoby technologii", "Past Simple - Podsumowanie", "Sprawdź czy potrafisz (4)"],
+	  "7C-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE", "Części ciała i zdrowy styl życia", "Choroby, bóle i inne przypadki", "Past Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT I PRZYRODA", "Kontynenty oraz kraje", "Przyroda: Zwierzęta, Krajobrazy i rośliny", "Czas poprawny, Zapis czasu słownie", "Present Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE", "Ludność: Rodzina i znajomi", "Czas wolny: Aktywności i dni wolne", "Present Cintus - Lekcja gramatyczna", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - CZŁOWIEK", "Opis człowieka: Cechy charakteru i wygląd zewnętrzny", "Przedmioty: Ubiór i przedmioty osobiste / użytkowe", "Etapy życia", "Zaimki osobowe - Lekcja gramatyczna", "Porównanie czasów teraźniejszych - Lekcja gramatyczna", "Sprawdź czy potrafisz (4)"],
+	  "7A-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE","Choroby i bóle","Części ciała i zdrowy styl życia","Past simple","Jak na egzaminie","DZIAŁ 2 - ŚWIAT ORAZ PRZYRODA","Kontynenty oraz kraje","Zwierzęta, Krajobrazy, Rośliny","Czas poprawny, Zapis czasu słownie","Present Simple","Jak na egzaminie (2)","DZIAŁ 3 - ŻYCIE PRYWATNE", "Rodzina i znajomi", "Czas wolny, Wydarzenia", "Present Cintus", "Jak na egzaminie (3)","DZIAŁ 4 - CZŁOWIEK", "Cechy charakteru, Wygląd zewnętrzny","Ubrania, Przedmioty osobiste", "Etapy życia","Zaimki osobowe", "Porównanie czasów teraźniejszych","Jak na egzaminie (4)"],
+      "8I-Język_Piotrowski": ["DZIAŁ 1 - PRACA", "Zawody", "Odmiana zawodów przez osoby", "Miejsca prac", "Present Simple", "Jak na egzaminie (1)", "DZIAŁ 2 - EDUKACJA", "Przedmioty fizyczne i lekcyjne", "Pracownicy i pomieszczenia", "Czasowniki szkolne", "Present Hadsing", "Jak na egzaminie (2)", "DZIAŁ 3 - DOM", "Rodzaje miejsc zamieszkania", "Meble wewnętrzne", "Na zewnątrz", "Określenia i pomieszczenia", "Present Past", "Jak na egzaminie (3)", "DZIAŁ 4 - LEKCJE DODATKOWE", "Zaimki osobowe", "Gramatyka piotrowska", "Jak na egzaminie (4)"],
+      "8L-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+      "1J-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+	  "2B-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
+	  "3E-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
+  	  "Edukacja_ogólna": ["DZIAŁ - Brak tematów dla tej klasy"]
  
 	};
 
@@ -667,7 +663,8 @@ function normalizujKlase(klasa) {
         tLower.includes("jak na egzaminie") ||
 		tLower.includes("praca klasowa") ||
 		tLower.includes("omówienie pracy klasowej") ||
-        tLower.includes("inne")
+        tLower.includes("inne") ||
+		tLower.includes("czy potrafisz")
       ) {
         option.style.backgroundColor = "#ccffcc"; // jasnozielony
       }
@@ -1133,16 +1130,15 @@ document.getElementById("zast-klasa").addEventListener("change", () => {
   <label>Klasa:</label>
   <select id="zast-klasa">
     <option value="">— wybierz —</option>
-	<option value="6A">6A</option>
-	<option value="6C">6C</option>
 	<option value="6H">6H</option>
-	<option value="7I">7I</option>
-	<option value="7L">7L</option>
-	<option value="8F">8F</option>
-	<option value="8J">8J</option>
-	<option value="1B">1B</option>
-	<option value="2E">2E</option>
-	<option value="3G">3G</option>
+	<option value="6F">6F</option>
+	<option value="7A">7A</option>
+	<option value="7C">7C</option>
+	<option value="8I">8I</option>
+	<option value="8L">8L</option>
+	<option value="1J">1J</option>
+	<option value="2B">2B</option>
+	<option value="3E">3E</option>
   </select>
 
 
@@ -1232,52 +1228,43 @@ document.getElementById("zast-klasa").addEventListener("change", () => {
 <script>
 const planLekcji = {
   "poniedziałek": [
-    { nr: 1, klasa: "6A-Język_Piotrowski" },
-    { nr: 2, klasa: "6H-Język_Piotrowski" },
-    { nr: 3, klasa: "6C-Język_Piotrowski" },
-    { nr: 4, klasa: "7L-Język_Piotrowski" },
-    { nr: 5, klasa: "8J-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6H-Język_Piotrowski" },
+    { nr: 2, klasa: "6F-Język_Piotrowski" },
+    { nr: 3, klasa: "1J-Język_Piotrowski" },
+    { nr: 4, klasa: "2B-Język_Piotrowski" },
+	{ nr: 5, klasa: "3E-Język_Piotrowski" },
   ],
   "wtorek": [
-    { nr: 1, klasa: "7I-Język_Piotrowski" },
-    { nr: 2, klasa: "8F-Język_Piotrowski" },
-    { nr: 3, klasa: "1B-Język_Piotrowski" },
-    { nr: 4, klasa: "2E-Język_Piotrowski" },
-    { nr: 5, klasa: "3G-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7A-Język_Piotrowski" },
+    { nr: 2, klasa: "7C-Język_Piotrowski" },
+    { nr: 3, klasa: "8I-Język_Piotrowski" },
+    { nr: 4, klasa: "8L-Język_Piotrowski" },
   ],
   "środa": [
-    { nr: 1, klasa: "6A-Język_Piotrowski" },
-    { nr: 2, klasa: "6H-Język_Piotrowski" },
-    { nr: 3, klasa: "6C-Język_Piotrowski" },
-    { nr: 4, klasa: "7L-Język_Piotrowski" },
-    { nr: 5, klasa: "8J-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6H-Język_Piotrowski" },
+    { nr: 2, klasa: "6F-Język_Piotrowski" },
+    { nr: 3, klasa: "1J-Język_Piotrowski" },
+    { nr: 4, klasa: "2B-Język_Piotrowski" },
+	{ nr: 5, klasa: "3E-Język_Piotrowski" },
   ],
   "czwartek": [
-    { nr: 1, klasa: "7I-Język_Piotrowski" },
-    { nr: 2, klasa: "8F-Język_Piotrowski" },
-    { nr: 3, klasa: "1B-Język_Piotrowski" },
-    { nr: 4, klasa: "2E-Język_Piotrowski" },
-    { nr: 5, klasa: "3G-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7A-Język_Piotrowski" },
+    { nr: 2, klasa: "7C-Język_Piotrowski" },
+    { nr: 3, klasa: "8I-Język_Piotrowski" },
+    { nr: 4, klasa: "8L-Język_Piotrowski" },
   ],
   "piątek": [
-    { nr: 1, klasa: "6A-Język_Piotrowski" },
-    { nr: 2, klasa: "6H-Język_Piotrowski" },
-    { nr: 3, klasa: "6C-Język_Piotrowski" },
-    { nr: 4, klasa: "7L-Język_Piotrowski" },
-    { nr: 5, klasa: "8J-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "6H-Język_Piotrowski" },
+    { nr: 2, klasa: "6F-Język_Piotrowski" },
+    { nr: 3, klasa: "1J-Język_Piotrowski" },
+    { nr: 4, klasa: "2B-Język_Piotrowski" },
+	{ nr: 5, klasa: "3E-Język_Piotrowski" },
   ],
     "sobota": [
-    { nr: 1, klasa: "7I-Język_Piotrowski" },
-    { nr: 2, klasa: "8F-Język_Piotrowski" },
-    { nr: 3, klasa: "1B-Język_Piotrowski" },
-    { nr: 4, klasa: "2E-Język_Piotrowski" },
-    { nr: 5, klasa: "3G-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 1, klasa: "7A-Język_Piotrowski" },
+    { nr: 2, klasa: "7C-Język_Piotrowski" },
+    { nr: 3, klasa: "8I-Język_Piotrowski" },
+    { nr: 4, klasa: "8L-Język_Piotrowski" },
   ]
 };
 // 🔸 Klasy, które zakończyły materiał
@@ -1287,7 +1274,24 @@ const zakonczoneKlasy = [
 
 // 🔸 Klasy nieregularne (pojawiają się tylko w określone dni)
 const nieregularneKlasy = {
-  
+  "poniedziałek": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ],
+  "wtorek": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ],
+  "środa": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ],
+  "czwartek": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ],
+  "piątek": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ],
+  "sobota": [
+    { nr: 1, klasa: "Edukacja_ogólna" },
+  ]
   };
 
 function pokazPlan(date) {
