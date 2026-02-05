@@ -385,6 +385,7 @@ td.pasek {
   <option value="2B-Język_Piotrowski">2B - Język Piotrowski</option>
   <option value="3E-Język_Piotrowski">3E - Język Piotrowski</option>
   <option value="Edukacja_ogólna">Edukacja ogólna</option>
+  <option value="Własna">Własna</option>
 </select>
 
 <!-- NOWY WIDOK PLANU LEKCJI -->
@@ -520,7 +521,39 @@ function pokazPostep(klasa) {
 }
 
 </script>
-  
+<div id="wlasny-przedmiot-box" style="display:none;">
+  <label>Przedmiot:</label>
+  <select id="wlasny-przedmiot">
+    <option value="">— wybierz —</option>
+    <option>Matematyka</option>
+    <option>Język polski</option>
+    <option>Biologia</option>
+    <option>Chemia</option>
+    <option>Historia</option>
+    <option>Geografia</option>
+	<option>Edukacja dla bezpieczeństwa</option>
+	<option>Wiedza o społeczeństwie</option>
+	<option>Fizyka</option>
+	<option>Język angielski</option>
+	<option>Język niemiecki</option>
+	<option>Przyroda</option>
+	<option>Doradztwo zawodowe</option>
+	<option>Wychowanie fizyczne</option>
+	<option>Edukacja zdrowotna</option>
+	<option>Godzina wychowawcza</option>
+	<option>Zajęcia rozwijające zainteresowania</option>
+	<option>Plastyka</option>
+	<option>Muzyka</option>
+	<option>Technika / Zajęcia praktyczno-techniczne</option>
+	<option>Religia</option>
+	<option>Informatyka</option>
+	<option>Zajęcia korekcyjne (wyrównawcze)</option>
+	<option>Edukacja wczesnoszkolna</option>
+    <option>Inny</option>
+  </select>
+</div>
+
+
   <label for="temat-select">Temat lekcji:</label>
   <select id="temat-select"></select>
   
@@ -627,7 +660,8 @@ function normalizujKlase(klasa) {
       "1J-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
 	  "2B-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
 	  "3E-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
-  	  "Edukacja_ogólna": ["DZIAŁ - Brak tematów dla tej klasy"]
+	  "Własna": ["Tematy dla edukacja dla bezpieczeństwa", "DZIAŁ 1 - BEZPIECZEŃSTWO PAŃSTWA", "Bezpieczny obywatel, bezpieczny naród, bezpieczne państwo", "Bezpieczeństwo Polski w stosunkach międzynarodowych", "DZIAŁ 2 - POSTĘPOWANIE W SYTUACJACH ZAGROŻEŃ", "Źródła zagrożeń", "Ostrzeganie o zagrożeniach i alarmowanie", "Ewakuacja","Zagrożenia pożarowe", "Zagrożenia powodziowe", "Ekstremalne warunki pogodowe", "Wypadki i katastrofy komunikacyjne", "Uwolnienie niebezpiecznych substancji chemicznych", "Zagrożenia terrorystyczne", "DZIAŁ 3 - PODSTAWY PIERWSZEJ POMOCY", "Podstawowe wiadomości z zakresu pierwszej pomocy", "Postępowanie w miejscu zdarzenia", "Pomoc osobie nieprzytomnej", "Resuscytacja krążeniowo-oddechowa", "Apteczka pierwszej pomocy", "Tamowanie krwawień i krwotoków", "Złamania i zwichnięcia", "Oparzenia i odmrożenia", "Inne groźne przypadki", "DZIAŁ 4 - PROFILAKTYKA ZDROWOTNA", "Zdrowie jako wartość. Zasady zdrowego stylu życia", "Choroby cywilizacyjne", "Komunikacja interpersonalna w trosce o zdrowie"],
+	  "Edukacja_ogólna": ["DZIAŁ - Brak tematów dla tej klasy"]
  
 	};
 
@@ -663,7 +697,7 @@ function normalizujKlase(klasa) {
         tLower.includes("jak na egzaminie") ||
 		tLower.includes("praca klasowa") ||
 		tLower.includes("omówienie pracy klasowej") ||
-        tLower.includes("inne") ||
+		tLower.includes("Tematy dla edukacja dla bezpieczeństwa") ||
 		tLower.includes("czy potrafisz")
       ) {
         option.style.backgroundColor = "#ccffcc"; // jasnozielony
@@ -821,6 +855,10 @@ function zapiszLekcje() {
   const opis = document.getElementById("opis").value;
   const status = document.getElementById("status-lekcji").value;
   const zastepca = document.getElementById("zastepca")?.value || "";
+  const przedmiot =
+  klasa === "Własna"
+    ? document.getElementById("wlasny-przedmiot")?.value || ""
+    : "";
 
   if (!data || !temat) {
     alert("Uzupełnij wszystkie dane.");
@@ -835,7 +873,17 @@ function zapiszLekcje() {
     });
   }
 
-  const nowaLekcja = { data, klasa, temat, opis, status, zastepca, frekwencja };
+  const nowaLekcja = {
+  data,
+  klasa,
+  temat,
+  opis,
+  status,
+  zastepca,
+  przedmiot,   // ⬅️ TU
+  frekwencja
+};
+
   const klucz = `lekcje_${klasa}`;
   const istniejace = JSON.parse(localStorage.getItem(klucz)) || [];
   // 🔥 Szukamy, czy istnieje lekcja tego dnia
@@ -1233,7 +1281,9 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },  
+	{ nr: 6, klasa: "Edukacja_ogólna" },
+    { nr: 7, klasa: "Własna" }
+	
   ],
   "wtorek": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
@@ -1241,6 +1291,7 @@ const planLekcji = {
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
 	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 6, klasa: "Własna" }
   ],
   "środa": [
     { nr: 1, klasa: "6H*-Język_Piotrowski" },
@@ -1249,6 +1300,7 @@ const planLekcji = {
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
 	{ nr: 6, klasa: "Edukacja_ogólna" },
+	{ nr: 7, klasa: "Własna" }
   ],
   "czwartek": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
@@ -1256,6 +1308,8 @@ const planLekcji = {
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
 	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 6, klasa: "Własna" }
+
   ],
   "piątek": [
     { nr: 1, klasa: "6H*-Język_Piotrowski" },
@@ -1264,6 +1318,7 @@ const planLekcji = {
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
 	{ nr: 6, klasa: "Edukacja_ogólna" },
+	{ nr: 7, klasa: "Własna" }
   ],
     "sobota": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
@@ -1271,6 +1326,7 @@ const planLekcji = {
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
 	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 6, klasa: "Własna" }
   ]
 };
 // 🔸 Klasy, które zakończyły materiał
@@ -1318,8 +1374,11 @@ function pokazPlan(date) {
     const wpisana = dynamiczneWpisy.filter(l => l.klasa === klasa).pop();
 
     const temat = wpisana
-      ? (wpisana.status === "zastepstwo" ? "Zastępstwo: " + (wpisana.temat || "") : wpisana.temat)
-      : "—";
+  ? wpisana.przedmiot
+      ? `[${wpisana.przedmiot}] ${wpisana.temat}`
+      : wpisana.temat
+  : "—";
+
 
     const status = wpisana ? wpisana.status : "normalna";
 
@@ -1385,6 +1444,9 @@ function otworzLekcje(klasa, data) {
   pokazFrekwencje(klasa);
   pokazHistorieLekcji(klasa);
   pokazPostep(klasa);
+  document.getElementById("wlasny-przedmiot-box").style.display =
+  klasa === "Własna" ? "block" : "none";
+
 }
 
 function odwolajLekcje(klasa, data) {
