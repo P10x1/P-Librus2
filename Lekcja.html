@@ -1233,12 +1233,14 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },  
   ],
   "wtorek": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
+	{ nr: 5, klasa: "Edukacja_ogólna" },
   ],
   "środa": [
     { nr: 1, klasa: "6H*-Język_Piotrowski" },
@@ -1246,12 +1248,14 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
   "czwartek": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
+	{ nr: 5, klasa: "Edukacja_ogólna" },
   ],
   "piątek": [
     { nr: 1, klasa: "6H*-Język_Piotrowski" },
@@ -1259,12 +1263,14 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
+	{ nr: 6, klasa: "Edukacja_ogólna" },
   ],
     "sobota": [
     { nr: 1, klasa: "7A-Język_Piotrowski" },
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
+	{ nr: 5, klasa: "Edukacja_ogólna" },
   ]
 };
 // 🔸 Klasy, które zakończyły materiał
@@ -1274,24 +1280,6 @@ const zakonczoneKlasy = [
 
 // 🔸 Klasy nieregularne (pojawiają się tylko w określone dni)
 const nieregularneKlasy = {
-  "poniedziałek": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ],
-  "wtorek": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ],
-  "środa": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ],
-  "czwartek": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ],
-  "piątek": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ],
-  "sobota": [
-    { nr: 1, klasa: "Edukacja_ogólna" },
-  ]
   };
 
 function pokazPlan(date) {
@@ -1488,6 +1476,7 @@ document.getElementById("data-plan").addEventListener("change", e => {
 	
 </body>
 </html>
+
 
 
 
