@@ -384,7 +384,7 @@ td.pasek {
   <option value="1J-Język_Piotrowski">1J - Język Piotrowski</option>
   <option value="2B-Język_Piotrowski">2B - Język Piotrowski</option>
   <option value="3E-Język_Piotrowski">3E - Język Piotrowski</option>
-  <option value="Edukacja_ogólna">Edukacja ogólna</option>
+  <option value="Zajęcia_egzaminacyjne">Zajęcia egzaminacyjne</option>
   <option value="Własna">Własna</option>
 </select>
 
@@ -628,7 +628,7 @@ function pokazPostep(klasa) {
     '7C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
     '3E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
 	'6H*-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
-	'Edukacja_ogólna': ['Julia','Ola','Zuzia','Tadeusz','Grzesiek','Adam','Wiesia','Bożena','Jagoda','Antek','Maciej','Tosia']
+	'Zajęcia_egzaminacyjne': ['Jagoda', 'Justyna', 'Krystian', 'Paweł', 'Karol', 'Ola', 'Natalia']
   };
   
   // Alias skróconych nazw na pełne klasy
@@ -661,7 +661,7 @@ function normalizujKlase(klasa) {
 	  "2B-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
 	  "3E-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
 	  "Własna": ["Tematy dla edukacja dla bezpieczeństwa", "DZIAŁ 1 - BEZPIECZEŃSTWO PAŃSTWA", "Bezpieczny obywatel, bezpieczny naród, bezpieczne państwo", "Bezpieczeństwo Polski w stosunkach międzynarodowych", "DZIAŁ 2 - POSTĘPOWANIE W SYTUACJACH ZAGROŻEŃ", "Źródła zagrożeń", "Ostrzeganie o zagrożeniach i alarmowanie", "Ewakuacja","Zagrożenia pożarowe", "Zagrożenia powodziowe", "Ekstremalne warunki pogodowe", "Wypadki i katastrofy komunikacyjne", "Uwolnienie niebezpiecznych substancji chemicznych", "Zagrożenia terrorystyczne", "DZIAŁ 3 - PODSTAWY PIERWSZEJ POMOCY", "Podstawowe wiadomości z zakresu pierwszej pomocy", "Postępowanie w miejscu zdarzenia", "Pomoc osobie nieprzytomnej", "Resuscytacja krążeniowo-oddechowa", "Apteczka pierwszej pomocy", "Tamowanie krwawień i krwotoków", "Złamania i zwichnięcia", "Oparzenia i odmrożenia", "Inne groźne przypadki", "DZIAŁ 4 - PROFILAKTYKA ZDROWOTNA", "Zdrowie jako wartość. Zasady zdrowego stylu życia", "Choroby cywilizacyjne", "Komunikacja interpersonalna w trosce o zdrowie"],
-	  "Edukacja_ogólna": ["DZIAŁ - Brak tematów dla tej klasy"]
+	  "Zajęcia_egzaminacyjne": ["DZIAŁ - Brak tematów dla tej klasy"]
  
 	};
 
@@ -1290,7 +1290,7 @@ const planLekcji = {
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
-	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 5, klasa: "Zajęcia_egzaminacyjne" },
 	{ nr: 6, klasa: "Własna" }
   ],
   "środa": [
@@ -1299,7 +1299,7 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+	{ nr: 6, klasa: "Zajęcia_egzaminacyjne" },
 	{ nr: 7, klasa: "Własna" }
   ],
   "czwartek": [
@@ -1307,7 +1307,7 @@ const planLekcji = {
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
-	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 5, klasa: "Zajęcia_egzaminacyjne" },
 	{ nr: 6, klasa: "Własna" }
 
   ],
@@ -1317,7 +1317,7 @@ const planLekcji = {
     { nr: 3, klasa: "1J-Język_Piotrowski" },
     { nr: 4, klasa: "2B-Język_Piotrowski" },
 	{ nr: 5, klasa: "3E-Język_Piotrowski" },
-	{ nr: 6, klasa: "Edukacja_ogólna" },
+	{ nr: 6, klasa: "Zajęcia_egzaminacyjne" },
 	{ nr: 7, klasa: "Własna" }
   ],
     "sobota": [
@@ -1325,7 +1325,7 @@ const planLekcji = {
     { nr: 2, klasa: "7C-Język_Piotrowski" },
     { nr: 3, klasa: "8I-Język_Piotrowski" },
     { nr: 4, klasa: "8L-Język_Piotrowski" },
-	{ nr: 5, klasa: "Edukacja_ogólna" },
+	{ nr: 5, klasa: "Zajęcia_egzaminacyjne" },
 	{ nr: 6, klasa: "Własna" }
   ]
 };
@@ -1538,6 +1538,7 @@ document.getElementById("data-plan").addEventListener("change", e => {
 	
 </body>
 </html>
+
 
 
 
