@@ -1,202 +1,170 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>P-Librus</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0057b8, #0099cc);
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+<meta charset="UTF-8">
+<title>System Dziennika</title>
 
-    .login-box {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      width: 100%;
-      max-width: 380px;
-      text-align: center;
-      animation: fadeIn 0.8s ease;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1c1c1c, #2e2e2e);
+}
 
-    .login-box h2 {
-      margin-bottom: 25px;
-      color: #333;
-    }
+.login-wrapper {
+    width: 420px;
+}
 
-    .input-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
+.logo-box {
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+    color: white;
+    font-size: 26px;
+    letter-spacing: 3px;
+}
 
-    .input-group label {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #555;
-    }
+.login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    position: relative;
+}
 
-    .input-group input {
-      width: 80%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s;
-      display: block;
-      margin: 0 auto;
-    }
+h2 {
+    margin-top: 0;
+    font-weight: 500;
+}
 
-    .btn-login {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background: #0057b8;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
+label {
+    font-size: 14px;
+    color: #444;
+}
 
-    .btn-login:hover {
-      background: #004a9c;
-      transform: scale(1.03);
-    }
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 16px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-    #errorMsg {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-      display: none;
-    }
+button {
+    width: 100%;
+    padding: 12px;
+    background: #1e63b6;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+button:hover {
+    background: #144a88;
+}
 
-    .tiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      width: 80%;
-      max-width: 800px;
-      margin-top: 20px;
-    }
+.error {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 10px;
+}
 
-    .tile {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
+.hidden {
+    display: none;
+}
 
-    .tile img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 15px;
-    }
+.worker-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    color: #1e63b6;
+}
 
-    .tile:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-      background: #f8f9fa;
-    }
-
-    .hidden {
-      display: none;
-    }
-	h1 {
-      color: #fffff;
-      margin-bottom: 20px;
-    }
-  </style>
+.worker-link:hover {
+    text-decoration: underline;
+}
+</style>
 </head>
+
 <body>
-  <!-- Panel logowania -->
-  <div id="loginPanel" class="login-box">
-    <h2>Zaloguj się do P-Librus</h2>
-    <form id="loginForm">
-      <div class="input-group">
-        <label for="username">Login</label>
-        <input type="text" id="username" required>
-      </div>
-      <div class="input-group">
-        <label for="password">Hasło</label>
-        <input type="password" id="password" required>
-      </div>
-      <button type="submit" class="btn-login">Zaloguj</button>
-      <p id="errorMsg">Nieprawidłowy login lub hasło</p>
-    </form>
-  </div>
 
-  <!-- Główna strona (ukryta na początku) -->
-  <div id="mainContent" class="hidden">
-    <h1>Witaj w P-Librusie!</h1>
-    <p>To nie jest twoje konto? Spróbuj zalogować się ponownie lub skontaktuj się z administratorem</p>
-    <button class="btn btn-logout" onclick="logout()">Wyloguj</button>
-	
-    <div class="tiles">
-      <div class="tile" onclick="location.href='home.html'">
-        <img src="https://img.icons8.com/color/96/book.png" alt="Dziennik">
-        Dziennik elektroniczny
-      </div>
-      <div class="tile" onclick="location.href='admin.html'">
-        <img src="https://img.icons8.com/color/96/school.png" alt="Administracja">
-        Administracja szkoły
-      </div>
-      <div class="tile" onclick="location.href='https://p10x1.github.io/RKE/'">
-        <img src="RKELOGO.png" alt="RKE">
-        Rejska komisja egzaminacyjna
-      </div>
+<div class="login-wrapper">
+
+    <div class="logo-box">
+        LOGOWANIE P-LIBRUS
     </div>
-  </div>
 
-  <script>
-    // Logowanie
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
+    <div class="login-box" id="mainLogin">
+        <h2>Zaloguj się na swoje konto</h2>
 
-      if(user === "PIOTRREJMSTP" && pass === "Piotr5883") {
-        document.getElementById("loginPanel").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-        sessionStorage.setItem("loggedIn", "true");
-      } else {
-        document.getElementById("errorMsg").style.display = "block";
-      }
-    });
+        <label>Nazwa użytkownika</label>
+        <input type="text">
 
-    // Sprawdzenie czy użytkownik jest już zalogowany
-    window.onload = function() {
-      if(sessionStorage.getItem("loggedIn") === "true") {
-        document.getElementById("loginPanel").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-      }
+        <label>Hasło</label>
+        <input type="password">
+
+        <button onclick="fakeError()">Logowanie</button>
+        <div id="errorMessage" class="error"></div>
+
+        <div class="worker-link" onclick="showWorkerLogin()">
+            👥Logowanie za pomocą konta pracowniczego
+        </div>
+    </div>
+
+    <div class="login-box hidden" id="workerLogin">
+        <h2>Logowanie pracownicze 🔐</h2>
+
+        <label>Login</label>
+        <input type="text" id="workerLoginInput">
+
+        <label>Hasło</label>
+        <input type="password" id="workerPasswordInput">
+
+        <label>Kod z aplikacji uwierzytelniającej</label>
+        <input type="text" id="workerCodeInput">
+
+        <button onclick="checkWorkerLogin()">Zaloguj</button>
+
+        <div id="workerMessage" class="error"></div>
+    </div>
+
+</div>
+
+<script>
+function fakeError() {
+    document.getElementById("errorMessage").innerText =
+        "Błąd logowania. Nieprawidłowa nazwa użytkownika lub hasło.";
+}
+
+function showWorkerLogin() {
+    document.getElementById("mainLogin").classList.add("hidden");
+    document.getElementById("workerLogin").classList.remove("hidden");
+}
+
+function checkWorkerLogin() {
+    const login = document.getElementById("workerLoginInput").value;
+    const password = document.getElementById("workerPasswordInput").value;
+    const code = document.getElementById("workerCodeInput").value;
+
+    if (login === "PIOTRREJMSTP" && password === "Piotr5883" && code.length > 0) {
+
+        // 🔥 TU MOŻESZ PODMIENIĆ LINK
+        window.location.href = "https://p10x1.github.io/P-Librus2/home.html";
+
+    } else {
+        document.getElementById("workerMessage").innerText =
+            "Nieprawidłowe dane logowania.";
     }
+}
+</script>
 
-    // Wylogowanie
-    function logout() {
-      sessionStorage.removeItem("loggedIn");
-      location.reload();
-    }
-  </script>
 </body>
 </html>
-
