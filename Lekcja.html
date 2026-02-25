@@ -462,7 +462,7 @@ function pokazPostep(klasa) {
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
 
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
-
+  const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
   const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
   const liczbaWszystkich = wszystkieTematy.length;
   const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
@@ -490,13 +490,13 @@ function pokazPostep(klasa) {
 	 tLower.includes("Jak na egzaminie") ||
      (!t.startsWith("DZIAŁ") && !tLower.includes("dział"))); // zwykłe białe tematy
 });
-
+const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
 
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
   const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
-  const liczbaWszystkich = wszystkieTematy.length;
+const liczbaWszystkich = wszystkieTematy.length;
   const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
 
   let ostatniaLekcja = lekcje.length > 0 ? lekcje[lekcje.length - 1] : null;
@@ -556,7 +556,11 @@ function pokazPostep(klasa) {
 
   <label for="temat-select">Temat lekcji:</label>
   <select id="temat-select"></select>
-  
+
+<button type="button" onclick="pominTemat()" style="background:#999;">
+  ⏭ Pomiń ten temat
+</button>
+	  
 <label for="nowy-temat">Dodaj własny temat lekcji:</label>
 <input type="text" id="nowy-temat" placeholder="Wpisz nowy temat..." />
 <button type="button" onclick="dodajWlasnyTemat()">Dodaj temat</button>
@@ -607,7 +611,23 @@ function pokazPostep(klasa) {
     tematSelect.value = nowyTemat;
     nowyTematInput.value = "";
   }
+function pominTemat() {
+  const klasa = klasaSelect.value;
+  const temat = tematSelect.value;
 
+  if (!klasa || !temat) return;
+
+  const klucz = `pominiete_${klasa}`;
+  const pominiete = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  if (!pominiete.includes(temat)) {
+    pominiete.push(temat);
+    localStorage.setItem(klucz, JSON.stringify(pominiete));
+  }
+
+  updateTematy();
+  pokazPostep(klasa);
+}
 </script>
 	
 <div class="history-box" id="historia-box" style="display: none;">
@@ -681,7 +701,10 @@ function normalizujKlase(klasa) {
       const option = document.createElement("option");
       option.value = t;
       option.textContent = t;
-
+if (pominiete.includes(t)) {
+  option.style.backgroundColor = "#ddd";
+  option.style.textDecoration = "line-through";
+}
       if (t.startsWith("DZIAŁ")) {
         option.classList.add("dzial-option");
       }
@@ -716,13 +739,16 @@ function normalizujKlase(klasa) {
 }
 
 function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
-  const lista = tematy[klasa] || [];
+  const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
 
-  for (let temat of lista) {
-    if (!zrealizowaneTematy.has(temat) && !temat.startsWith("DZIAŁ")) {
-      tematSelect.value = temat;
-      break;
-    }
+for (let temat of lista) {
+  if (
+    !zrealizowaneTematy.has(temat) &&
+    !temat.startsWith("DZIAŁ") &&
+    !pominiete.includes(temat)
+  ) {
+    tematSelect.value = temat;
+    break;
   }
 }
 
@@ -1538,6 +1564,7 @@ document.getElementById("data-plan").addEventListener("change", e => {
 	
 </body>
 </html>
+
 
 
 
