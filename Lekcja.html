@@ -322,7 +322,11 @@ td.pasek {
   opacity: 1;
 }
 
-
+.temat-pominiety {
+  text-decoration: line-through;
+  color: #666;
+  background-color: #f2f2f2;
+}
   </style>
 </head>
 <body>
@@ -462,7 +466,7 @@ function pokazPostep(klasa) {
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
 
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
-  const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
+
   const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
   const liczbaWszystkich = wszystkieTematy.length;
   const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
@@ -490,13 +494,13 @@ function pokazPostep(klasa) {
 	 tLower.includes("Jak na egzaminie") ||
      (!t.startsWith("DZIAŁ") && !tLower.includes("dział"))); // zwykłe białe tematy
 });
-const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
+
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
 
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
   const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
-const liczbaWszystkich = wszystkieTematy.length;
+  const liczbaWszystkich = wszystkieTematy.length;
   const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
 
   let ostatniaLekcja = lekcje.length > 0 ? lekcje[lekcje.length - 1] : null;
@@ -556,11 +560,7 @@ const liczbaWszystkich = wszystkieTematy.length;
 
   <label for="temat-select">Temat lekcji:</label>
   <select id="temat-select"></select>
-
-<button type="button" onclick="pominTemat()" style="background:#999;">
-  ⏭ Pomiń ten temat
-</button>
-	  
+  <button type="button" onclick="pominTemat()">Pomiń ten temat</button>
 <label for="nowy-temat">Dodaj własny temat lekcji:</label>
 <input type="text" id="nowy-temat" placeholder="Wpisz nowy temat..." />
 <button type="button" onclick="dodajWlasnyTemat()">Dodaj temat</button>
@@ -615,7 +615,10 @@ function pominTemat() {
   const klasa = klasaSelect.value;
   const temat = tematSelect.value;
 
-  if (!klasa || !temat) return;
+  if (!temat) {
+    alert("Nie wybrano tematu.");
+    return;
+  }
 
   const klucz = `pominiete_${klasa}`;
   const pominiete = JSON.parse(localStorage.getItem(klucz)) || [];
@@ -625,8 +628,7 @@ function pominTemat() {
     localStorage.setItem(klucz, JSON.stringify(pominiete));
   }
 
-  updateTematy();
-  pokazPostep(klasa);
+  updateTematy(); // odśwież listę
 }
 </script>
 	
@@ -689,9 +691,12 @@ function normalizujKlase(klasa) {
   const tematSelect = document.getElementById("temat-select");
 
   function updateTematy() {
+
   tematSelect.innerHTML = "";
   const klasa = klasaSelect.value;
-
+  // 🔸 Pobierz pominięte tematy
+const kluczPominiete = `pominiete_${klasa}`;
+const pominieteTematy = JSON.parse(localStorage.getItem(kluczPominiete)) || [];
   const klucz = `lekcje_${klasa}`;
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
   const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
@@ -700,11 +705,15 @@ function normalizujKlase(klasa) {
     tematy[klasa].forEach(t => {
       const option = document.createElement("option");
       option.value = t;
-      option.textContent = t;
-if (pominiete.includes(t)) {
-  option.style.backgroundColor = "#ddd";
-  option.style.textDecoration = "line-through";
+
+if (pominieteTematy.includes(t)) {
+  option.textContent = "✖ " + t;
+  option.style.color = "#888";
+  option.style.backgroundColor = "#f2f2f2";
+} else {
+  option.textContent = t;
 }
+
       if (t.startsWith("DZIAŁ")) {
         option.classList.add("dzial-option");
       }
@@ -727,9 +736,13 @@ if (pominiete.includes(t)) {
       }
 
       if (zrealizowaneTematy.has(t)) {
+	  
         option.style.backgroundColor = "yellow"; // temat już zrobiony
       }
-
+// 🔸 Jeśli temat jest pominięty
+if (pominieteTematy.includes(t)) {
+  option.classList.add("temat-pominiety");
+}
       tematSelect.appendChild(option);
     });
   }
@@ -739,16 +752,20 @@ if (pominiete.includes(t)) {
 }
 
 function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
-  const pominiete = JSON.parse(localStorage.getItem(`pominiete_${klasa}`)) || [];
+  const lista = tematy[klasa] || [];
 
-for (let temat of lista) {
-  if (
-    !zrealizowaneTematy.has(temat) &&
-    !temat.startsWith("DZIAŁ") &&
-    !pominiete.includes(temat)
-  ) {
-    tematSelect.value = temat;
-    break;
+  const kluczPominiete = `pominiete_${klasa}`;
+  const pominieteTematy = JSON.parse(localStorage.getItem(kluczPominiete)) || [];
+
+  for (let temat of lista) {
+    if (
+      !zrealizowaneTematy.has(temat) &&
+      !pominieteTematy.includes(temat) &&
+      !temat.startsWith("DZIAŁ")
+    ) {
+      tematSelect.value = temat;
+      break;
+    }
   }
 }
 
@@ -1564,7 +1581,6 @@ document.getElementById("data-plan").addEventListener("change", e => {
 	
 </body>
 </html>
-
 
 
 
