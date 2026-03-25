@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>P-Librus</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P-Librus: Rejestr Lekcji</title>
   <style>
-    body {
+  body {
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, #e6ebed, #f5f7f9);
       margin: 0;
@@ -71,7 +72,78 @@
       padding: 2px 5px;
       border-radius: 50%;
     }
-	
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #dfe9f3, #ffffff);
+      padding: 40px;
+      color: #333;
+    }
+    .lesson-box, .history-box {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .dzial-option {
+      background-color: #000;
+      color: #fff;
+      font-weight: bold;
+    }
+    h2 {
+      color: #2a6f97;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 15px;
+      color: #34495e;
+    }
+    select, textarea, input[type="date"], button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    button {
+      background: #2a6f97;
+      color: white;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #1b4965;
+    }
+    ul {
+      padding-left: 25px;
+    }
+    .frekwencja-wrapper {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #f0f8ff;
+      border-radius: 8px;
+    }
+    .frekwencja-wrapper label {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    .frekwencja-wrapper span {
+      margin-right: 10px;
+    }
+	#tabela-klas th, #tabela-klas td {
+  border-bottom: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+#tabela-klas tr:hover {
+  background-color: #f2f2f2;
+}
 .top-alert {
   position: fixed;
   top: 0;
@@ -95,283 +167,1446 @@
   line-height: 1;
   cursor: pointer;
   color: #ffffff;
-}	
-
-/* Styl dla nagłówków widgetów */
-.widget h3 {
-  font-size: 16px;
-  color: #2a2a2a;
-  margin-bottom: 10px;
+}
+td.pasek {
+  width: 10px;
 }
 
-/* Ogólne stylowanie kontenerów widgetów */
-.widget {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-}
+.pasek.dzien1 { background-color: #4CAF50; }
+.pasek.dzien2 { background-color: #2196F3; }
+.pasek.bio8   { background-color: #FF9800; }
+.pasek.ogolna { background-color: #9C27B0; }
 
-/* Styl przycisków */
-.widget button {
-  background-color: #f5f7f9;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 5px 10px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background-color 0.3s;
-}
-
-.widget button:hover {
-  background-color: #e0e3e6;
-}
-
-/* Styl inputów i textarea */
-.widget input[type="text"],
-.widget input[type="date"],
-.widget textarea {
+.modern-table {
   width: 100%;
-  padding: 6px 8px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-family: inherit;
-  font-size: 14px;
-  box-sizing: border-box;
-  margin-bottom: 8px;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
+.modern-table th {
+  background-color: #2a6f97;
+  color: white;
+  padding: 10px;
+}
+
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modern-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.btn-nav {
+  background: #2a6f97;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-nav:hover {
+  background: #1b4965;
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.modern-table th {
+  background-color: #2a6f97;
+  color: white;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.modern-table tr:hover {
+  background-color: #f0f8ff;
+}
+
+.btn-nav {
+  background: #2a6f97;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-nav:hover {
+  background: #1b4965;
+}
+
+.btn-action {
+  background: #e0e0e0;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: all 0.2s;
+}
+
+.btn-action:hover {
+  background: #d4d4d4;
+}
+
+.status-label {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.status-normalna { color: #2a6f97; }
+.status-odwolana { color: red; }
+.status-zastepstwo { color: orange; }
+
+.akcja-select {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.akcja-select:hover {
+  background-color: #f5faff;
+}
+.zakonczona {
+  text-decoration: line-through;
+  color: #888;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+	  .tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 260px;
+  background-color: #2a6f97;
+  color: #fff;
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
+  position: absolute;
+  z-index: 9999;
+  bottom: 125%;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.temat-pominiety {
+  text-decoration: line-through;
+  color: #666;
+  background-color: #f2f2f2;
+}
+	  tr.zakonczona {
+  background: #f1f1f1;
+  color: #888;
+}
+
+tr.zakonczona td {
+  text-decoration: line-through;
+}
+
+tr.zakonczona select {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
   </style>
 </head>
 <body>
 
-  </script>
-<div class="top-alert" id="topAlert">
-  <span class="alert-message">STP School im. Piotra Rejmentowskiego w Olsztynie - Nauczyciel</span>
-  <button class="close-btn" onclick="document.getElementById('topAlert').style.display='none'">×</button>
-</div>
 
-<script type="module">
-  // Importy z Firebase CDN
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    // twoja konfiguracja
-  };// Your web app's Firebase configuration (wklej tutaj swój config)
-  const firebaseConfig = {
-  apiKey: "AIzaSyDlSm_Cg8Pz0rPsExKro958vjRDUD_i95Y",
-  authDomain: "p-librus.firebaseapp.com",
-  projectId: "p-librus",
-  storageBucket: "p-librus.firebasestorage.app",
-  messagingSenderId: "1018564561209",
-  appId: "1:1018564561209:web:14fc2df790ca838837c0e8"
-};
 
- 
 
-  // teraz możesz używać db, np. dodawanie i pobieranie dokumentów
-</script>
+
 <div class="header">
-  <div class="logo">
-    <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
-    <span>P-Librus</span>
-  </div>
-  <div class="user-info">
-    Jesteś zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
-  </div>
-  <select>
-    <option selected>polski</option>
-    <option>english</option>
-  </select>
-</div>
+    <div class="logo">
+      <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
+      <span>P-Librus</span>
+    </div>
+    <div class="user-info">
+      Zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
+    </div>
 
-  <div class="menu">
+  </div>
+
+    <div class="menu">
     <div class="menu-item"><a href="indywidualni.html">Indywidualni</a></div>
     <div class="menu-item"><a href="Lekcja.html">Lekcja</a></div>
     <div class="menu-item"><a href="Oceny.html">Oceny</a></div>
     <div class="menu-item"><a href="Zachowanie.html">Zachowanie</a></div>
-    <div class="menu-item"><a href="organizacja.html">Organizacja</a></div>
+    <div class="menu-item"><a href="Organizacja.html">Organizacja</a></div>
     <div class="menu-item"><a href="wiadomosci.html">Wiadomości</a></div>
     <div class="menu-item"><a href="ogloszenia.html">Ogłoszenia</a></div>
     <div class="menu-item"><a href="Terminarz.html">Terminarz</a></div>
+	<div class="menu-item"><a href="https://zwgy5t.webwave.dev">Rejskie wydawnictwo</a></div>
   </div>
+<div class="lesson-box">
+  <h2>PANEL NAUCZYCIELA LEKCJI</h2>
+
+  <div id="wybor-klasy" style="display:none;">
+  <h2>Wybierz klasę do wpisania nowej lekcji lub edycji.</h2>
+  <table style="width: 100%; border-collapse: collapse;" id="tabela-klas">
+    <thead>
+      <tr>
+		<th><i>Kolor</th>
+        <th><i>Klasa</th>
+        <th><i>Ostatni temat</th>
+        <th><i>Data ostatniej lekcji</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </div>
 
-<div style="margin: 20px;">
-  <h3>🗓️ Nadchodzące wydarzenia (7 dni)</h3>
-  <ul id="upcoming-events" style="list-style: none; padding: 0;"></ul>
+<!-- Ukryty select, który nadal używany w kodzie -->
+<select id="klasa-select" style="display: none;">
+  <option value="6E-Język_Piotrowski">6E - Język Piotrowski</option>
+  <option value="6D-Język_Piotrowski">6D - Język Piotrowski</option>
+  <option value="6G-Język_Piotrowski">6G - Język Piotrowski</option>
+  <option value="7F-Język_Piotrowski">7F - Język Piotrowski</option>
+  <option value="7H-Język_Piotrowski">7H - Język Piotrowski</option>
+  <option value="8A-Język_Piotrowski">8A - Język Piotrowski</option>
+  <option value="8C-Język_Piotrowski">8C - Język Piotrowski</option>
+  <option value="1L-Język_Piotrowski">1L - Język Piotrowski</option>
+  <option value="2J-Język_Piotrowski">2J - Język Piotrowski</option>
+  <option value="3B-Język_Piotrowski">3B - Język Piotrowski</option>
+  <option value="Własna">Własna</option>
+</select>
+
+<!-- NOWY WIDOK PLANU LEKCJI -->
+<div id="plan-lekcji" class="lesson-box">
+  <h2>📅 Plan lekcji – Piotr Rejmentowski</h2>
+
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+    <button id="prev-day" class="btn-nav">◀</button>
+    <input type="date" id="data-plan" />
+    <span id="dzien-tygodnia" style="font-weight:bold; font-size:16px; color:#2a6f97;"></span>
+    <button id="next-day" class="btn-nav">▶</button>
+  </div>
+
+  <table id="tabela-planu" class="modern-table">
+    <thead>
+      <tr>
+        <th>Nr lekcji</th>
+        <th>Klasa</th>
+        <th>Temat</th>
+        <th>Status</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+<div id="plan-nieregularne" class="lesson-box" style="margin-top:25px;">
+  <h3>📘 Klasy nieregularne</h3>
+  <table id="tabela-nieregularne" class="modern-table">
+    <thead>
+      <tr>
+        <th>Klasa</th>
+        <th>Temat</th>
+        <th>Status</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </div>
 
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<div style="margin: 20px; display: flex; flex-wrap: wrap; gap: 20px;">
+  <div id="lekcja-form" style="display: none;">
+  <button type="button" onclick="powrotDoPlanu()">← Wróć do planu lekcji</button>
+<script>
+function powrotDoPlanu() {
+  document.getElementById("lekcja-form").style.display = "none";
+  document.getElementById("plan-lekcji").style.display = "block";
+}
+</script>
 
-  <!-- 📝 Notatki nauczyciela -->
-  <div class="widget" style="flex: 1; min-width: 250px;">
-
-    <h3>📝 Notatki nauczyciela</h3>
-    <textarea id="teacher-notes" placeholder="Wpisz swoje notatki..." style="width: 100%; height: 150px;"></textarea>
-    <button onclick="saveNotes()" style="margin-top: 10px;">💾 Zapisz</button>
-  </div>
-
-  <!-- ⏰ Zegar i data -->
-  <div class="widget" style="flex: 1; min-width: 250px;">
-
-    <h3>⏰ Czas i data</h3>
-    <div id="clock" style="font-size: 24px; font-weight: bold;"></div>
-    <div id="date" style="font-size: 18px;"></div>
-  </div>
-
-  <!-- 📅 Mini kalendarz z integracją -->
-<div class="widget" style="flex: 1; min-width: 250px;">
-
-  <h3>📅 Mini kalendarz</h3>
-  <input type="date" id="mini-calendar" style="width: 100%; padding: 5px;">
-  <ul id="calendar-events" style="list-style: none; padding: 10px 0 0 0; font-size: 14px;"></ul>
+<div class="top-alert" id="topAlert">
+  <span class="alert-message">System P-Librus jest aktualny na semestr 04-05/2026</span>
+  <button class="close-btn" onclick="document.getElementById('topAlert').style.display='none'">×</button>
 </div>
 
+<h3 id="wybrana-klasa" style="color: #2a6f97;"></h3>
 
-  <!-- ✅ Lista rzeczy do zrobienia -->
-  <div class="widget" style="flex: 1; min-width: 250px;">
 
-    <h3>✅ Lista rzeczy do zrobienia</h3>
-    <input type="text" id="todo-input" placeholder="Nowe zadanie..." style="width: 100%; padding: 5px;">
-    <button onclick="addTodo()" style="margin-top: 5px;">➕ Dodaj</button>
-    <ul id="todo-list" style="list-style: none; padding: 0; margin-top: 10px;"></ul>
-  </div>
 
+  <label for="data">Data:</label>
+  <input type="date" id="data" />
+  
+  <br><br>
+  <div class="lesson-box">
+  <h2>Postęp realizacji materiału</h2>
+  <div id="postep-box"></div>
 </div>
 
 <script>
-  // 📝 Notatki nauczyciela
-  const notesArea = document.getElementById("teacher-notes");
-  notesArea.value = localStorage.getItem("teacherNotes") || "";
-  function saveNotes() {
-    localStorage.setItem("teacherNotes", notesArea.value);
-    alert("Notatki zapisane!");
+function pokazPostep(klasa) {
+  const box = document.getElementById("postep-box");
+  box.innerHTML = "";
+
+  const wszystkieTematy = tematy[klasa] || [];
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
+
+  const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
+  const liczbaWszystkich = wszystkieTematy.length;
+  const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
+
+  box.innerHTML = `
+    <p>Zrealizowano <strong>${liczbaZrealizowanych}</strong> z <strong>${liczbaWszystkich}</strong> tematów (${procent}%)</p>
+    <div style="background: #eee; border-radius: 10px; overflow: hidden; height: 20px;">
+      <div style="width: ${procent}%; background: #2a6f97; height: 100%; color: white; text-align: center; font-size: 12px;">
+        ${procent}%
+      </div>
+    </div>
+  `;
+}
+function pokazPostep(klasa) {
+  const box = document.getElementById("postep-box");
+  box.innerHTML = "";
+
+  const wszystkieTematy = (tematy[klasa] || []).filter(t => {
+  const tLower = t.toLowerCase();
+  return !t.startsWith("DZIAŁ") &&
+    (tLower.includes("powtórzenie") ||
+     tLower.includes("sprawdzian") ||
+     tLower.includes("omówienie sprawdzianu") ||
+     tLower.includes("egzamin") ||
+	 tLower.includes("Jak na egzaminie") ||
+     (!t.startsWith("DZIAŁ") && !tLower.includes("dział"))); // zwykłe białe tematy
+});
+
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
+  const liczbaZrealizowanych = wszystkieTematy.filter(t => zrealizowaneTematy.has(t)).length;
+  const liczbaWszystkich = wszystkieTematy.length;
+  const procent = liczbaWszystkich ? Math.round((liczbaZrealizowanych / liczbaWszystkich) * 100) : 0;
+
+  let ostatniaLekcja = lekcje.length > 0 ? lekcje[lekcje.length - 1] : null;
+
+  box.innerHTML = `
+    <p>Zrealizowano <strong>${liczbaZrealizowanych}</strong> z <strong>${liczbaWszystkich}</strong> tematów (${procent}%)</p>
+    <div style="background: #eee; border-radius: 10px; overflow: hidden; height: 20px; margin-bottom: 10px;">
+      <div style="width: ${procent}%; background: #2a6f97; height: 100%; color: white; text-align: center; font-size: 12px;">
+        ${procent}%
+      </div>
+    </div>
+    ${
+      ostatniaLekcja
+        ? `
+          <p><strong>Ostatni temat:</strong> ${ostatniaLekcja.temat}</p>
+          <p><strong>Data lekcji:</strong> ${ostatniaLekcja.data}</p>
+          ${ostatniaLekcja.opis ? `<p><strong>Komentarz:</strong> ${ostatniaLekcja.opis}</p>` : ""}
+        `
+        : `<p>Brak zrealizowanych tematów.</p>`
+    }
+  `;
+}
+
+</script>
+<div id="wlasny-przedmiot-box" style="display:none;">
+  <label>Przedmiot:</label>
+  <select id="wlasny-przedmiot">
+    <option value="">— wybierz —</option>
+    <option>Matematyka</option>
+    <option>Język polski</option>
+    <option>Biologia</option>
+    <option>Chemia</option>
+    <option>Historia</option>
+    <option>Geografia</option>
+	<option>Edukacja dla bezpieczeństwa</option>
+	<option>Wiedza o społeczeństwie</option>
+	<option>Fizyka</option>
+	<option>Język angielski</option>
+	<option>Język niemiecki</option>
+	<option>Przyroda</option>
+	<option>Doradztwo zawodowe</option>
+	<option>Wychowanie fizyczne</option>
+	<option>Edukacja zdrowotna</option>
+	<option>Godzina wychowawcza</option>
+	<option>Zajęcia rozwijające zainteresowania</option>
+	<option>Plastyka</option>
+	<option>Muzyka</option>
+	<option>Technika / Zajęcia praktyczno-techniczne</option>
+	<option>Religia</option>
+	<option>Informatyka</option>
+	<option>Zajęcia korekcyjne (wyrównawcze)</option>
+	<option>Edukacja wczesnoszkolna</option>
+    <option>Inny</option>
+  </select>
+</div>
+
+
+  <label for="temat-select">Temat lekcji:</label>
+  <select id="temat-select"></select>
+  <button type="button" onclick="pominTemat()">Pomiń ten temat</button>
+<label for="nowy-temat">Dodaj własny temat lekcji:</label>
+<input type="text" id="nowy-temat" placeholder="Wpisz nowy temat..." />
+<button type="button" onclick="dodajWlasnyTemat()">Dodaj temat</button>
+
+<label for="opis">Dodatkowe notatki:</label>
+<textarea id="opis" rows="3"></textarea>
+
+  <label>Frekwencja uczniów:</label>
+<button type="button" onclick="zaznaczWszystkichObecnosc()" style="margin-bottom: 10px;">Zaznacz wszystkich jako Obecność</button>
+<div id="frekwencja-box"></div>
+
+<label>Status lekcji:</label>
+<select id="status-lekcji">
+  <option value="normalna">Zajęcia zgodnie z planem</option>
+  <option value="odwołana">Lekcja odwołana</option>
+  <option value="zastepstwo">Zastępstwo</option>
+</select>
+
+<div id="zastepstwo-box" style="display:none; margin-top:10px;">
+  <label for="zastepca">Prowadzący zastępstwo:</label>
+  <input type="text" id="zastepca" placeholder="Wpisz nazwisko zastępcy..." />
+</div>
+
+  <button onclick="zapiszLekcje()">Zapisz lekcję</button>
+</div>
+
+<script>
+  function dodajWlasnyTemat() {
+    const nowyTematInput = document.getElementById("nowy-temat");
+    const nowyTemat = nowyTematInput.value.trim();
+
+    if (nowyTemat === "") {
+      alert("Proszę wpisać temat lekcji.");
+      return;
+    }
+
+    const klasa = document.getElementById("klasa-select").value;
+    if (!tematy[klasa]) tematy[klasa] = [];
+
+    tematy[klasa].push(nowyTemat);
+
+    const tematSelect = document.getElementById("temat-select");
+    const option = document.createElement("option");
+    option.value = nowyTemat;
+    option.textContent = nowyTemat;
+    tematSelect.appendChild(option);
+
+    tematSelect.value = nowyTemat;
+    nowyTematInput.value = "";
+  }
+function pominTemat() {
+  const klasa = klasaSelect.value;
+  const temat = tematSelect.value;
+
+  if (!temat) {
+    alert("Nie wybrano tematu.");
+    return;
   }
 
-  // ⏰ Zegar i data
-  function updateClock() {
-    const now = new Date();
-    document.getElementById("clock").textContent = now.toLocaleTimeString();
-    document.getElementById("date").textContent = now.toLocaleDateString();
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
+  const klucz = `pominiete_${klasa}`;
+  const pominiete = JSON.parse(localStorage.getItem(klucz)) || [];
 
-  // ✅ Lista rzeczy do zrobienia
-  const todoInput = document.getElementById("todo-input");
-  const todoList = document.getElementById("todo-list");
-  let todos = JSON.parse(localStorage.getItem("todoItems") || "[]");
-  function renderTodos() {
-    todoList.innerHTML = "";
-    todos.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.style.marginBottom = "5px";
-      li.innerHTML = `<input type="checkbox" ${item.done ? "checked" : ""} onchange="toggleTodo(${index})"> ${item.text} <button onclick="removeTodo(${index})">❌</button>`;
-      todoList.appendChild(li);
+  if (!pominiete.includes(temat)) {
+    pominiete.push(temat);
+    localStorage.setItem(klucz, JSON.stringify(pominiete));
+  }
+
+  updateTematy(); // odśwież listę
+}
+</script>
+	
+<div class="history-box" id="historia-box" style="display: none;">
+  <h2>Historia lekcji</h2>
+  <ul id="historia-lekcji"></ul>
+</div>
+
+</div> <!-- zamknięcie #lekcja-form -->
+
+<script>
+  const uczniowie = {
+	'1L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+	'6D-Język_Piotrowski': ['Wojtek', 'Krzysiek', 'Mirek'],
+	'6G-Język_Piotrowski': ['Ela', 'Ola', 'Marylka', 'Marta'],
+    '7F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'2J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '8A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '3B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '6E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
+	'7H*-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
+	'Zajęcia_egzaminacyjne': ['Jagoda', 'Justyna', 'Krystian', 'Paweł', 'Karol', 'Ola', 'Natalia']
+  };
+  
+  // Alias skróconych nazw na pełne klasy
+const aliasyKlas = {
+  "6G": "6G-Język_Piotrowski",
+  "6D": "6D-Język_Piotrowski",
+  "6E": "6E-Język_Piotrowski",
+  "7F": "7F-Język_Piotrowski",
+  "7H": "7H-Język_Piotrowski",
+  "8A": "8A-Język_Piotrowski",
+  "8C": "8C-Język_Piotrowski",
+  "1L": "1L-Język_Piotrowski",
+  "2J": "2J-Język_Piotrowski",
+  "3B": "3B-Język_Piotrowski"
+};
+
+function normalizujKlase(klasa) {
+  return aliasyKlas[klasa] || klasa;
+}
+
+
+  const tematy = {
+  
+      "6D-Język_Piotrowski": ["DZIAŁ 1 - PODSTAWY JĘZYKA PIOTROWSKIEGO", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "Jak na egzaminie 1", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby","Daty", "Jak na egzaminie 2", "DZIAŁ 3 - PODSTAWY GRAMATYKI", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "Zaimki osobowe", "Jak na egzaminie 3", "Zastosowanie zaimków osobowych w zdaniach", "Present Simple - Wprowadzenie (nieobowiązkowy)"],
+	  "6E-Język_Piotrowski": ["DZIAŁ 1 - PODSTAWY JĘZYKA PIOTROWSKIEGO", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby","Daty", "DZIAŁ 3 - PODSTAWY GRAMATYKI", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "Zaimki osobowe"],
+	  "6G-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby", "Daty, Miesiące", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - GRAMATYKA", "Podstawy gramatyki piotrowskiej", "Past Simple - Jako najprostrzy czas", "Past Simple - Ogólność i upodobania", "Past Simple - Regularność", "Past Simple - Opis osobowy stały", "Zaimki osobowe - Wprowadzenie", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - NAUKA I TECHNIKA", "Nauka i technika jako pierwszy dział praktyczny", "Urządzenia nowoczesnej technologii", "Nauka w szkole", "Czasowniki i osoby technologii", "Past Simple - Podsumowanie", "Sprawdź czy potrafisz (4)"],
+	  "7F-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE", "Części ciała i zdrowy styl życia", "Choroby, bóle i inne przypadki", "Past Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT I PRZYRODA", "Kontynenty oraz kraje", "Przyroda: Zwierzęta, Krajobrazy i rośliny", "Czas poprawny, Zapis czasu słownie", "Present Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE", "Ludność: Rodzina i znajomi", "Czas wolny: Aktywności i dni wolne", "Present Cintus - Lekcja gramatyczna", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - CZŁOWIEK", "Opis człowieka: Cechy charakteru i wygląd zewnętrzny", "Przedmioty: Ubiór i przedmioty osobiste / użytkowe", "Etapy życia", "Zaimki osobowe - Lekcja gramatyczna", "Porównanie czasów teraźniejszych - Lekcja gramatyczna", "Sprawdź czy potrafisz (4)"],
+	  "7H-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE","Choroby i bóle","Części ciała i zdrowy styl życia","Past simple","Jak na egzaminie","DZIAŁ 2 - ŚWIAT ORAZ PRZYRODA","Kontynenty oraz kraje","Zwierzęta, Krajobrazy, Rośliny","Czas poprawny, Zapis czasu słownie","Present Simple","Jak na egzaminie (2)","DZIAŁ 3 - ŻYCIE PRYWATNE", "Rodzina i znajomi", "Czas wolny, Wydarzenia", "Present Cintus", "Jak na egzaminie (3)","DZIAŁ 4 - CZŁOWIEK", "Cechy charakteru, Wygląd zewnętrzny","Ubrania, Przedmioty osobiste", "Etapy życia","Zaimki osobowe", "Porównanie czasów teraźniejszych","Jak na egzaminie (4)"],
+      "8A-Język_Piotrowski": ["DZIAŁ 1 - PRACA", "Zawody", "Odmiana zawodów przez osoby", "Miejsca prac", "Present Simple", "Jak na egzaminie (1)", "DZIAŁ 2 - EDUKACJA", "Przedmioty fizyczne i lekcyjne", "Pracownicy i pomieszczenia", "Czasowniki szkolne", "Present Hadsing", "Jak na egzaminie (2)", "DZIAŁ 3 - DOM", "Rodzaje miejsc zamieszkania", "Meble wewnętrzne", "Na zewnątrz", "Określenia i pomieszczenia", "Present Past", "Jak na egzaminie (3)", "DZIAŁ 4 - LEKCJE DODATKOWE", "Zaimki osobowe", "Gramatyka piotrowska", "Jak na egzaminie (4)"],
+      "8C-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+      "1L-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+	  "2J-Język_Piotrowski": ["DZIAŁ 1 - ŚWIAT PRZYRODY","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - ZDROWIE","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)"],
+	  "3B-Język_Piotrowski": ["DZIAŁ 1 - ŻYWIENIE","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "Nagrań i lang funkq (1)", "DZIAŁ 2 - ZAKUPY I USŁUGI","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "Nagrań i lang funkq (2)"],
+	  "Własna": ["Tematy dla edukacja dla bezpieczeństwa", "DZIAŁ 1 - BEZPIECZEŃSTWO PAŃSTWA", "Bezpieczny obywatel, bezpieczny naród, bezpieczne państwo", "Bezpieczeństwo Polski w stosunkach międzynarodowych", "DZIAŁ 2 - POSTĘPOWANIE W SYTUACJACH ZAGROŻEŃ", "Źródła zagrożeń", "Ostrzeganie o zagrożeniach i alarmowanie", "Ewakuacja","Zagrożenia pożarowe", "Zagrożenia powodziowe", "Ekstremalne warunki pogodowe", "Wypadki i katastrofy komunikacyjne", "Uwolnienie niebezpiecznych substancji chemicznych", "Zagrożenia terrorystyczne", "DZIAŁ 3 - PODSTAWY PIERWSZEJ POMOCY", "Podstawowe wiadomości z zakresu pierwszej pomocy", "Postępowanie w miejscu zdarzenia", "Pomoc osobie nieprzytomnej", "Resuscytacja krążeniowo-oddechowa", "Apteczka pierwszej pomocy", "Tamowanie krwawień i krwotoków", "Złamania i zwichnięcia", "Oparzenia i odmrożenia", "Inne groźne przypadki", "DZIAŁ 4 - PROFILAKTYKA ZDROWOTNA", "Zdrowie jako wartość. Zasady zdrowego stylu życia", "Choroby cywilizacyjne", "Komunikacja interpersonalna w trosce o zdrowie"],
+	  "Zajęcia_egzaminacyjne": ["DZIAŁ - Brak tematów dla tej klasy"]
+ 
+	};
+
+  const klasaSelect = document.getElementById("klasa-select");
+  const tematSelect = document.getElementById("temat-select");
+
+  function updateTematy() {
+
+  tematSelect.innerHTML = "";
+  const klasa = klasaSelect.value;
+  // 🔸 Pobierz pominięte tematy
+const kluczPominiete = `pominiete_${klasa}`;
+const pominieteTematy = JSON.parse(localStorage.getItem(kluczPominiete)) || [];
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  const zrealizowaneTematy = new Set(lekcje.map(l => l.temat));
+
+  if (tematy[klasa]) {
+    tematy[klasa].forEach(t => {
+      const option = document.createElement("option");
+      option.value = t;
+
+if (pominieteTematy.includes(t)) {
+  option.textContent = "✖ " + t;
+  option.style.color = "#888";
+  option.style.backgroundColor = "#f2f2f2";
+} else {
+  option.textContent = t;
+}
+
+      if (t.startsWith("DZIAŁ")) {
+        option.classList.add("dzial-option");
+      }
+
+      const tLower = t.toLowerCase();  
+      if (
+        tLower.includes("powtórzenie wiadomości") ||
+        tLower.includes("sprawdzian") ||
+        tLower.includes("omówienie sprawdzianu") ||
+        tLower.includes("powtórzenie do egzaminu 1") ||
+        tLower.includes("powtórzenie do egzaminu 2") ||
+        tLower.includes("egzamin szóstoklasisty") ||
+        tLower.includes("jak na egzaminie") ||
+		tLower.includes("praca klasowa") ||
+		tLower.includes("omówienie pracy klasowej") ||
+		tLower.includes("Tematy dla edukacja dla bezpieczeństwa") ||
+		tLower.includes("czy potrafisz")
+      ) {
+        option.style.backgroundColor = "#ccffcc"; // jasnozielony
+      }
+
+      if (zrealizowaneTematy.has(t)) {
+	  
+        option.style.backgroundColor = "yellow"; // temat już zrobiony
+      }
+// 🔸 Jeśli temat jest pominięty
+if (pominieteTematy.includes(t)) {
+  option.classList.add("temat-pominiety");
+}
+      tematSelect.appendChild(option);
     });
-    localStorage.setItem("todoItems", JSON.stringify(todos));
   }
-  function addTodo() {
-    const text = todoInput.value.trim();
-    if (!text) return;
-    todos.push({ text, done: false });
-    todoInput.value = "";
-    renderTodos();
+
+  // automatycznie zaznacz następny temat
+  wybierzNastepnyTemat(klasa, zrealizowaneTematy);
+}
+
+function wybierzNastepnyTemat(klasa, zrealizowaneTematy) {
+  const lista = tematy[klasa] || [];
+
+  const kluczPominiete = `pominiete_${klasa}`;
+  const pominieteTematy = JSON.parse(localStorage.getItem(kluczPominiete)) || [];
+
+  for (let temat of lista) {
+    if (
+      !zrealizowaneTematy.has(temat) &&
+      !pominieteTematy.includes(temat) &&
+      !temat.startsWith("DZIAŁ")
+    ) {
+      tematSelect.value = temat;
+      break;
+    }
   }
-  function toggleTodo(index) {
-    todos[index].done = !todos[index].done;
-    renderTodos();
+}
+
+  function pokazFrekwencje(klasa) {
+    const kontener = document.getElementById("frekwencja-box");
+    kontener.innerHTML = "";
+
+    if (!uczniowie[klasa]) return;
+
+    const wszystkieOceny = JSON.parse(localStorage.getItem("oceny") || "{}");
+    const ocenyKlasy = wszystkieOceny[klasa] || [];
+
+    uczniowie[klasa].forEach((uczen, index) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "frekwencja-wrapper";
+
+        // 🔵 Pobieramy oceny danego ucznia
+        const ocenyUcznia = ocenyKlasy.filter(o => o.uczen === uczen);
+
+        // 🔵 Lista ocen do wyświetlenia (np. 5+, 4-, 6)
+        const ocenyKrotkie = ocenyUcznia.map(o => o.ocena).join(", ") || "brak";
+
+        // 🔵 Tooltip – pełne informacje
+        const tooltipHTML = ocenyUcznia.length
+            ? ocenyUcznia.map(o =>
+                `<div style='margin-bottom:6px'>
+                    <strong>Ocena:</strong> ${o.ocena}<br>
+                    <strong>Typ:</strong> ${o.typ}<br>
+                    <strong>Data:</strong> ${o.data}<br>
+                    <strong>Komentarz:</strong> ${o.komentarz || "—"}
+                </div>`
+              ).join("")
+            : "Brak ocen";
+
+        const label = document.createElement("label");
+        label.innerHTML = `
+            <div class="tooltip">
+                <strong>${uczen}</strong> 
+                <span style="color:blue">— Oceny: ${ocenyKrotkie}</span>
+                <div class="tooltiptext">${tooltipHTML}</div>
+            </div>
+        `;
+        
+        wrapper.appendChild(label);
+
+        // 🔵 Frekwencja
+        [
+            "Obecność", "Spóźnienie", "Nieobecność nieusprawiedliwiona",
+            "Nieobecność usprawiedliwiona", "Zwolnienie",
+            "Rekolekcje", "Egzamin", "Sanatorium",
+            "Wycieczka", "Konkurs", "Wolontariat"
+        ].forEach(opcja => {
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = `frekwencja_${index}`;
+            radio.value = opcja;
+
+            const span = document.createElement("span");
+            span.textContent = opcja;
+
+            wrapper.appendChild(radio);
+            wrapper.appendChild(span);
+        });
+
+        kontener.appendChild(wrapper);
+    });
+}
+
+
+function pokazFrekwencjeZastepstwo(klasa) {
+  const kontener = document.getElementById("zastep-frekwencja");
+  kontener.innerHTML = "";
+
+  if (!uczniowie[klasa]) {
+    kontener.innerHTML = "<p>Brak danych o uczniach.</p>";
+    return;
   }
-  function removeTodo(index) {
-    todos.splice(index, 1);
-    renderTodos();
+
+  uczniowie[klasa].forEach((uczen, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "frekwencja-wrapper";
+
+    const label = document.createElement("label");
+    label.textContent = uczen;
+    wrapper.appendChild(label);
+
+    [
+      "Obecność",
+      "Spóźnienie",
+      "Nieobecność nieusprawiedliwiona",
+      "Nieobecność usprawiedliwiona",
+      "Zwolnienie",
+      "Rekolekcje",
+      "Egzamin",
+      "Sanatorium",
+      "Wycieczka",
+      "Konkurs",
+      "Wolontariat"
+    ].forEach(opcja => {
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = `zastep_frekwencja_${index}`;
+      radio.value = opcja;
+
+      const span = document.createElement("span");
+      span.textContent = opcja;
+
+      wrapper.appendChild(radio);
+      wrapper.appendChild(span);
+    });
+
+    kontener.appendChild(wrapper);
+  });
+}
+function zastepstwoZaznaczWszystkich() {
+  const kontener = document.getElementById("zastep-frekwencja");
+  const radios = kontener.querySelectorAll('input[type="radio"]');
+
+  radios.forEach(radio => {
+    if (radio.value === "Obecność") {
+      radio.checked = true;
+    }
+  });
+}
+
+function zapiszLekcje() {
+  const data = document.getElementById("data").value;
+  const klasa = klasaSelect.value;
+  const temat = tematSelect.value;
+  const opis = document.getElementById("opis").value;
+  const status = document.getElementById("status-lekcji").value;
+  const zastepca = document.getElementById("zastepca")?.value || "";
+  const przedmiot =
+  klasa === "Własna"
+    ? document.getElementById("wlasny-przedmiot")?.value || ""
+    : "";
+
+  if (!data || !temat) {
+    alert("Uzupełnij wszystkie dane.");
+    return;
   }
-  renderTodos();
+
+  const frekwencja = [];
+  if (uczniowie[klasa]) {
+    uczniowie[klasa].forEach((uczen, index) => {
+      const zaznaczona = document.querySelector(`input[name="frekwencja_${index}"]:checked`);
+      frekwencja.push({ uczen, status: zaznaczona ? zaznaczona.value : "Brak danych" });
+    });
+  }
+
+  const nowaLekcja = {
+  data,
+  klasa,
+  temat,
+  opis,
+  status,
+  zastepca,
+  przedmiot,   // ⬅️ TU
+  frekwencja
+};
+
+  const klucz = `lekcje_${klasa}`;
+  const istniejace = JSON.parse(localStorage.getItem(klucz)) || [];
+  // 🔥 Szukamy, czy istnieje lekcja tego dnia
+const indexIstniejacej = istniejace.findIndex(l => l.data === data);
+
+// 🔥 Jeśli istnieje → nadpisz
+if (indexIstniejacej !== -1) {
+    istniejace[indexIstniejacej] = nowaLekcja;
+} else {
+    // 🔥 Jeśli nie istnieje → dodaj jako nową
+    istniejace.push(nowaLekcja);
+}
+
+  localStorage.setItem(klucz, JSON.stringify(istniejace));
+
+  pokazHistorieLekcji(klasa);
+  updateTematy();
+  pokazFrekwencje(klasa);
+  pokazPostep(klasa);
+}
+document.getElementById("status-lekcji").addEventListener("change", e => {
+  document.getElementById("zastepstwo-box").style.display =
+    e.target.value === "zastepstwo" ? "block" : "none";
+});
+
+  
+ function usunLekcje(index, klasa) {
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  if (confirm("Czy na pewno chcesz usunąć tę lekcję?")) {
+    lekcje.splice(index, 1);
+    localStorage.setItem(klucz, JSON.stringify(lekcje));
+    pokazHistorieLekcji(klasa);
+    pokazPostep(klasa);
+  }
+}
+function edytujLekcje(index, klasa) {
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  const lekcja = lekcje[index];
+
+  document.getElementById("data").value = lekcja.data;
+  document.getElementById("opis").value = lekcja.opis || "";
+  klasaSelect.value = lekcja.klasa;
+  updateTematy();
+  tematSelect.value = lekcja.temat;
+
+  pokazFrekwencje(klasa);
+
+  if (lekcja.frekwencja) {
+    lekcja.frekwencja.forEach((f, i) => {
+      const radio = document.querySelectorAll(`input[name="frekwencja_${i}"]`);
+      radio.forEach(r => {
+        if (r.value === f.status) {
+          r.checked = true;
+        }
+      });
+    });
+  }
+
+  // Usunięcie starej wersji, przed zapisaniem nowej
+  lekcje.splice(index, 1);
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazHistorieLekcji(klasa);
+  pokazPostep(klasa);
+}
+
+
+  function pokazHistorieLekcji(klasa) {
+    const ul = document.getElementById("historia-lekcji");
+    ul.innerHTML = "";
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+    lekcje.forEach((lekcja, index) => {
+  const li = document.createElement("li");
+  li.innerHTML = `
+  <strong>${lekcja.data}:</strong> ${lekcja.temat} 
+  <span style="color:${lekcja.status === 'odwołana' ? 'red' : lekcja.status === 'zastepstwo' ? 'orange' : 'black'};">
+    [${lekcja.status}${lekcja.zastepca ? " – " + lekcja.zastepca : ""}]
+  </span><br>${lekcja.opis || ""}
+`;
+
+
+  if (lekcja.frekwencja && lekcja.frekwencja.length) {
+    li.innerHTML += `<br><strong>Frekwencja:</strong><ul>${
+      lekcja.frekwencja.map(f => `<li>${f.uczen}: ${f.status}</li>`).join("")
+    }</ul>`;
+  }
+
+  // Dodaj przyciski Edytuj i Usuń
+  const edytujBtn = document.createElement("button");
+  edytujBtn.textContent = "Edytuj";
+  edytujBtn.onclick = () => edytujLekcje(index, klasa);
+
+  const usunBtn = document.createElement("button");
+  usunBtn.textContent = "Usuń";
+  usunBtn.onclick = () => usunLekcje(index, klasa);
+
+  li.appendChild(edytujBtn);
+  li.appendChild(usunBtn);
+  ul.appendChild(li);
+});
+
+  }
+
+  klasaSelect.addEventListener("change", () => {
+    updateTematy();
+    pokazFrekwencje(klasaSelect.value);
+    pokazHistorieLekcji(klasaSelect.value);
+	pokazPostep(klasaSelect.value);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  updateTematy();
+  pokazFrekwencje(klasaSelect.value);
+  pokazHistorieLekcji(klasaSelect.value);
+  pokazPostep(klasaSelect.value); // ← TO DODAJ
+});
+pokazTabeleWyboruKlasy();
+
+  function zaznaczWszystkichObecnosc() {
+  const kontener = document.getElementById("frekwencja-box");
+  const radios = kontener.querySelectorAll('input[type="radio"]');
+
+  radios.forEach(radio => {
+    if (radio.value === "Obecność") {
+      radio.checked = true;
+    }
+  });
+}
+klasaSelect.addEventListener("change", () => {
+  const selected = klasaSelect.value;
+  const form = document.getElementById("lekcja-form");
+
+  if (selected) {
+    form.style.display = "block";
+    updateTematy();
+    pokazFrekwencje(selected);
+    pokazHistorieLekcji(selected);
+    pokazPostep(selected);
+  } else {
+    form.style.display = "none";
+  }
+});
+function pokazTabeleWyboruKlasy() {
+  const tabela = document.querySelector("#tabela-klas tbody");
+  tabela.innerHTML = "";
+
+  Object.keys(tematy).forEach(klasa => {
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+    const ostatnia = lekcje.length ? lekcje[lekcje.length - 1] : null;
+
+    const tr = document.createElement("tr");
+
+    // nazwa klasy (dla 2H-Język_Piotrowski przekreślona)
+    const nazwaKlasy = klasa === "2H-Język_Piotrowski"
+      ? `<span style="text-decoration: line-through;">${klasa}</span>`
+      : klasa;
+
+    tr.innerHTML = `
+      <td style="background-color:${kolory[klasa] || 'transparent'}; width: 10px;"></td>
+      <td>${nazwaKlasy}</td>
+      <td>${ostatnia ? ostatnia.temat : '<em>–</em>'}</td>
+      <td>${ostatnia ? ostatnia.data : '<em>–</em>'}</td>
+      <td>
+        <button onclick="wybierzKlase('${klasa}')">Wybierz i sprawdź obecność</button>
+      </td>
+    `;
+
+    tabela.appendChild(tr);
+  });
+}
+
+
+
+function wybierzKlase(klasa) {
+  document.getElementById("klasa-select").value = klasa;
+  document.getElementById("lekcja-form").style.display = "block";
+  document.getElementById("wybor-klasy").style.display = "none";
+  document.getElementById("historia-box").style.display = "block";
+
+  // ✨ Dodaj ten wiersz:
+  document.getElementById("wybrana-klasa").textContent = "Wybrana klasa: " + klasa;
+
+  updateTematy();
+  pokazFrekwencje(klasa);
+  pokazHistorieLekcji(klasa);
+  pokazPostep(klasa);
+}
+
+// 🟦 Wypełnij listę klas
+document.addEventListener("DOMContentLoaded", () => {
+  const select = document.getElementById("zast-klasa");
+  Object.keys(tematy).forEach(kl => {
+    const op = document.createElement("option");
+    op.value = kl;
+    op.textContent = kl;
+    select.appendChild(op);
+  });
+});
+
+
+// 🟧 Zapisanie zastępstwa do localStorage
+function addZastepstwo() {
+  const data = document.getElementById("zast-data").value;
+  const klasa = document.getElementById("zast-klasa").value;
+  const przedmiot = document.getElementById("zast-przedmiot").value.trim();
+  const nieobecny = document.getElementById("zast-nieobecny").value.trim();
+  const prowadzacy = document.getElementById("zast-prowadzacy").value.trim();
+  const frekwencja = [];
+
+if (uczniowie[klasa]) {
+  uczniowie[klasa].forEach((uczen, index) => {
+    const zaznaczone = document.querySelector(`input[name="zastep_frekwencja_${index}"]:checked`);
+    frekwencja.push({
+      uczen,
+      status: zaznaczone ? zaznaczone.value : "Brak danych"
+    });
+  });
+}
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  let klasaOryginal = document.getElementById("zast-klasa").value;
+
+  // używamy aliasu tylko do wczytania uczniów
+  let klasaDoFrekwencji = normalizujKlase(klasaOryginal);
+
+  pokazFrekwencjeZastepstwo(klasaDoFrekwencji);
+});
+
+
+  if (!data || !klasa || !przedmiot || !prowadzacy) {
+    alert("Uzupełnij wszystkie pola!");
+    return;
+  }
+
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  lekcje.push({
+    data,
+    klasa,
+    temat: `Zastępstwo z przedmiotu: ${przedmiot}`,
+    status: "zastepstwo",
+    zastepca: prowadzacy,
+    nieobecny
+  });
+
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+
+  alert("✓ Zastępstwo dodane!");
+  
+  // odśwież plan dnia
+  pokazPlan(new Date(data));
+}
+
+// AUTOMATYCZNIE dodaj klasę do planu na ten dzień
+const dni = ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
+const dzienTyg = dni[new Date(data).getDay()];
+
+if (!planLekcji[dzienTyg]) planLekcji[dzienTyg] = [];
+
+if (!planLekcji[dzienTyg].some(p => p.klasa === klasa)) {
+  planLekcji[dzienTyg].push({
+    nr: planLekcji[dzienTyg].length + 1, // numer lekcji kolejny
+    klasa: klasa
+  });
+}
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  const klasa = document.getElementById("zast-klasa").value;
+});
+
+document.getElementById("zast-klasa").addEventListener("change", () => {
+  let klasa = document.getElementById("zast-klasa").value;
+
+  if (typeof normalizujKlase === "function") {
+    klasa = normalizujKlase(klasa); 
+  }
+
+  pokazFrekwencjeZastepstwo(klasa);
+});
+
+</script>
+
+<div class="lesson-box">
+  <h2>➕ Dodaj własne zastępstwo</h2>
+
+  <label>Data zastępstwa:</label>
+  <input type="date" id="zast-data" />
+
+  <label>Klasa:</label>
+  <select id="zast-klasa">
+    <option value="">— wybierz —</option>
+	<option value="6D">6D</option>
+	<option value="6G">6G</option>
+	<option value="6E">6E</option>
+	<option value="7F">7F</option>
+	<option value="7H">7H</option>
+	<option value="8A">8A</option>
+	<option value="8C">8C</option>
+	<option value="1L">1L</option>
+	<option value="2J">2J</option>
+	<option value="3B">3B</option>
+  </select>
+
+
+  <label>Przedmiot:</label>
+<select id="zast-przedmiot">
+  <option value="">— wybierz przedmiot —</option>
+  <option>Biologia</option>
+  <option>Chemia</option>
+  <option>Matematyka</option>
+  <option>Język polski</option>
+  <option>Język angielski</option>
+  <option>Geografia</option>
+  <option>Historia</option>
+  <option>Wychowanie fizyczne</option>
+  <option>Muzyka</option>
+  <option>Plastyka</option>
+  <option>Informatyka</option>
+  <option>Fizyka</option>
+  <option>Religia</option>
+  <option>Edukacja zdrowotna</option>
+  <option>Zastępstwo ogólne</option>
+</select>
+
+<label>Inny przedmiot (opcjonalnie):</label>
+<input type="text" id="zast-przedmiot-inny" placeholder="Wpisz, jeśli nie ma na liście" />
+
+
+  <label>Nauczyciel nieobecny:</label>
+  <input type="text" id="zast-nieobecny" placeholder="Np. Kowalski" />
+
+  <label>Prowadzący zastępstwo:</label>
+  <input type="text" id="zast-prowadzacy" value="Piotr Rejmentowski" />
+
+
+
+<div id="zastep-frekwencja"></div>
+
+  <button onclick="addZastepstwo()">Dodaj zastępstwo</button>
+</div>
+
+
+
+<footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
+  <div style="margin-bottom: 10px;">
+    <img src="teamppp.png" alt="Team P" style="width: 200px; margin: 0 20px;">
+    <img src="21 maj 2025, 16_13_32.png" alt="p-librus" style="width: 200px; margin: 0 20px;">
+    <img src="stpschool.png" alt="STP School" style="width: 200px; margin: 0 20px;">
+  </div>
+  <p style="font-size: 14px; color: #555;">P-Librus © 2025</p>
+</footer>
+
+<script type="module">
+  import { db } from "./firebase.js";
+  import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+  // 🟢 Funkcja: zapisz lekcję w chmurze
+  async function zapiszLekcje() {
+    const klasa = document.getElementById("klasa").value;
+    const temat = document.getElementById("temat").value;
+    const data = document.getElementById("data").value;
+
+    await addDoc(collection(db, "lekcje"), {
+      klasa,
+      temat,
+      data,
+      createdAt: new Date()
+    });
+
+    alert("✅ Lekcja zapisana w chmurze!");
+  }
+
+  // 🟣 Funkcja: pobierz lekcje i wypisz w konsoli
+  async function pobierzLekcje() {
+    const querySnapshot = await getDocs(collection(db, "lekcje"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  }
+
+  // 🧠 Po załadowaniu strony — pobierz lekcje
+  window.addEventListener("DOMContentLoaded", pobierzLekcje);
+
+  // 🖱️ Przykład: po kliknięciu przycisku "Zapisz"
+  document.getElementById("zapisz").addEventListener("click", zapiszLekcje);
 </script>
 <script>
-  // Ładowanie nadchodzących wydarzeń (7 dni)
-  function loadUpcomingEvents() {
-    const events = JSON.parse(localStorage.getItem('events') || '[]');
-    const now = new Date();
-    const sevenDaysLater = new Date();
-    sevenDaysLater.setDate(now.getDate() + 7);
+const planLekcji = {
+  "poniedziałek": [
+    { nr: 1, klasa: "6D-Język_Piotrowski" },
+    { nr: 2, klasa: "6G-Język_Piotrowski" },
+    { nr: 3, klasa: "6E-Język_Piotrowski" },
+    { nr: 4, klasa: "7F-Język_Piotrowski" },
+	{ nr: 5, klasa: "7H-Język_Piotrowski" },
+    { nr: 6, klasa: "Własna" }
+	
+  ],
+  "wtorek": [
+    { nr: 1, klasa: "8A-Język_Piotrowski" },
+    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 3, klasa: "1L-Język_Piotrowski" },
+    { nr: 4, klasa: "2J-Język_Piotrowski" },
+	{ nr: 5, klasa: "3B-Język_Piotrowski" },
+	{ nr: 6, klasa: "Własna" }
+  ],
+  "środa": [
+    { nr: 1, klasa: "6D-Język_Piotrowski" },
+    { nr: 2, klasa: "6G-Język_Piotrowski" },
+    { nr: 3, klasa: "6E-Język_Piotrowski" },
+    { nr: 4, klasa: "7F-Język_Piotrowski" },
+	{ nr: 5, klasa: "7H-Język_Piotrowski" },
+	{ nr: 6, klasa: "Własna" }
+  ],
+  "czwartek": [
+    { nr: 1, klasa: "8A-Język_Piotrowski" },
+    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 3, klasa: "1L-Język_Piotrowski" },
+    { nr: 4, klasa: "2J-Język_Piotrowski" },
+	{ nr: 5, klasa: "3B-Język_Piotrowski" },
+	{ nr: 6, klasa: "Własna" }
 
-    const upcoming = events
-      .map(ev => ({ ...ev, dateObj: new Date(ev.date) }))
-      .filter(ev => ev.dateObj >= now && ev.dateObj <= sevenDaysLater)
-      .sort((a, b) => a.dateObj - b.dateObj);
+  ],
+  "piątek": [
+    { nr: 1, klasa: "6D-Język_Piotrowski" },
+    { nr: 2, klasa: "6G-Język_Piotrowski" },
+    { nr: 3, klasa: "6E-Język_Piotrowski" },
+    { nr: 4, klasa: "7F-Język_Piotrowski" },
+	{ nr: 5, klasa: "7H-Język_Piotrowski" },
+	{ nr: 6, klasa: "Własna" }
+  ],
+    "sobota": [
+    { nr: 1, klasa: "8A-Język_Piotrowski" },
+    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 3, klasa: "1L-Język_Piotrowski" },
+    { nr: 4, klasa: "2J-Język_Piotrowski" },
+	{ nr: 5, klasa: "3B-Język_Piotrowski" },
+	{ nr: 6, klasa: "Własna" }
+  ]
+};
+// 🔸 Klasy, które zakończyły materiał
+const zakonczoneKlasy = [
+"1J-Język_Piotrowski",
+"2B-Język_Piotrowski",
+"3E-Język_Piotrowski",
+	"8L-Język_Piotrowski"
+];
 
-    const ul = document.getElementById("upcoming-events");
-    ul.innerHTML = "";
+// 🔸 Klasy nieregularne (pojawiają się tylko w określone dni)
+const nieregularneKlasy = {
+  };
 
-    if (upcoming.length === 0) {
-      ul.innerHTML = "<li>Brak wydarzeń w nadchodzącym tygodniu.</li>";
-      return;
+function pokazPlan(date) {
+  const tabela = document.getElementById("tabela-planu").querySelector("tbody");
+  tabela.innerHTML = "";
+
+  const dni = ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"];
+  const dzien = dni[date.getDay()];
+  const dzienData = date.toISOString().split("T")[0];
+
+  document.getElementById("dzien-tygodnia").textContent = dzien.charAt(0).toUpperCase() + dzien.slice(1);
+  document.getElementById("data-plan").value = dzienData;
+
+  // 🟦 STAŁY PLAN DNIA
+  const planDnia = planLekcji[dzien] || [];
+
+  // 🟨 ZASTĘPSTWA i dodatkowe lekcje z localStorage
+  const dynamiczneWpisy = [];
+
+  Object.keys(localStorage).forEach(key => {
+    if (key.startsWith("lekcje_")) {
+      const lekcje = JSON.parse(localStorage.getItem(key)) || [];
+      lekcje
+        .filter(l => l.data === dzienData)
+        .forEach(l => dynamiczneWpisy.push(l));
     }
-
-    upcoming.forEach(ev => {
-      const li = document.createElement("li");
-      li.style.marginBottom = "8px";
-      li.innerHTML = `<strong>${ev.date}</strong>: ${ev.subject} – ${ev.type} (${ev.className}) ${ev.comment ? `– <em>${ev.comment}</em>` : ""}`;
-      ul.appendChild(li);
-    });
-  }
-
-  // Mini kalendarz – wyświetlanie wydarzeń dla wybranego dnia
-  const miniCalendar = document.getElementById("mini-calendar");
-  const calendarEventsList = document.getElementById("calendar-events");
-
-  function loadCalendarEvents(selectedDate) {
-    const events = JSON.parse(localStorage.getItem('events') || '[]');
-    const filtered = events.filter(ev => ev.date === selectedDate);
-
-    calendarEventsList.innerHTML = "";
-    if (filtered.length === 0) {
-      calendarEventsList.innerHTML = "<li>Brak wydarzeń na ten dzień.</li>";
-      return;
-    }
-
-    filtered.forEach(ev => {
-      const li = document.createElement("li");
-      li.textContent = `${ev.subject} – ${ev.type} (${ev.className})`;
-      calendarEventsList.appendChild(li);
-    });
-  }
-
-  // Automatyczne ustawienie dzisiejszej daty
-  window.addEventListener("DOMContentLoaded", () => {
-    const today = new Date().toISOString().split("T")[0];
-    miniCalendar.value = today;
-    loadCalendarEvents(today);
-    loadUpcomingEvents();
   });
 
-  // Reakcja na zmianę daty w mini kalendarzu
-  miniCalendar.addEventListener("change", (e) => {
-    loadCalendarEvents(e.target.value);
+  // 🟩 WYŚWIETLENIE:  najpierw stały plan, potem dynamiczne wpisy
+  let numer = 1;
+
+  // --- STAŁE LEKCJE ---
+  planDnia.forEach(poz => {
+    const klasa = poz.klasa;
+
+    const wpisana = dynamiczneWpisy.filter(l => l.klasa === klasa).pop();
+
+    const temat = wpisana
+  ? wpisana.przedmiot
+      ? `[${wpisana.przedmiot}] ${wpisana.temat}`
+      : wpisana.temat
+  : "—";
+
+
+    const status = wpisana ? wpisana.status : "normalna";
+
+    const czyZakonczona = zakonczoneKlasy.includes(klasa);
+
+const tr = document.createElement("tr");
+tr.className = czyZakonczona ? "zakonczona" : "";
+
+tr.innerHTML = `
+      <td>${poz.nr}</td>
+      <td class="${zakonczoneKlasy.includes(klasa) ? 'zakonczona' : ''}">
+  ${klasa}
+</td>
+      <td>${temat}</td>
+      <td><span class="status-label status-${status}">${status}</span></td>
+      <td>
+        <select class="akcja-select"
+  ${czyZakonczona ? "disabled" : ""}
+  onchange="wykonajAkcje(this.value, '${klasa}', '${dzienData}')">
+          <option value="">— wybierz —</option>
+          <option value="otworz">Wpisz lekcję / obecność</option>
+          <option value="odwolaj">Odwołaj lekcję</option>
+          <option value="zastepstwo">Zastępstwo</option>
+        </select>
+      </td>
+    `;
+    tabela.appendChild(tr);
   });
+
+  // --- DYNAMICZNIE DODANE LEKCJE (NOWE, ZASTĘPSTWA, NIE W PLANIE) ---
+  dynamiczneWpisy
+    .filter(l => !planDnia.some(p => p.klasa === l.klasa))
+    .forEach(l => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${numer++}</td>
+        <td>${l.klasa}</td>
+        <td>${l.temat}</td>
+        <td><span class="status-label status-${l.status}">${l.status}</span></td>
+        <td>
+          <select class="akcja-select" onchange="wykonajAkcje(this.value, '${l.klasa}', '${dzienData}')">
+            <option value="">— wybierz —</option>
+            <option value="otworz">Edytuj lekcję</option>
+            <option value="odwolaj">Odwołaj</option>
+            <option value="zastepstwo">Zastępstwo</option>
+          </select>
+        </td>
+      `;
+      tabela.appendChild(tr);
+    });
+}
+
+function wykonajAkcje(akcja, klasa, data) {
+  if (akcja === "otworz") {
+    otworzLekcje(klasa, data);
+  } else if (akcja === "odwolaj") {
+    odwolajLekcje(klasa, data);
+  } else if (akcja === "zastepstwo") {
+    zastepstwoLekcji(klasa, data);
+  }
+}
+
+function otworzLekcje(klasa, data) {
+  document.getElementById("plan-lekcji").style.display = "none";
+  document.getElementById("lekcja-form").style.display = "block";
+  document.getElementById("historia-box").style.display = "block";
+  document.getElementById("klasa-select").value = klasa;
+  document.getElementById("data").value = data;
+  document.getElementById("wybrana-klasa").textContent = "Wybrana klasa: " + klasa;
+  updateTematy();
+  pokazFrekwencje(klasa);
+  pokazHistorieLekcji(klasa);
+  pokazPostep(klasa);
+  document.getElementById("wlasny-przedmiot-box").style.display =
+  klasa === "Własna" ? "block" : "none";
+
+}
+
+function odwolajLekcje(klasa, data) {
+  if (!confirm(`Czy na pewno chcesz odwołać lekcję z klasy ${klasa} (${data})?`)) return;
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  lekcje.push({ data, klasa, temat: "—", status: "odwolana" });
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazPlan(new Date(data));
+}
+
+function zastepstwoLekcji(klasa, data) {
+  const zastepca = prompt("Podaj nazwisko nauczyciela prowadzącego zastępstwo:");
+  if (!zastepca) return;
+  const klucz = `lekcje_${klasa}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+  function zastepstwoLekcji(klasa, data) {
+    const zastepca = prompt("Podaj nazwisko nauczyciela prowadzącego zastępstwo:");
+    if (!zastepca) return;
+
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+    lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
+
+    localStorage.setItem(klucz, JSON.stringify(lekcje));
+    alert("Zastępstwo zapisane.");
+}
+
+  lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazPlan(new Date(data));
+}
+function pokazKlasyNieregularne() {
+  const tabela = document.getElementById("tabela-nieregularne").querySelector("tbody");
+  tabela.innerHTML = "";
+
+  // 🔹 znajdź wszystkie klasy, które nie występują w planLekcji
+  const klasyWPlanie = Object.values(planLekcji).flat().map(p => p.klasa);
+  const wszystkieKlasy = Object.keys(uczniowie || {});
+  const nieregularne = wszystkieKlasy.filter(k => !klasyWPlanie.includes(k));
+
+  nieregularne.forEach(klasa => {
+    const klucz = `lekcje_${klasa}`;
+    const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+    const ostatnia = lekcje[lekcje.length - 1];
+    const tematInfo = ostatnia ? `✅ ${ostatnia.temat} (${ostatnia.data})` : "—";
+    const status = ostatnia ? (ostatnia.status || "normalna") : "normalna";
+    const zakonczona = zakonczoneKlasy.includes(klasa);
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="${zakonczona ? 'zakonczona' : ''}" title="${zakonczona ? 'Zakończyli materiał' : ''}">${klasa}</td>
+      <td>${tematInfo}</td>
+      <td><span class="status-label status-${status}">${status}</span></td>
+      <td>
+        <select class="akcja-select" ${zakonczona ? 'disabled' : ''} onchange="wykonajAkcje(this.value, '${klasa}', new Date().toISOString().split('T')[0])">
+          <option value="">— wybierz —</option>
+          <option value="otworz">Wybierz i sprawdź obecność</option>
+          <option value="odwolaj">Odwołaj lekcję</option>
+          <option value="zastepstwo">Zastępstwo</option>
+        </select>
+      </td>
+    `;
+    tabela.appendChild(tr);
+  });
+}
+
+let currentDate = new Date();
+
+pokazPlan(currentDate);
+pokazKlasyNieregularne();
+
+
+document.getElementById("prev-day").addEventListener("click", () => {
+  currentDate.setDate(currentDate.getDate() - 1);
+  pokazPlan(currentDate);
+});
+document.getElementById("next-day").addEventListener("click", () => {
+  currentDate.setDate(currentDate.getDate() + 1);
+  pokazPlan(currentDate);
+});
+document.getElementById("data-plan").addEventListener("change", e => {
+  currentDate = new Date(e.target.value);
+  pokazPlan(currentDate);
+});
 </script>
 
 	
 </body>
 </html>
-
-
-
-
-
-
-
