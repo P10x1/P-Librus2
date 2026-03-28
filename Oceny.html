@@ -317,7 +317,11 @@
 	
 	  <h2>PANEL NAUCZYCIELA OCEN</h2>
 <br>
-  <h3>Dodaj nowe oceny</h3>	
+  <h3>Dodaj nowe oceny</h3>
+
+<button onclick="toggleFormOceny()">➕ Dodaj oceny</button>
+
+<div id="formOceny" style="display:none; margin-top:20px;">	
   <label for="klasa">Klasa:</label>
   <select id="klasa"></select>
 
@@ -344,13 +348,21 @@
     <option>Półroczna</option>
   </select>
 
-  <label for="komentarz">Komentarz:</label>
-  <textarea id="komentarz" rows="2" cols="50"></textarea>
 
+<h4>Wpis hurtowy</h4>
+
+<label>Ocena dla wszystkich:</label>
+<input type="text" id="ocena-wszystkim" placeholder="np. 4+">
+
+<label>Komentarz dla wszystkich:</label>
+<input type="text" id="komentarz-wszystkim" placeholder="Komentarz">
+
+<button type="button" onclick="ustawWszystkim()">Wstaw wszystkim</button>
   <div class="students" id="students"></div>
 
-  <button onclick="zapiszOceny()">Zapisz ocenę</button>
-  <br>
+
+<button onclick="zapiszOceny()">Zapisz ocenę</button>
+</div>
 
   <label for="sortowanie">Sortuj oceny według:</label>
   <select id="sortowanie" onchange="pokazTabele()">
@@ -372,16 +384,14 @@
 
 <script>
     const klasy = {
-	'8I-Język_Piotrowski': ['Jagoda', 'Krystian', 'Justyna'],
-	'8L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
-    '6F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
-	'1J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
-    '7A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
-    '2B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
-    '7C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
-    '3E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
-	'6H*-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
-	'Zajęcia_egzaminacyjne': ['Justyna', 'Jagoda', 'Krystian', 'Karol', 'Ola', 'Natalia', 'Paweł']
+	'6E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
+	'6D-Język_Piotrowski': ['Wojtek', 'Krzysiek', 'Mirek'],
+	'6G-Język_Piotrowski': ['Ela', 'Ola', 'Marylka', 'Marta'],
+	'7H-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
+	'8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Halina', 'Bożena'],
+	'1L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol']
+    
+    
     };
   window.addEventListener('DOMContentLoaded', () => {
 
@@ -421,49 +431,76 @@ Object.keys(klasy).forEach(nazwaKlasy => {
     }
 
     function pokazUczniow() {
-      studentsDiv.innerHTML = '';
-      const wybranaKlasa = selectKlasa.value;
-      klasy[wybranaKlasa].forEach(uczen => {
-        const div = document.createElement('div');
-        div.className = 'student';
-        div.innerHTML = `
-  <span>${uczen}</span>
-  <select id="ocena-${uczen}">
-    <option value="">-</option>
-    ${ocenyMozliwe.map(o => `<option value="${o}">${o}</option>`).join('')}
-  </select>
-`;
+  studentsDiv.innerHTML = '';
+  const wybranaKlasa = selectKlasa.value;
 
+  let html = `
+    <table>
+      <thead>
+        <tr>
+          <th>Uczeń</th>
+          <th>Ocena</th>
+          <th>Komentarz</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
 
-        studentsDiv.appendChild(div);
-      });
-    }
+  klasy[wybranaKlasa].forEach(uczen => {
+    html += `
+      <tr>
+        <td>${uczen}</td>
+        <td>
+          <input type="text" class="ocena" data-uczen="${uczen}" placeholder="np. 4+">
+        </td>
+        <td>
+          <input type="text" class="komentarz" data-uczen="${uczen}" placeholder="Komentarz">
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</tbody></table>`;
+  studentsDiv.innerHTML = html;
+}
 
     function zapiszOceny() {
-      const typ = document.getElementById('typ').value;
-      const komentarz = document.getElementById('komentarz').value;
-      const klasa = selectKlasa.value;
-      if (!klasa) return alert('Wybierz klasę');
+  const typ = document.getElementById('typ').value;
+  const klasa = selectKlasa.value;
 
-      const oceny = klasy[klasa].map(uczen => {
-        const select = document.getElementById(`ocena-${uczen}`);
-        return {
-          uczen,
-          ocena: select.value,
-          typ,
-          komentarz,
-          data: new Date().toLocaleDateString()
-        };
+  if (!klasa) return alert('Wybierz klasę');
+
+  const oceny = [];
+
+  document.querySelectorAll('.ocena').forEach(input => {
+    const uczen = input.dataset.uczen;
+    const ocena = input.value;
+
+    const komentarzInput = document.querySelector(`.komentarz[data-uczen="${uczen}"]`);
+    const komentarz = komentarzInput.value;
+
+    if (ocena) {
+      oceny.push({
+        uczen,
+        ocena,
+        typ,
+        komentarz,
+        data: new Date().toLocaleDateString()
       });
-
-      const zapisane = JSON.parse(localStorage.getItem('oceny') || '{}');
-      if (!zapisane[klasa]) zapisane[klasa] = [];
-      zapisane[klasa].push(...oceny.filter(o => o.ocena !== ''));
-      localStorage.setItem('oceny', JSON.stringify(zapisane));
-      pokazUczniow();
-      pokazTabele();
-      alert('Oceny zapisane!');
     }
+  });
+
+  const zapisane = JSON.parse(localStorage.getItem('oceny') || '{}');
+  if (!zapisane[klasa]) zapisane[klasa] = [];
+
+  zapisane[klasa].push(...oceny);
+  localStorage.setItem('oceny', JSON.stringify(zapisane));
+
+  pokazUczniow();
+  pokazTabele();
+
+  alert('Oceny zapisane!');
+}
 
     function edytujOcene(klasa, uczen, index) {
       const zapisane = JSON.parse(localStorage.getItem('oceny') || '{}');
@@ -679,7 +716,27 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+function toggleFormOceny() {
+  const form = document.getElementById('formOceny');
 
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+  } else {
+    form.style.display = 'none';
+  }
+}
+function ustawWszystkim() {
+  const ocena = document.getElementById('ocena-wszystkim').value;
+  const komentarz = document.getElementById('komentarz-wszystkim').value;
+
+  document.querySelectorAll('.ocena').forEach(input => {
+    input.value = ocena;
+  });
+
+  document.querySelectorAll('.komentarz').forEach(input => {
+    input.value = komentarz;
+  });
+}
 </script>
 
   <!-- Firebase App (core SDK) -->
