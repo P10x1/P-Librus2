@@ -194,30 +194,30 @@
       <div id="panelZachowanie" class="container">
         <h2>PANEL NAUCZYCIELA – ZACHOWANIE</h2>
 
-        <label for="klasa">Klasa:</label>
+        
         <select id="klasa"></select>
 
-        <label for="typ">Rodzaj punktu:</label>
-        <select id="typ">
-          <option>Dodatnie</option>
-          <option>Ujemne</option>
-          <option>Neutralne</option>
-        </select>
 
-        <label for="kategoria">Kategoria:</label>
-        <select id="kategoria"></select>
+        <button onclick="toggleForm()">➕ Dodaj oceny z zachowania</button>
 
-        <label for="punkty">Liczba punktów (+/-):</label>
-        <input type="number" id="punkty" value="1">
+<div id="formDodawania" style="display:none; margin-top:20px;">
 
-        <label for="komentarz">Komentarz:</label>
-        <textarea id="komentarz" rows="2"></textarea>
-		
-		<button type="button" onclick="toggleWszyscy()">Wybierz wszystkich</button>
+  <label for="kategoria">Kategoria:</label>
+  <select id="kategoria"></select>
 
-        <div id="students"></div>
+  <label for="punkty">Nie wpisuj nic</label>
+  <input type="number" id="punkty" value=".">
 
-        <button onclick="zapiszPunkty()">Zapisz punkt</button>
+  <label for="komentarz">Komentarz:</label>
+  <textarea id="komentarz" rows="2"></textarea>
+
+  <button type="button" onclick="toggleWszyscy()">Wybierz wszystkich</button>
+
+  <div id="students"></div>
+
+  <button onclick="zapiszPunkty()">Zapisz punkt</button>
+
+</div>
 		
 
 
@@ -229,15 +229,16 @@
 
 <script>
 const klasy = {
-	'8I': ['Jagoda', 'Krystian', 'Justyna'],
-	'8L': ['Paweł', 'Ola', 'Natalia', 'Karol'],
-    '6F': ['Ola', 'Julia', 'Natan', 'Filip'],
-	'1J': ['Zuzia', 'Kasia', 'Maja'],
-    '7A': ['Agata', 'Tadeusz', 'Piotr'],
-    '2B': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
-    '7C': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
-    '3E': ['Ola', 'Maria', 'Marta'],
-	'6H*': ['Andrzej', 'Maciej', 'Patryk'],
+	'1L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+	'6D-Język_Piotrowski': ['Wojtek', 'Krzysiek', 'Mirek'],
+	'6G-Język_Piotrowski': ['Ela', 'Ola', 'Marylka', 'Marta'],
+    '7F-Język_Piotrowski': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'2J-Język_Piotrowski': ['Zuzia', 'Kasia', 'Maja'],
+    '8A-Język_Piotrowski': ['Agata', 'Tadeusz', 'Piotr'],
+    '3B-Język_Piotrowski': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '6E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
+	'7H*-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk'],
 };
 
 const STARTOWE_PUNKTY = 40;
@@ -344,6 +345,20 @@ Object.keys(klasy).forEach(nazwaKlasy => {
 });
 
 const selectKlasa = document.getElementById('klasa');
+const inputPunkty = document.getElementById('punkty');
+const selectTyp = document.getElementById('typ');
+
+inputPunkty.addEventListener('input', () => {
+  const val = parseInt(inputPunkty.value);
+
+  if (val > 0) {
+    selectTyp.value = "Dodatnie";
+  } else if (val < 0) {
+    selectTyp.value = "Ujemne";
+  } else {
+    selectTyp.value = "Neutralne";
+  }
+});
 const selectKategoria = document.getElementById('kategoria');
 const studentsDiv = document.getElementById('students');
 const tabeleKlasDiv = document.getElementById('tabeleKlas');
@@ -379,48 +394,78 @@ kategorie.forEach(k => {
 
 function pokazUczniow() {
   studentsDiv.innerHTML = '';
+
   const wybranaKlasa = selectKlasa.value;
+
+  let html = `
+    <table>
+      <thead>
+        <tr>
+          <th>⬜</th>
+          <th>Uczeń</th>
+          <th>Punkty</th>
+          <th>Komentarz</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
   klasy[wybranaKlasa].forEach(uczen => {
-    const div = document.createElement('div');
-    div.className = 'student';
-    div.innerHTML = `
-      <span>${uczen}</span>
-      <input type="checkbox" id="uczen-${uczen}">
+    html += `
+      <tr>
+        <td><input type="checkbox" class="chk-uczen" data-uczen="${uczen}"></td>
+        <td>${uczen}</td>
+        <td><input type="number" class="pkt" data-uczen="${uczen}" value="1"></td>
+        <td><input type="text" class="kom" data-uczen="${uczen}"></td>
+      </tr>
     `;
-    studentsDiv.appendChild(div);
   });
+
+  html += `</tbody></table>`;
+
+  studentsDiv.innerHTML = html;
 }
 
 function zapiszPunkty() {
-  const typ = document.getElementById('typ').value;
   const kategoria = document.getElementById('kategoria').value;
-  const komentarz = document.getElementById('komentarz').value;
-  const ilosc = parseInt(document.getElementById('punkty').value);
   const klasa = selectKlasa.value;
+
   if (!klasa) return alert("Wybierz klasę");
 
   const zapisane = JSON.parse(localStorage.getItem('zachowanie') || '{}');
   if (!zapisane[klasa]) zapisane[klasa] = [];
 
-  klasy[klasa].forEach(uczen => {
-    const chk = document.getElementById(`uczen-${uczen}`);
-    if (chk && chk.checked) {
-      zapisane[klasa].push({
-  id: crypto.randomUUID(),
-  uczen,
-  typ,
-  kategoria,
-  punkty: ilosc,
-  komentarz,
-  data: new Date().toLocaleDateString()
-});
+  const checkboxes = document.querySelectorAll('.chk-uczen');
 
+  checkboxes.forEach(chk => {
+    if (chk.checked) {
+      const uczen = chk.dataset.uczen;
+
+      const punkty = document.querySelector(`.pkt[data-uczen="${uczen}"]`).value;
+      const komentarz = document.querySelector(`.kom[data-uczen="${uczen}"]`).value;
+
+      const p = Number(punkty);
+
+      let typ;
+if (p > 0) typ = "Dodatnie";
+else if (p < 0) typ = "Ujemne";
+else typ = "Neutralne";
+
+      zapisane[klasa].push({
+        id: crypto.randomUUID(),
+        uczen,
+        typ,
+        kategoria,
+        punkty: p,
+        komentarz,
+        data: new Date().toLocaleDateString()
+      });
     }
   });
 
   localStorage.setItem('zachowanie', JSON.stringify(zapisane));
   pokazTabele();
-  alert("Punkty zapisane!");
+  alert("Zapisano!");
 }
 
 function proponowaneZachowanie(suma) {
@@ -603,7 +648,15 @@ function zapiszOcene(klasa, uczen, typ, wartosc) {
   localStorage.setItem(OCENY_KEY, JSON.stringify(dane));
 }
 
+function toggleForm() {
+  const form = document.getElementById('formDodawania');
 
+  if (form.style.display === 'none') {
+    form.style.display = 'block';
+  } else {
+    form.style.display = 'none';
+  }
+}
 </script>
 
 <footer style="text-align: center; padding: 20px; background-color: #f0f0f0;">
