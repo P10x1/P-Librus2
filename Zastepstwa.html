@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>P-Librus – Zastępstwa</title>
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(to right, #e6ebed, #f5f7f9);
+  padding: 30px;
+}
+.lesson-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.modern-table th {
+  background: #2a6f97;
+  color: white;
+  padding: 10px;
+}
+.modern-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+button {
+  background: #2a6f97;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.frekwencja-wrapper {
+  background: #f0f8ff;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+#frekwencja-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uczen-box {
+  background: #eaf4fb;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #cfe3f3;
+  gap: 20px; /* 👈 TO DODAJE ODSTĘP */
+}
+
+.uczen-box .nr {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.uczen-box .nr {
+  min-width: 120px;
+}
+.uczen-box select {
+  width: 100%;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #d4dce4, #f2f3f5);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  .logo span {
+    font-size: 24px;
+    color: #8a2e6e;
+    font-weight: bold;
+  }
+
+  .user-info {
+    font-size: 14px;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #edf0f3;
+    flex-wrap: wrap;
+  }
+  .menu-item {
+    margin: 10px;
+    position: relative;
+  }
+  .menu-item a {
+    font-size: 14px;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s;
+    display: block;
+  }
+  .menu-item a:hover {
+    background-color: #f0f0f0;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+    <div class="logo">
+      <img src="21 maj 2025, 16_13_32.png" alt="P-Librus logo">
+      <span>P-Librus</span>
+    </div>
+    <div class="user-info">
+      Zalogowany jako: <strong>Piotr Rejmentowski (nauczyciel)</strong>
+    </div>
+    <select>
+      <option selected>polski</option>
+      <option>english</option>
+    </select>
+  </div>
+
+    <div class="menu">
+    <div class="menu-item"><a href="indywidualni.html">Indywidualni</a></div>
+    <div class="menu-item"><a href="Lekcja.html">Lekcja</a></div>
+    <div class="menu-item"><a href="Oceny.html">Oceny</a></div>
+	<div class="menu-item"><a href="Zastepstwa.html">Zastępstwa</a></div>
+    <div class="menu-item"><a href="Zachowanie.html">Zachowanie</a></div>
+    <div class="menu-item"><a href="organizacja.html">Organizacja</a></div>
+    <div class="menu-item"><a href="wiadomosci.html">Wiadomości</a></div>
+    <div class="menu-item"><a href="ogloszenia.html">Ogłoszenia</a></div>
+    <div class="menu-item"><a href="Terminarz.html">Terminarz</a></div>
+  </div>
+<div class="lesson-box">
+<h2>📌 Moje zastępstwa</h2>
+<input type="date" id="dataView">
+<table class="modern-table">
+<thead>
+<tr>
+<th>Data</th>
+<th>Klasa</th>
+<th>Przedmiot</th>
+<th>Akcja</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
+</div>
+<button onclick="otworzDodaj()">➕ Dodaj zastępstwo</button>
+
+
+<script>
+function dodaj() {
+  const data = document.getElementById("data").value;
+  const klasa = document.getElementById("klasa").value;
+  const przedmiot = document.getElementById("przedmiot").value;
+
+  if (!data || !klasa || !przedmiot) {
+    alert("Uzupełnij dane!");
+    return;
+  }
+
+  const lista = JSON.parse(localStorage.getItem("zastepstwa")) || [];
+  lista.push({ data, klasa, przedmiot });
+  localStorage.setItem("zastepstwa", JSON.stringify(lista));
+
+  pokaz();
+}
+
+function pokaz() {
+  const tabela = document.getElementById("tabela");
+  tabela.innerHTML = "";
+
+  const lista = JSON.parse(localStorage.getItem("zastepstwa")) || [];
+
+  const wybranaData = document.getElementById("dataView").value;
+  const dzis = new Date().toISOString().split("T")[0];
+  const dataDoPokazania = wybranaData || dzis;
+
+  lista
+    lista
+  .map((z, index) => ({ ...z, index }))
+  .filter(z => z.data === dataDoPokazania)
+  .forEach(z => {
+      const tr = document.createElement("tr");
+
+      tr.innerHTML = `
+        <td>${z.data}</td>
+        <td>${z.klasa}</td>
+        <td>${z.przedmiot}</td>
+        <td><button onclick="otworzLekcje(${z.index})">▶ Rozpocznij zastępstwo</td>
+      `;
+
+      tabela.appendChild(tr);
+    });
+}
+
+function lekcja(i) {
+  const lista = JSON.parse(localStorage.getItem("zastepstwa"));
+  localStorage.setItem("zastepstwo_do_lekcji", JSON.stringify(lista[i]));
+  alert("Zastępstwo zapisane – przejdź do Lekcja.html");
+}
+
+document.getElementById("dataView").addEventListener("change", pokaz);
+document.addEventListener("DOMContentLoaded", pokaz);
+let aktualneZastepstwo = null;
+
+
+
+
+function zamknijLekcje() {
+  document.getElementById("panel-lekcji").style.display = "none";
+  document.getElementById("lekcja-temat").value = "";
+  document.getElementById("lekcja-opis").value = "";
+}
+
+function otworzDodaj() {
+  document.getElementById("modal-dodaj").style.display = "flex";
+}
+
+function zamknijModal() {
+  document.querySelectorAll(".modal").forEach(m => m.style.display = "none");
+}
+function zapiszZastepstwo() {
+  const data = document.getElementById("m-data").value;
+const klasa = document.getElementById("m-klasa").value;
+const przedmiot = document.getElementById("m-przedmiot").value;
+const nieobecny = document.getElementById("m-nieobecny").value;
+const notatka = document.getElementById("m-notatka").value;
+  const lista = JSON.parse(localStorage.getItem("zastepstwa")) || [];
+
+  lista.push({ data, klasa, przedmiot, nieobecny, notatka });
+
+  localStorage.setItem("zastepstwa", JSON.stringify(lista));
+
+  zamknijModal();
+  pokaz();
+}
+let aktualne = null;
+
+const uczniowie = {
+  '1L': ['Paweł', 'Ola', 'Natalia', 'Karol'],
+	'6D': ['Wojtek', 'Krzysiek', 'Mirek'],
+	'6G': ['Ela', 'Ola', 'Marylka', 'Marta'],
+    '7F': ['Ola', 'Julia', 'Natan', 'Filip'],
+	'2J': ['Zuzia', 'Kasia', 'Maja'],
+    '8A': ['Agata', 'Tadeusz', 'Piotr'],
+    '3B': ['Gosia', 'Grzesiek', 'Agnieszka', 'Adam'],
+    '8C': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '6E': ['Ola', 'Maria', 'Marta'],
+	'7H': ['Andrzej', 'Maciej', 'Patryk']
+};
+
+function otworzLekcje(i) {
+  const lista = JSON.parse(localStorage.getItem("zastepstwa")) || [];
+  aktualne = lista[i];
+
+  document.getElementById("modal-lekcja").style.display = "flex";
+
+  document.getElementById("l-klasa").textContent = aktualne.klasa;
+  document.getElementById("l-data").textContent = aktualne.data;
+  document.getElementById("l-notatka").textContent = aktualne.notatka || "Brak";
+  pokazFrekwencje(aktualne.klasa);
+  
+  document.getElementById("l-nieobecny").textContent = aktualne.nieobecny || "-";
+document.getElementById("l-przedmiot").textContent = aktualne.przedmiot || "-";
+}
+
+
+function zaznaczWszystkich() {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`f${i}`);
+    if (el) el.value = "O";
+  }
+}
+function zapiszLekcje() {
+  const temat = document.getElementById("l-temat").value;
+
+  const klasaPelna = aktualne.klasa + "-Język_Piotrowski";
+
+  const klucz = `lekcje_${klasaPelna}`;
+  const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
+
+  lekcje.push({
+    data: aktualne.data,
+    klasa: klasaPelna,
+    temat,
+    status: "zastepstwo"
+  });
+
+  localStorage.setItem(klucz, JSON.stringify(lekcje));
+
+  alert("✅ Zapisano lekcję");
+  zamknijModal();
+}
+function pokazFrekwencje(klasa) {
+  const box = document.getElementById("frekwencja-box");
+  box.innerHTML = "";
+
+  const lista = uczniowie[klasa] || [];
+
+  lista.forEach((imie, i) => {
+    const div = document.createElement("div");
+    div.className = "uczen-box";
+
+    div.innerHTML = `
+  <span class="nr">${imie}</span>
+  <select id="f${i}">
+        <option value="O">✔ Obecny</option>
+        <option value="N">❌ Nieobecny</option>
+        <option value="U">📝 Usprawiedliwiony</option>
+        <option value="Sp">⏰ Spóźnienie</option>
+        <option value="Zw">📄 Zwolnienie</option>
+      </select>
+    `;
+
+    box.appendChild(div);
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const dzis = new Date().toISOString().split("T")[0];
+  document.getElementById("dataView").value = dzis;
+});
+</script>
+
+
+
+<!-- 🔵 MODAL DODAWANIA -->
+<div id="modal-dodaj" class="modal">
+  <div class="modal-content">
+    <h2>➕ Dodaj zastępstwo</h2>
+
+    <input type="date" id="m-data">
+    <input type="text" id="m-klasa" placeholder="Klasa (np. 6D)">
+    <input type="text" id="m-przedmiot" placeholder="Przedmiot">
+    <input type="text" id="m-nieobecny" placeholder="Nieobecny nauczyciel">
+<textarea id="m-notatka" placeholder="Notatka (opcjonalna)"></textarea>
+    <button onclick="zapiszZastepstwo()">Zapisz</button>
+    <button onclick="zamknijModal()">Anuluj</button>
+  </div>
+</div>
+
+<!-- 🟢 MODAL LEKCJI -->
+<div id="modal-lekcja" class="modal">
+  <div class="modal-content">
+    <h2>📘 Przeprowadź zastępstwo</h2>
+
+    <p><strong>Klasa:</strong> <span id="l-klasa"></span></p>
+    <p><strong>Data:</strong> <span id="l-data"></span></p>
+    <p><strong>Nauczyciel nieobecny:</strong> <span id="l-nieobecny"></span></p>
+<p><strong>Przedmiot:</strong> <span id="l-przedmiot"></span></p>
+    <input type="text" id="l-temat" placeholder="Temat lekcji">
+<p><strong>Notatka:</strong> <span id="l-notatka"></span></p>
+    <h3>Frekwencja</h3>
+    <button onclick="zaznaczWszystkich()">Zaznacz wszystkich jako obecnych</button>
+	<br>
+    <div id="frekwencja-box"></div>
+
+    <button onclick="zapiszLekcje()">Zapisz lekcję</button>
+    <button onclick="zamknijModal()">Anuluj</button>
+  </div>
+</div>
+
+</body>
+</html>
