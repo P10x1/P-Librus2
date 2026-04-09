@@ -397,7 +397,7 @@ tr.zakonczona select {
   <option value="6D-Język_Piotrowski">6D - Język Piotrowski</option>
   <option value="6G-Język_Piotrowski">6G - Język Piotrowski</option>
   <option value="7H*-Język_Piotrowski">7H* - Język Piotrowski</option>
-  <option value="8C-Język_Piotrowski">8C - Język Piotrowski</option>
+  <option value="8C*-Język_Piotrowski">8C* - Język Piotrowski</option>
   <option value="1L-Język_Piotrowski">1L - Język Piotrowski</option>
   <option value="Własna">Własna</option>
 </select>
@@ -659,7 +659,7 @@ function pominTemat() {
 	'1L-Język_Piotrowski': ['Paweł', 'Ola', 'Natalia', 'Karol'],
 	'6D-Język_Piotrowski': ['Wojtek', 'Krzysiek', 'Mirek'],
 	'6G-Język_Piotrowski': ['Ela', 'Ola', 'Marylka', 'Marta'],
-    '8C-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
+    '8C*-Język_Piotrowski': ['Wiesia', 'Alina', 'Bożena', 'Halinka'],
     '6E-Język_Piotrowski': ['Ola', 'Maria', 'Marta'],
 	'7H*-Język_Piotrowski': ['Andrzej', 'Maciej', 'Patryk']
   };
@@ -670,7 +670,7 @@ const aliasyKlas = {
   "6D": "6D-Język_Piotrowski",
   "6E": "6E-Język_Piotrowski",
   "7H*": "7H*-Język_Piotrowski",
-  "8C": "8C-Język_Piotrowski",
+  "8C*": "8C*-Język_Piotrowski",
   "1L": "1L-Język_Piotrowski"
 };
 
@@ -685,7 +685,7 @@ function normalizujKlase(klasa) {
 	  "6E-Język_Piotrowski": ["DZIAŁ 1 - PODSTAWY JĘZYKA PIOTROWSKIEGO", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby","Daty", "DZIAŁ 3 - PODSTAWY GRAMATYKI", "Podstawy gramatyki piotrowskiej","Past simple - Wprowadzenie","Past simple - Ogólność i Upodobania","Past simple - Regularność i jej czas","Past simple - Osobowość i jej opis", "Zaimki osobowe"],
 	  "6G-Język_Piotrowski": ["DZIAŁ 1 - WPROWADZENIE", "Alfabet i znaki piotrowskie", "Słownictwo: Kolory i pomieszczenia", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT LICZB", "Liczby", "Daty, Miesiące", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - GRAMATYKA", "Podstawy gramatyki piotrowskiej", "Past Simple - Jako najprostrzy czas", "Past Simple - Ogólność i upodobania", "Past Simple - Regularność", "Past Simple - Opis osobowy stały", "Zaimki osobowe - Wprowadzenie", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - NAUKA I TECHNIKA", "Nauka i technika jako pierwszy dział praktyczny", "Urządzenia nowoczesnej technologii", "Nauka w szkole", "Czasowniki i osoby technologii", "Past Simple - Podsumowanie", "Sprawdź czy potrafisz (4)"],
 	  "7H*-Język_Piotrowski": ["DZIAŁ 1 - ZDROWIE", "Części ciała i zdrowy styl życia", "Choroby, bóle i inne przypadki", "Past Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (1)", "DZIAŁ 2 - ŚWIAT I PRZYRODA", "Kontynenty oraz kraje", "Przyroda: Zwierzęta, Krajobrazy i rośliny", "Czas poprawny, Zapis czasu słownie", "Present Simple - Lekcja gramatyczna", "Sprawdź czy potrafisz (2)", "DZIAŁ 3 - ŻYCIE PRYWATNE", "Ludność: Rodzina i znajomi", "Czas wolny: Aktywności i dni wolne", "Present Cintus - Lekcja gramatyczna", "Sprawdź czy potrafisz (3)", "DZIAŁ 4 - CZŁOWIEK", "Opis człowieka: Cechy charakteru i wygląd zewnętrzny", "Przedmioty: Ubiór i przedmioty osobiste / użytkowe", "Etapy życia", "Zaimki osobowe - Lekcja gramatyczna", "Porównanie czasów teraźniejszych - Lekcja gramatyczna", "Sprawdź czy potrafisz (4)"],
-	  "8C-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
+	  "8C*-Język_Piotrowski": ["DZIAŁ 1 - MIEJSCE ZAMIESZKANIA", "Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - EDUKACJA", "Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - PRACA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
       "1L-Język_Piotrowski": ["DZIAŁ 1 - SPORT","Vocabulary (1)", "Gramar (1)", "Buking i writing (1)", "DZIAŁ 2 - KULTURA","Vocabulary (2)", "Gramar (2)", "Buking i writing (2)", "DZIAŁ 3 - TRANSPORT I TURYSTYKA","Vocabulary (3)", "Gramar (3)", "Buking i writing (3)"],
 	  "Własna": ["Tematy dla edukacja dla bezpieczeństwa", "DZIAŁ 1 - BEZPIECZEŃSTWO PAŃSTWA", "Bezpieczny obywatel, bezpieczny naród, bezpieczne państwo", "Bezpieczeństwo Polski w stosunkach międzynarodowych", "DZIAŁ 2 - POSTĘPOWANIE W SYTUACJACH ZAGROŻEŃ", "Źródła zagrożeń", "Ostrzeganie o zagrożeniach i alarmowanie", "Ewakuacja","Zagrożenia pożarowe", "Zagrożenia powodziowe", "Ekstremalne warunki pogodowe", "Wypadki i katastrofy komunikacyjne", "Uwolnienie niebezpiecznych substancji chemicznych", "Zagrożenia terrorystyczne", "DZIAŁ 3 - PODSTAWY PIERWSZEJ POMOCY", "Podstawowe wiadomości z zakresu pierwszej pomocy", "Postępowanie w miejscu zdarzenia", "Pomoc osobie nieprzytomnej", "Resuscytacja krążeniowo-oddechowa", "Apteczka pierwszej pomocy", "Tamowanie krwawień i krwotoków", "Złamania i zwichnięcia", "Oparzenia i odmrożenia", "Inne groźne przypadki", "DZIAŁ 4 - PROFILAKTYKA ZDROWOTNA", "Zdrowie jako wartość. Zasady zdrowego stylu życia", "Choroby cywilizacyjne", "Komunikacja interpersonalna w trosce o zdrowie"]
  
@@ -1229,7 +1229,7 @@ document.getElementById("zast-klasa").addEventListener("change", () => {
 	<option value="6G">6G</option>
 	<option value="6E">6E</option>
 	<option value="7H*">7H*</option>
-	<option value="8C">8C</option>
+	<option value="8C*">8C*</option>
 	<option value="1L">1L</option>
   </select>
 
@@ -1327,7 +1327,7 @@ const planLekcji = {
   ],
   "wtorek": [
     { nr: 1, klasa: "7H*-Język_Piotrowski" },
-    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 2, klasa: "8C*-Język_Piotrowski" },
     { nr: 3, klasa: "1L-Język_Piotrowski" },
 	{ nr: 6, klasa: "Własna" }
   ],
@@ -1339,7 +1339,7 @@ const planLekcji = {
   ],
   "czwartek": [
     { nr: 1, klasa: "7H*-Język_Piotrowski" },
-    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 2, klasa: "8C*-Język_Piotrowski" },
     { nr: 3, klasa: "1L-Język_Piotrowski" },
 	{ nr: 6, klasa: "Własna" }
 
@@ -1352,7 +1352,7 @@ const planLekcji = {
   ],
     "sobota": [
     { nr: 1, klasa: "7H*-Język_Piotrowski" },
-    { nr: 2, klasa: "8C-Język_Piotrowski" },
+    { nr: 2, klasa: "8C*-Język_Piotrowski" },
     { nr: 3, klasa: "1L-Język_Piotrowski" },
 	{ nr: 6, klasa: "Własna" }
   ]
