@@ -1045,10 +1045,12 @@ function edytujLekcje(index, klasa) {
   });
 
   document.addEventListener("DOMContentLoaded", () => {
+  Notification.requestPermission(); // 🔔 TU
+
   updateTematy();
   pokazFrekwencje(klasaSelect.value);
   pokazHistorieLekcji(klasaSelect.value);
-  pokazPostep(klasaSelect.value); // ← TO DODAJ
+  pokazPostep(klasaSelect.value);
 });
 pokazTabeleWyboruKlasy();
 
@@ -1213,7 +1215,17 @@ document.getElementById("zast-klasa").addEventListener("change", () => {
 
   pokazFrekwencjeZastepstwo(klasa);
 });
-
+function pokazPowiadomienie(tytul, tresc) {
+  if (Notification.permission === "granted") {
+    new Notification(tytul, { body: tresc });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        new Notification(tytul, { body: tresc });
+      }
+    });
+  }
+}
 </script>
 
 <div class="lesson-box">
@@ -1490,6 +1502,11 @@ function odwolajLekcje(klasa, data) {
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
   lekcje.push({ data, klasa, temat: "—", status: "odwolana" });
   localStorage.setItem(klucz, JSON.stringify(lekcje));
+  pokazPlan(new Date(data));
+  pokazPowiadomienie(
+  "Odwołano lekcję",
+  `Klasa ${klasa} (${data}) została odwołana`
+);
 }
 
 function zastepstwoLekcji(klasa, data) {
@@ -1513,6 +1530,10 @@ function zastepstwoLekcji(klasa, data) {
   lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
   localStorage.setItem(klucz, JSON.stringify(lekcje));
   pokazPlan(new Date(data));
+  pokazPowiadomienie(
+  "Zastępstwo 🔄",
+  `Zastępstwo dla ${klasa} (${data}) – ${zastepca}`
+);
 }
 function pokazKlasyNieregularne() {
   const tabela = document.getElementById("tabela-nieregularne").querySelector("tbody");
