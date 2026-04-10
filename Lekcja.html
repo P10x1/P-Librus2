@@ -946,14 +946,6 @@ if (indexIstniejacej !== -1) {
 
   localStorage.setItem(klucz, JSON.stringify(istniejace));
 
-	if (status === "odwolana") {
-  pokazPowiadomienie(`❌ Odwołano lekcję (${klasa}) dnia ${data}`);
-}
-
-if (status === "zastepstwo") {
-  pokazPowiadomienie(`🔄 Zastępstwo (${klasa}) – ${zastepca || "brak nauczyciela"} (${data})`);
-}
-
   pokazHistorieLekcji(klasa);
   updateTematy();
   pokazFrekwencje(klasa);
@@ -1221,21 +1213,7 @@ document.getElementById("zast-klasa").addEventListener("change", () => {
 
   pokazFrekwencjeZastepstwo(klasa);
 });
-function pokazPowiadomienie(tresc) {
-  const alertBox = document.createElement("div");
-  alertBox.className = "top-alert";
-  alertBox.innerHTML = `
-    <span>${tresc}</span>
-    <button class="close-btn" onclick="this.parentElement.remove()">×</button>
-  `;
 
-  document.body.appendChild(alertBox);
-
-  // auto znikanie po 5s
-  setTimeout(() => {
-    alertBox.remove();
-  }, 5000);
-}
 </script>
 
 <div class="lesson-box">
@@ -1512,8 +1490,6 @@ function odwolajLekcje(klasa, data) {
   const lekcje = JSON.parse(localStorage.getItem(klucz)) || [];
   lekcje.push({ data, klasa, temat: "—", status: "odwolana" });
   localStorage.setItem(klucz, JSON.stringify(lekcje));
-  pokazPlan(new Date(data));
-	pokazPowiadomienie(`❌ Odwołano lekcję (${klasa}) dnia ${data}`);
 }
 
 function zastepstwoLekcji(klasa, data) {
@@ -1532,7 +1508,6 @@ function zastepstwoLekcji(klasa, data) {
 
     localStorage.setItem(klucz, JSON.stringify(lekcje));
     alert("Zastępstwo zapisane.");
-	  pokazPowiadomienie(`🔄 Zastępstwo (${klasa}) – ${zastepca}`);
 }
 
   lekcje.push({ data, klasa, temat: "Zastępstwo", status: "zastepstwo", zastepca });
